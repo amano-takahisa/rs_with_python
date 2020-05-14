@@ -1,0 +1,254 @@
+
+<!DOCTYPE html>
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>セットアップ &#8212; rs-with-python  ドキュメント</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/translations.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="id1">
+<h1>セットアップ<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>これはこのドキュメント作成に関するメモ。
+Pythonでリモートセンシングを行う上では不要。</p>
+<div class="section" id="sphinx">
+<h2>Sphinx<a class="headerlink" href="#sphinx" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="id2">
+<h3>インストール<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>下記に従い、インストールを行う。
+<a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/installation.html">https://www.sphinx-doc.org/en/master/usage/installation.html</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt install python3-sphinx
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="nbsphinx">
+<h2>nbsphinx<a class="headerlink" href="#nbsphinx" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="id3">
+<h3>インストール<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>下記に従い、インストールを行う。
+<a class="reference external" href="https://nbsphinx.readthedocs.io/en/latest/installation.html">https://nbsphinx.readthedocs.io/en/latest/installation.html</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 事前にanacondaの環境構築が済んでいること。</span>
+$ conda activate py37
+$ conda install -c conda-forge nbspinx
+</pre></div>
+</div>
+<p>また、下記のインストールをしておく。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conda install -c conda-forge pandoc
+$ conda install -c conda-forge ipython
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h3>セットアップ<a class="headerlink" href="#id4" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">sphinx.cmd.quickstart</span></code> で、セットアップを行う。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ python3 -m sphinx.cmd.quickstart
+</pre></div>
+</div>
+<p>使用した設定は以下。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt; Separate <span class="nb">source</span> and build directories <span class="o">(</span>y/n<span class="o">)</span> <span class="o">[</span>n<span class="o">]</span>: y
+&gt; Project name: rs-with-python
+&gt; Author name<span class="o">(</span>s<span class="o">)</span>: Taka
+&gt; Project release <span class="o">[]</span>:
+&gt; Project language <span class="o">[</span>en<span class="o">]</span>: ja
+</pre></div>
+</div>
+<p>下記のようなディレクトリが作成される。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>.
+├── build
+├── make.bat
+├── Makefile
+└── source
+    ├── conf.py
+    ├── index.rst
+    ├── _static
+    └── _templates
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">source/conf.py</span></code> を以下のように修正</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
+   <span class="s1">&#39;nbsphinx&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;sphinx.ext.mathjax&#39;</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="github-pages">
+<h2>Github Pagesでの公開設定<a class="headerlink" href="#github-pages" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="id5">
+<h3>ビルド<a class="headerlink" href="#id5" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Makefile</span></code> ファイルを以下のとおり変更</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># BUILDDIR    = build</span>
+<span class="n">BUILDDIR</span>     <span class="o">=</span> <span class="n">docs</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">make</span> <span class="pre">html</span></code> を実行する。</p>
+<p>下記のようにhtmlディレクトリが作成される。:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>.
+├── docs
+│   ├── doctrees
+│   │   ├── environment.pickle
+│   │   └── index.doctree
+│   └── html
+│       ├── genindex.html
+│       ├── index.html
+│       ├── objects.inv
+│       ├── search.html
+│       ├── searchindex.js
+│       ├── _sources
+│       │   └── index.rst.txt
+│       └── _static
+│           ├── alabaster.css
+│           ├── basic.css
+│           ├── custom.css
+│           ├── doctools.js
+│           ├── documentation_options.js
+│           ├── file.png
+│           ├── jquery-3.4.1.js
+│           ├── jquery.js
+│           ├── language_data.js
+│           ├── minus.png
+│           ├── plus.png
+│           ├── pygments.css
+│           ├── searchtools.js
+│           ├── translations.js
+│           ├── underscore-1.3.1.js
+│           └── underscore.js
+├── make.bat
+├── Makefile
+└── source
+    ├── conf.py
+    ├── index.rst
+    ├── _static
+    └── _templates
+</pre></div>
+</div>
+</div>
+<div class="section" id="git-github">
+<h3>Git, Githubの設定<a class="headerlink" href="#git-github" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>githubのリポジトリを作成。</p>
+<p><code class="docutils literal notranslate"><span class="pre">doc</span></code> ディレクトリに以下の <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> を保存。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">test</span> <span class="n">text</span> <span class="n">aaaa</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>コンテンツの追加・更新<a class="headerlink" href="#id6" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="id7">
+<h3>追加<a class="headerlink" href="#id7" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="section" id="rst">
+<h4><code class="docutils literal notranslate"><span class="pre">.rst</span></code> ファイル<a class="headerlink" href="#rst" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">source</span></code> ディレクトリ内に <code class="docutils literal notranslate"><span class="pre">.rst</span></code> ファイルを追加する。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">index.rst</span></code> に追加したファイル名(拡張子を除く)を追記する。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">html</span></code> を実行する。</p></li>
+</ol>
+</div>
+<div class="section" id="ipynb">
+<h4><code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> ファイル<a class="headerlink" href="#ipynb" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">source</span></code> ディレクトリ内に <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> ファイルを追加する。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">index.rst</span></code> に追加したファイル名(拡張子を除く)を追記する。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">html</span></code> を実行する。</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="id8">
+<h3>更新<a class="headerlink" href="#id8" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">source</span></code> ディレクトリ内のファイルを変更する。
+<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">html</span></code> を実行する。</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">rs-with-python</a></h1>
+
+
+
+
+
+
+
+
+<h3>ナビゲーション</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">クイック検索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="検索" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Taka.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/setup_docs.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
