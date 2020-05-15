@@ -78,7 +78,8 @@ https://nbsphinx.readthedocs.io/en/latest/installation.html
 
    extensions = [
       'nbsphinx',
-      'sphinx.ext.mathjax'
+      'sphinx.ext.mathjax',
+      'sphinx.ext.githubpages'
    ]
 
 Github Pagesでの公開設定
