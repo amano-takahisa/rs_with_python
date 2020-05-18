@@ -1,0 +1,412 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="ja" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="ja" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>セットアップ &mdash; rs-with-python  ドキュメント</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script src="_static/translations.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> rs-with-python
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="read_shapefile_and_geotiff.html">Shapefileとgeotiffファイルを読み込む</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">rs-with-python</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>セットアップ</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/setup_docs.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="id1">
+<h1>セットアップ<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>これはこのドキュメント作成に関するメモ。
+Pythonでリモートセンシングを行う上では不要。</p>
+<div class="section" id="anaconda">
+<h2>Anaconda<a class="headerlink" href="#anaconda" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Anacondaで環境構築しておく。</p>
+</div>
+<div class="section" id="jupyter-notebook">
+<h2>jupyter notebook<a class="headerlink" href="#jupyter-notebook" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="id2">
+<h3>インストール<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>下記に従いインストールを行う。
+<a class="reference external" href="https://jupyter.org/install">https://jupyter.org/install</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conda install -c conda-forge jupyterlab
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="sphinx">
+<h2>Sphinx<a class="headerlink" href="#sphinx" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="id3">
+<h3>インストール<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>下記に従い、インストールを行う。
+<a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/installation.html">https://www.sphinx-doc.org/en/master/usage/installation.html</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt install python3-sphinx
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="nbsphinx">
+<h2>nbsphinx<a class="headerlink" href="#nbsphinx" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="id4">
+<h3>インストール<a class="headerlink" href="#id4" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>下記に従い、インストールを行う。
+<a class="reference external" href="https://nbsphinx.readthedocs.io/en/latest/installation.html">https://nbsphinx.readthedocs.io/en/latest/installation.html</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conda activate py37
+$ conda install -c conda-forge nbsphinx
+</pre></div>
+</div>
+<p>また、下記のインストールをしておく。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conda install -c conda-forge pandoc
+$ conda install -c conda-forge ipython
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h3>セットアップ<a class="headerlink" href="#id5" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">sphinx.cmd.quickstart</span></code> で、セットアップを行う。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ python3 -m sphinx.cmd.quickstart
+</pre></div>
+</div>
+<p>使用した設定は以下。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt; Separate <span class="nb">source</span> and build directories <span class="o">(</span>y/n<span class="o">)</span> <span class="o">[</span>n<span class="o">]</span>: y
+&gt; Project name: rs-with-python
+&gt; Author name<span class="o">(</span>s<span class="o">)</span>: Taka
+&gt; Project release <span class="o">[]</span>:
+&gt; Project language <span class="o">[</span>en<span class="o">]</span>: ja
+</pre></div>
+</div>
+<p>下記のようなディレクトリが作成される。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>.
+├── build
+├── make.bat
+├── Makefile
+└── source
+    ├── conf.py
+    ├── index.rst
+    ├── _static
+    └── _templates
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">read-the-doc</span></code> スタイルを適用するため、以下を実行。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install sphinx_rtd_theme
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">source/conf.py</span></code> を以下のように修正</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sphinx_rtd_theme</span>  <span class="c1"># この行を追記する。</span>
+
+<span class="o">...</span>
+
+<span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
+   <span class="s1">&#39;nbsphinx&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;sphinx.ext.mathjax&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;sphinx.ext.githubpages&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;sphinx_rtd_theme&#39;</span>
+<span class="p">]</span>
+
+<span class="n">html_theme</span> <span class="o">=</span> <span class="s2">&quot;sphinx_rtd_theme&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="github-pages">
+<h2>Github Pagesでの公開設定<a class="headerlink" href="#github-pages" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="id6">
+<h3>ビルド<a class="headerlink" href="#id6" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Makefile</span></code> ファイルを以下のとおり変更</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Minimal makefile for Sphinx documentation
+#
+
+# You can set these variables from the command line, and also
+# from the environment for the first two.
+SPHINXOPTS    ?=
+SPHINXBUILD   ?= sphinx-build
+SOURCEDIR     = source
+# BUILDDIR      = build
+BUILDDIR      = docs
+
+# Put it first so that &quot;make&quot; without argument is like &quot;make help&quot;.
+help:
+	@$(SPHINXBUILD) -M help &quot;$(SOURCEDIR)&quot; &quot;$(BUILDDIR)&quot; $(SPHINXOPTS) $(O)
+
+.PHONY: help Makefile
+
+# Catch-all target: route all unknown targets to Sphinx using the new
+# &quot;make mode&quot; option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
+%: Makefile
+	@$(SPHINXBUILD) -b $@ &quot;$(SOURCEDIR)&quot; &quot;$(BUILDDIR)&quot; $(SPHINXOPTS) $(O)
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">make</span> <span class="pre">html</span></code> を実行する。</p>
+<p>下記のようにhtmlディレクトリが作成される。:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>.
+├── docs
+│   ├── doctrees
+│   │   ├── environment.pickle
+│   │   └── index.doctree
+│   └── html
+│       ├── genindex.html
+│       ├── index.html
+│       ├── objects.inv
+│       ├── search.html
+│       ├── searchindex.js
+│       ├── _sources
+│       │   └── index.rst.txt
+│       └── _static
+│           ├── alabaster.css
+│           ├── basic.css
+│           ├── custom.css
+│           ├── doctools.js
+│           ├── documentation_options.js
+│           ├── file.png
+│           ├── jquery-3.4.1.js
+│           ├── jquery.js
+│           ├── language_data.js
+│           ├── minus.png
+│           ├── plus.png
+│           ├── pygments.css
+│           ├── searchtools.js
+│           ├── translations.js
+│           ├── underscore-1.3.1.js
+│           └── underscore.js
+├── make.bat
+├── Makefile
+└── source
+    ├── conf.py
+    ├── index.rst
+    ├── _static
+    └── _templates
+</pre></div>
+</div>
+</div>
+<div class="section" id="git-github">
+<h3>Git, Githubの設定<a class="headerlink" href="#git-github" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>githubのリポジトリを作成、 <code class="docutils literal notranslate"><span class="pre">gitinit</span></code> の実行、ルートディレクトリに
+<code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> を保存。</p>
+</div>
+</div>
+<div class="section" id="id7">
+<h2>コンテンツの追加・更新<a class="headerlink" href="#id7" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="id8">
+<h3>追加<a class="headerlink" href="#id8" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="section" id="rst">
+<h4><code class="docutils literal notranslate"><span class="pre">.rst</span></code> ファイル<a class="headerlink" href="#rst" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">source</span></code> ディレクトリ内に <code class="docutils literal notranslate"><span class="pre">.rst</span></code> ファイルを追加する。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">index.rst</span></code> に追加したファイル名(拡張子を除く)を追記する。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">html</span></code> を実行する。</p></li>
+</ol>
+</div>
+<div class="section" id="ipynb">
+<h4><code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> ファイル<a class="headerlink" href="#ipynb" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">source</span></code> ディレクトリ内に <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> ファイルを追加する。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">index.rst</span></code> に追加したファイル名(拡張子を除く)を追記する。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">html</span></code> を実行する。</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="id9">
+<h3>更新<a class="headerlink" href="#id9" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">source</span></code> ディレクトリ内のファイルを変更する。
+<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">html</span></code> を実行する。</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Taka
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
