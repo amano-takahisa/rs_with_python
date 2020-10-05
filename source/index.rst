@@ -18,6 +18,7 @@ source
 
    read_shapefile_and_geotiff
    split_dataframe
+   leaf_area_index
 
 
 
