@@ -16,9 +16,9 @@ source
    :maxdepth: 2
    :caption: Contents:
 
-   read_shapefile_and_geotiff
-   split_dataframe
-   leaf_area_index
+    about_ipynb
+    intro_python
+    leaf_area_index
 
 
 
