@@ -16,9 +16,9 @@ source
    :maxdepth: 2
    :caption: Contents:
 
-    about_ipynb
-    intro_python
-    leaf_area_index
+   about_ipynb
+   intro_python
+   leaf_area_index
 
 
 
