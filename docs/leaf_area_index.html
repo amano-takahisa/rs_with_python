@@ -37,7 +37,8 @@
 
     
     <link rel="index" title="索引" href="genindex.html" />
-    <link rel="search" title="検索" href="search.html" /> 
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="prev" title="pythonでリモセン" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -82,18 +83,18 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">OpenCVを利用した葉面積の推定</a><ul>
-<li><a class="reference internal" href="#OpenCVでの画像の表示">OpenCVでの画像の表示</a></li>
-<li><a class="reference internal" href="#画像データとはなにか">画像データとはなにか</a></li>
-<li><a class="reference internal" href="#チャンネルの分解">チャンネルの分解</a></li>
-<li><a class="reference internal" href="#HSVへの変換">HSVへの変換</a></li>
-<li><a class="reference internal" href="#閾値による分類">閾値による分類</a></li>
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">OpenCVを利用した葉面積の推定</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#OpenCVでの画像の表示">OpenCVでの画像の表示</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#画像データとはなにか">画像データとはなにか</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#チャンネルの分解">チャンネルの分解</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#HSVへの変換">HSVへの変換</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#閾値による分類">閾値による分類</a></li>
 </ul>
 </li>
 </ul>
-</div>
+
             
           
         </div>
@@ -466,7 +467,7 @@ Requirement already satisfied: numpy&gt;=1.14.5 in /home/takahisa/anaconda3/envs
 <div class="section" id="OpenCVでの画像の表示">
 <h2>OpenCVでの画像の表示<a class="headerlink" href="#OpenCVでの画像の表示" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <p>まずは画像を読み込んで表示します。画像の保存先は、<code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>ファイルと同じフォルダに、<code class="docutils literal notranslate"><span class="pre">data</span></code>という名前のフォルダを作成し、その中に保存してあるものとします。</p>
-<p>下記のチャンクを実行すると、<strong>image</strong>という名前の別ウィンドウが立ち上がり、画像が表示されます。 表示されたウィンドウは、キーボードのいづれかのキーを押して閉じてください。</p>
+<p>下記のチャンクを実行すると、<strong>image</strong>という名前の別ウィンドウが立ち上がり、画像が表示されます。(Jupyter labをWSL2上やGoogle Colaboratoryで動かしている場合、下のコードは機能しないかもしれません。) 表示されたウィンドウは、キーボードのいづれかのキーを押して閉じてください。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -945,6 +946,13 @@ Mask ratio is 0.2845270369284877
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="pythonでリモセン" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

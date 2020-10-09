@@ -82,13 +82,11 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Pythonの基礎</a></li>
-<li><a class="reference internal" href="#Jupyter-Notebook上での出力について">Jupyter Notebook上での出力について</a></li>
-<li><a class="reference internal" href="#型">型</a></li>
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="leaf_area_index.html">OpenCVを利用した葉面積の推定</a></li>
 </ul>
-</div>
+
             
           
         </div>
@@ -409,6 +407,13 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="section" id="Pythonの基礎">
 <h1>Pythonの基礎<a class="headerlink" href="#Pythonの基礎" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>Pythonは、プログラミング言語の一つで、最近は機械学習や画像解析によく使われています。</p>
+<p>プログラミング言語は、PythonのほかにもR、Java、Cなどなどたくさんあります。各言語はそれぞれの言語の仕様により、様々な特徴を持ちます。また、各言語がよく使われている分野というものがあり、特定分野においてその言語のユーザーが多いほど、多くのライブラリが作成されています。どのプログラミング言語を利用するかは、その分野でみんながよく使っているというのが重要な指標になります。</p>
+<p>リモートセンシング・GISの分野でよく使われている言語は、Python、R、Bash、C#といったところです。特に<strong>Python</strong>は、ArgGISのほか、QGIS、GRASS GIS、Orfeo ToolboxなどのメジャーなGISはPythonをサポートしており、それらのソフトウェアが提供する機能をつなぎ合わせて実行することが容易になっています。</p>
+<p><strong>R</strong>はグラフ作成や統計解析ライブラリが非常に充実しています。Pythonで大規模なデータを処理した後、Rで統計解析を行うこともよくあります。</p>
+<p><strong>Bash</strong>はほとんどのUnix系のOSがサポートしている言語で、他と比べて基本的な機能しかありません。古くから使われている言語で互換性が高いため、例えば、pythonで書かれたプログラムをAWS上で自動的に実行させるといった、異なるプログラムやディバイス上での処理をつなげる処理によく使われます。</p>
+<p><strong>C#</strong>は他の4つと比べると、非常に早く実行することができる言語です。多くのPythonやRのライブラリがバックエンドでC#で書かれたプログラムを利用しています。</p>
+<p>以下では、Jupyter Notebook上でPythonの基本的な使い方を学びます。</p>
 </div>
 <div class="section" id="Jupyter-Notebook上での出力について">
 <h1>Jupyter Notebook上での出力について<a class="headerlink" href="#Jupyter-Notebook上での出力について" title="このヘッドラインへのパーマリンク">¶</a></h1>
@@ -434,24 +439,7 @@ div.rendered_html tbody tr:hover {
 </pre></div></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">30</span> <span class="pre">+</span> <span class="pre">12</span></code>の実行結果が<code class="docutils literal notranslate"><span class="pre">42</span></code>と表示されました。PythonをJupyter Notebook上で実行する場合に限り、<code class="docutils literal notranslate"><span class="pre">print()</span></code>が省略されても一番最後の実行結果は表示されます。</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="mi">30</span> <span class="o">+</span> <span class="mi">12</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-42
-</pre></div></div>
-</div>
+<p>30 + 12</p>
 <p>ただし、省略できるのは同じチャンクの最後の行のみです。複数行表示したい場合は、適宜<code class="docutils literal notranslate"><span class="pre">print()</span></code>関数を利用する必要があります。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
@@ -494,9 +482,37 @@ div.rendered_html tbody tr:hover {
 </div>
 <p>以下では、<code class="docutils literal notranslate"><span class="pre">print()</span></code>関数が不要な場合、省略されている場合があります。</p>
 </div>
+<div class="section" id="代入">
+<h1>代入<a class="headerlink" href="#代入" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>以下のコードを見てください。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+110
+</pre></div></div>
+</div>
+<p>上記のコードは下記のことを行っています。</p>
+<p>１行目: 変数<code class="docutils literal notranslate"><span class="pre">x</span></code>に10を入力 ２行目: 変数<code class="docutils literal notranslate"><span class="pre">y</span></code>に100を入力 ３行目: <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">y</span></code>を計算して結果を変数<code class="docutils literal notranslate"><span class="pre">z</span></code>に入力 ４行目: 関数<code class="docutils literal notranslate"><span class="pre">print()</span></code>に<code class="docutils literal notranslate"><span class="pre">z</span></code>を入力</p>
+</div>
 <div class="section" id="型">
 <h1>型<a class="headerlink" href="#型" title="このヘッドラインへのパーマリンク">¶</a></h1>
-<p>型とは、データがどのような形式かを表すもので、Pythonにあらかじめ定義されている型は以下のものがあります。 - 数値型 - 整数型(‘int’) : -1, 0, 1, 2, …. - 小数型(‘float’) : -120.0, 3.1415, 1.5e12, 3.00e8 - 複素数型(‘complex’): 1.0j, 1+1j, 3e8+0j - バイナリ型 - ブール型(‘bool’) : True, False - 文字列 - 文字列型(‘str’) : ‘aaa’, ‘あいうえお’, “0123”</p>
+<div class="section" id="基本型">
+<h2>基本型<a class="headerlink" href="#基本型" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>型とは、データがどのような形式かを表すもので、Pythonにあらかじめ定義されている基本型は以下のものがあります。 - 数値型 - 整数型(‘int’) : -1, 0, 1, 2, …. - 小数型(‘float’) : -120.0, 3.1415, 1.5e12, 3.00e8 - 複素数型(‘complex’): 1.0j, 1+1j, 3e8+0j - バイナリ型 - ブール型(‘bool’) : True, False - 文字列 - 文字列型(‘str’) : ‘aaa’, ‘あいうえお’, “0123”</p>
 <p>また、必要に応じてユーザーによって<strong>型</strong>を新しく作ることもできます。 プログラムが複雑になってくると、新しい<strong>型</strong>を導入することはとても便利です。</p>
 <p>自分の扱っているデータの方を確認するには、<code class="docutils literal notranslate"><span class="pre">type()</span></code>関数を利用します。</p>
 <div class="nbinput docutils container">
@@ -535,14 +551,70 @@ str
 int
 </pre></div></div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</div>
+<div class="section" id="コレクション型">
+<h2>コレクション型<a class="headerlink" href="#コレクション型" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</div>
+</div>
+<div class="section" id="コレクションへのアクセス">
+<h1>コレクションへのアクセス<a class="headerlink" href="#コレクションへのアクセス" title="このヘッドラインへのパーマリンク">¶</a></h1>
+</div>
+<div class="section" id="参照">
+<h1>参照<a class="headerlink" href="#参照" title="このヘッドラインへのパーマリンク">¶</a></h1>
+</div>
+<div class="section" id="二項演算子">
+<h1>二項演算子<a class="headerlink" href="#二項演算子" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<div class="section" id="四則演算">
+<h2>四則演算<a class="headerlink" href="#四則演算" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</div>
+<div class="section" id="ブール演算子(論理演算子)">
+<h2>ブール演算子(論理演算子)<a class="headerlink" href="#ブール演算子(論理演算子)" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</div>
+</div>
+<div class="section" id="スライス">
+<h1>スライス<a class="headerlink" href="#スライス" title="このヘッドラインへのパーマリンク">¶</a></h1>
+</div>
+<div class="section" id="文字列整形">
+<h1>文字列整形<a class="headerlink" href="#文字列整形" title="このヘッドラインへのパーマリンク">¶</a></h1>
+</div>
+<div class="section" id="条件式(if,-elif,-else)">
+<h1>条件式(if, elif, else)<a class="headerlink" href="#条件式(if,-elif,-else)" title="このヘッドラインへのパーマリンク">¶</a></h1>
+</div>
+<div class="section" id="ループ(for,-while)">
+<h1>ループ(for, while)<a class="headerlink" href="#ループ(for,-while)" title="このヘッドラインへのパーマリンク">¶</a></h1>
+</div>
+<div class="section" id="enumulate">
+<h1>enumulate<a class="headerlink" href="#enumulate" title="このヘッドラインへのパーマリンク">¶</a></h1>
+</div>
+<div class="section" id="関数">
+<h1>関数<a class="headerlink" href="#関数" title="このヘッドラインへのパーマリンク">¶</a></h1>
+</div>
+<div class="section" id="モジュールとパッケージ">
+<h1>モジュールとパッケージ<a class="headerlink" href="#モジュールとパッケージ" title="このヘッドラインへのパーマリンク">¶</a></h1>
+</div>
+<div class="section" id="標準ライブラリ">
+<h1>標準ライブラリ<a class="headerlink" href="#標準ライブラリ" title="このヘッドラインへのパーマリンク">¶</a></h1>
+</div>
+<div class="section" id="名前空間とスコープ">
+<h1>名前空間とスコープ<a class="headerlink" href="#名前空間とスコープ" title="このヘッドラインへのパーマリンク">¶</a></h1>
+</div>
+<div class="section" id="プロパティとメソッド">
+<h1>プロパティとメソッド<a class="headerlink" href="#プロパティとメソッド" title="このヘッドラインへのパーマリンク">¶</a></h1>
+</div>
+<div class="section" id="Jupyter-Notebook外でのPythonの利用">
+<h1>Jupyter Notebook外でのPythonの利用<a class="headerlink" href="#Jupyter-Notebook外でのPythonの利用" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>Pythonで書いたプログラムをJupyter Notebookを起動せずに実行したり、過去に作成したプログラムを、別のPythonプログラムから呼び出したりするには、Pythonのコードをテキストファイルに書き、<code class="docutils literal notranslate"><span class="pre">.py</span></code>の拡張子で保存します。</p>
+<p>例えば、以下を<code class="docutils literal notranslate"><span class="pre">hello.py</span></code>として保存した場合、</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;hello world!&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nb">type</span><span class="p">()</span>
+<p>ターミナルから以下のコマンドを実行すると、ターミナルに実行結果が表示されます。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python hello.py
 </pre></div>
 </div>
+<p>表示:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hello world!
+</pre></div>
 </div>
 </div>
 
