@@ -6,25 +6,17 @@
 pythonでリモセン
 ================
 
-pythonでリモートセンシングデータやGISデータを扱う際によく使うコマンド等のメモです。
-
+主にPythonを使ったGISやリモートセンシングのデータ処理について書きます。
 
 source
    https://github.com/amano-takahisa/rs_with_python
 
+
+
+
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Contents:
 
-   about_ipynb
-   intro_python
-   leaf_area_index
-
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   handson/index
+   lib/index
