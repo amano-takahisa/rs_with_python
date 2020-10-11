@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Jupoyter Notebookについて &mdash; rs-with-python  ドキュメント</title>
+  <title>Jupoyter Notebookと環境構築 &mdash; rs-with-python  ドキュメント</title>
   
 
   
@@ -40,8 +40,8 @@
     
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="検索" href="../search.html" />
-    <link rel="next" title="ハイパースペクトラルセンサーデータの可視化" href="plot_hyperspectral.html" />
-    <link rel="prev" title="ハンズオン" href="index.html" /> 
+    <link rel="next" title="Pythonの基礎" href="intro_python.html" />
+    <link rel="prev" title="授業等" href="../indices/index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -88,36 +88,20 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">ハンズオン</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Jupoyter Notebookについて</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#Jupoyter-Notebookとはなにか">Jupoyter Notebookとはなにか</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../indices/index.html">授業等</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../indices/index.html#id2">2年基礎実験</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Jupoyter Notebookと環境構築</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Jupoyter-Notebookとはなにか">Jupoyter Notebookとはなにか</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#環境設定">環境設定</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Jupyter-Labの使い方">Jupyter Labの使い方</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#環境設定">環境設定</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#Google-Colaboratoryの紹介">Google Colaboratoryの紹介</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#WSL2上のLinuxでPythonを使う(Windows-10)">WSL2上のLinuxでPythonを使う(Windows 10)</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#Windows-10のバージョンの確認">Windows 10のバージョンの確認</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#WSLの設定">WSLの設定</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#Ubuntuの設定">Ubuntuの設定</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#Python環境等の設定">Python環境等の設定</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#WSLとWindowsとのファイル共有">WSLとWindowsとのファイル共有</a></li>
+<li class="toctree-l3"><a class="reference internal" href="intro_python.html">Pythonの基礎</a></li>
+<li class="toctree-l3"><a class="reference internal" href="leaf_area_index.html">OpenCVを利用した葉面積の推定</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#Jupyter-Labの使い方">Jupyter Labの使い方</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#チャンクの実行">チャンクの実行</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#チャンクの編集">チャンクの編集</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#カーネルの再起動">カーネルの再起動</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ファイルの保存">ファイルの保存</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#Pythonの基礎">Pythonの基礎</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plot_hyperspectral.html">ハイパースペクトラルセンサーデータの可視化</a></li>
-<li class="toctree-l2"><a class="reference internal" href="leaf_area_index.html">OpenCVを利用した葉面積の推定</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../lib/index.html">各種ライブラリのメモ</a></li>
 </ul>
 
             
@@ -164,9 +148,9 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="index.html">ハンズオン</a> &raquo;</li>
+          <li><a href="../indices/index.html">授業等</a> &raquo;</li>
         
-      <li>Jupoyter Notebookについて</li>
+      <li>Jupoyter Notebookと環境構築</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -440,8 +424,8 @@ div.rendered_html tbody tr:hover {
     text-align: unset;
 }
 </style>
-<div class="section" id="Jupoyter-Notebookについて">
-<h1>Jupoyter Notebookについて<a class="headerlink" href="#Jupoyter-Notebookについて" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<div class="section" id="Jupoyter-Notebookと環境構築">
+<h1>Jupoyter Notebookと環境構築<a class="headerlink" href="#Jupoyter-Notebookと環境構築" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <p>ここでは、Jupyter Notebookの導入方法と基本的な使い方を解説します。</p>
 <div class="section" id="Jupoyter-Notebookとはなにか">
 <h2>Jupoyter Notebookとはなにか<a class="headerlink" href="#Jupoyter-Notebookとはなにか" title="このヘッドラインへのパーマリンク">¶</a></h2>
@@ -473,11 +457,10 @@ div.rendered_html tbody tr:hover {
 <p>この<code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>ファイルは、Jupyter Labという名前のソフトを通じ、webブラウザ上に表示、編集することができます。Jupyter Labは、以前はJupyter Notebookという名前で開発されていたソフトの後続。高機能版になります。単に<strong>Jupyter Notebook</strong>と言うと、<code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>ファイルのことであったり、表示させるソフトのことであったりすることがあるので、少し紛らわしいです。</p>
 <p>ここでは基本的なJupyter Lab(Notebook)の使い方と、Pythonの基礎を解説します。</p>
 </div>
-</div>
 <div class="section" id="環境設定">
-<h1>環境設定<a class="headerlink" href="#環境設定" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<h2>環境設定<a class="headerlink" href="#環境設定" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <div class="section" id="Google-Colaboratoryの紹介">
-<h2>Google Colaboratoryの紹介<a class="headerlink" href="#Google-Colaboratoryの紹介" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<h3>Google Colaboratoryの紹介<a class="headerlink" href="#Google-Colaboratoryの紹介" title="このヘッドラインへのパーマリンク">¶</a></h3>
 <p>Jupyter Lab (Notebook)を利用するには、ローカル環境にJupyter Labをインストールする方法と、Googleが提供するクラウドサービスを利用する方法があります。</p>
 <p><a class="reference external" href="https://colab.research.google.com/">Google Colaboratory</a>を利用すると、下記のPython環境の構築やJupyter Labのインストールなどを行うことなく、googleが提供するサーバー上で動くJupyter環境がブラウザから利用することができます。 Google Colaboratoryを利用するメリットとしては、</p>
 <ul class="simple">
@@ -498,16 +481,16 @@ div.rendered_html tbody tr:hover {
 <p>以下に、ローカル環境でのPythonおよびJupyter labの環境構築手順を示しますが、うまく行かない場合Google Colaboratoryを利用して演習をしてください。Google Colaboratoryを利用する場合は、以下をすべてすっ飛ばして大丈夫です。</p>
 </div>
 <div class="section" id="WSL2上のLinuxでPythonを使う(Windows-10)">
-<h2>WSL2上のLinuxでPythonを使う(Windows 10)<a class="headerlink" href="#WSL2上のLinuxでPythonを使う(Windows-10)" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<h3>WSL2上のLinuxでPythonを使う(Windows 10)<a class="headerlink" href="#WSL2上のLinuxでPythonを使う(Windows-10)" title="このヘッドラインへのパーマリンク">¶</a></h3>
 <p>GIS、リモートセンシングで利用するPythonやGDAL等のライブラリは、開発者の多くがLinux(Unix)を使っています。そのため、Windows上でうまく動作しないことがよくあります。Windows10から導入されたWSL2(Windows Subsystem for Linux)という仮想化技術があります。WSL2の導入によって、Linuxの仮想マシンがWindows上で動作し、この仮想マシン上のLinuxでPythonを動かすことができるようになります。</p>
 <p>以下は基本的に<a class="reference external" href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">Microsoftの紹介する手順</a>に従い、導入方法を紹介します。作業時間は1時間ほどです。</p>
 <div class="section" id="Windows-10のバージョンの確認">
-<h3>Windows 10のバージョンの確認<a class="headerlink" href="#Windows-10のバージョンの確認" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<h4>Windows 10のバージョンの確認<a class="headerlink" href="#Windows-10のバージョンの確認" title="このヘッドラインへのパーマリンク">¶</a></h4>
 <p>WSL2は、windowsバージョンが1903、ビルドが18362以降で使うことができます。(ARM64の場合はそれぞれ2004および19041) これより低いビルドバージョンの場合は、<a class="reference external" href="https://www.microsoft.com/software-download/windows10">Windows Update Assistant</a>を使ってアップデートしてください。 ビルドバージョンは以下から確認できます。</p>
 <p><img alt="ビルドバージョンの確認" src="../_images/ss_001_Settings.png" /></p>
 </div>
 <div class="section" id="WSLの設定">
-<h3>WSLの設定<a class="headerlink" href="#WSLの設定" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<h4>WSLの設定<a class="headerlink" href="#WSLの設定" title="このヘッドラインへのパーマリンク">¶</a></h4>
 <p>WLS2はWSLのアップグレード版として提供されています。そのため、まずはWSLの導入を行います。</p>
 <p>Powershellを管理者権限で起動します。</p>
 <p><img alt="Powershellを管理者権限で起動" src="../_images/ss_002_start_powershell_with_admin.png" /></p>
@@ -531,7 +514,7 @@ div.rendered_html tbody tr:hover {
 <p>インストールが完了後、Microsoft storeの右上の起動ボタン、もしくはデスクトップやスタートメニューに追加されたUbuntu 20.04アイコンから、Ubuntuを起動します。</p>
 </div>
 <div class="section" id="Ubuntuの設定">
-<h3>Ubuntuの設定<a class="headerlink" href="#Ubuntuの設定" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<h4>Ubuntuの設定<a class="headerlink" href="#Ubuntuの設定" title="このヘッドラインへのパーマリンク">¶</a></h4>
 <p>初めてUbuntuを起動すると、黒い画面(Linuxではターミナルやコンソール、コマンドプロンプトなどと呼ばれます。)が次のように表示されます。</p>
 <p><img alt="ubuntu初期ターミナル" src="../_images/ss_010_ubuntu_setup.png" /></p>
 <p>この</p>
@@ -553,7 +536,7 @@ div.rendered_html tbody tr:hover {
 <p><img alt="Ubuntu初期設定の完了" src="../_images/ss_011_ubuntu_setup_end.png" /></p>
 </div>
 <div class="section" id="Python環境等の設定">
-<h3>Python環境等の設定<a class="headerlink" href="#Python環境等の設定" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<h4>Python環境等の設定<a class="headerlink" href="#Python環境等の設定" title="このヘッドラインへのパーマリンク">¶</a></h4>
 <p>ここでは上記で導入したWSL2上のUbuntuにPythonおよびJupyter Labの環境を設定していきます。</p>
 <p>Ubuntuのターミナルの最後の行にカーソルがあり、そこには、以下のように表示されていると思います。</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>takahisa@DESKTOP-QRCQMC:~$
@@ -606,29 +589,26 @@ jupyter labextension install @jupyter-widgets/jupyterlab-manager@2.0
 <p>あと少し、WindowsとWSL上のデータのやり取りの設定をしたら、Jupyter Labの準備が終了です。</p>
 </div>
 <div class="section" id="WSLとWindowsとのファイル共有">
-<h3>WSLとWindowsとのファイル共有<a class="headerlink" href="#WSLとWindowsとのファイル共有" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<h4>WSLとWindowsとのファイル共有<a class="headerlink" href="#WSLとWindowsとのファイル共有" title="このヘッドラインへのパーマリンク">¶</a></h4>
 </div>
 </div>
 </div>
 <div class="section" id="Jupyter-Labの使い方">
-<h1>Jupyter Labの使い方<a class="headerlink" href="#Jupyter-Labの使い方" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<h2>Jupyter Labの使い方<a class="headerlink" href="#Jupyter-Labの使い方" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <p>インタラクティブ 以下のチャンクを実行して、</p>
 <div class="section" id="チャンクの実行">
-<h2>チャンクの実行<a class="headerlink" href="#チャンクの実行" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<h3>チャンクの実行<a class="headerlink" href="#チャンクの実行" title="このヘッドラインへのパーマリンク">¶</a></h3>
 </div>
 <div class="section" id="チャンクの編集">
-<h2>チャンクの編集<a class="headerlink" href="#チャンクの編集" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<h3>チャンクの編集<a class="headerlink" href="#チャンクの編集" title="このヘッドラインへのパーマリンク">¶</a></h3>
 </div>
 <div class="section" id="カーネルの再起動">
-<h2>カーネルの再起動<a class="headerlink" href="#カーネルの再起動" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<h3>カーネルの再起動<a class="headerlink" href="#カーネルの再起動" title="このヘッドラインへのパーマリンク">¶</a></h3>
 </div>
 <div class="section" id="ファイルの保存">
-<h2>ファイルの保存<a class="headerlink" href="#ファイルの保存" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<h3>ファイルの保存<a class="headerlink" href="#ファイルの保存" title="このヘッドラインへのパーマリンク">¶</a></h3>
 </div>
 </div>
-<div class="section" id="Pythonの基礎">
-<h1>Pythonの基礎<a class="headerlink" href="#Pythonの基礎" title="このヘッドラインへのパーマリンク">¶</a></h1>
-<p><a class="reference external" href="intro_python.ipynb">Pythonの基礎</a>に進んでください。</p>
 </div>
 
 
@@ -639,10 +619,10 @@ jupyter labextension install @jupyter-widgets/jupyterlab-manager@2.0
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="plot_hyperspectral.html" class="btn btn-neutral float-right" title="ハイパースペクトラルセンサーデータの可視化" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="intro_python.html" class="btn btn-neutral float-right" title="Pythonの基礎" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral float-left" title="ハンズオン" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../indices/index.html" class="btn btn-neutral float-left" title="授業等" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

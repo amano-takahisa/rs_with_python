@@ -1,0 +1,672 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Pythonの基礎 &mdash; rs-with-python  ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> rs-with-python
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../indices/202011_nodai.html">2年基礎実験</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">ハンズオン</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lib/index.html">各種ライブラリのメモ</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">rs-with-python</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Pythonの基礎</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/handson/intro_python.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container,
+div.nbinput.container div.prompt,
+div.nbinput.container div.input_area,
+div.nbinput.container div[class*=highlight],
+div.nbinput.container div[class*=highlight] pre,
+div.nboutput.container,
+div.nboutput.container div.prompt,
+div.nboutput.container div.output_area,
+div.nboutput.container div[class*=highlight],
+div.nboutput.container div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    background: #f5f5f5;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="Pythonの基礎">
+<h1>Pythonの基礎<a class="headerlink" href="#Pythonの基礎" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>Pythonは、プログラミング言語の一つで、最近は機械学習や画像解析によく使われています。</p>
+<p>プログラミング言語は、PythonのほかにもR、Java、Cなどなどたくさんあります。各言語はそれぞれの言語の仕様により、様々な特徴を持ちます。また、各言語がよく使われている分野というものがあり、特定分野においてその言語のユーザーが多いほど、多くのライブラリが作成されています。どのプログラミング言語を利用するかは、その分野でみんながよく使っているというのが重要な指標になります。</p>
+<p>リモートセンシング・GISの分野でよく使われている言語は、Python、R、Bash、C#といったところです。特に<strong>Python</strong>は、ArgGISのほか、QGIS、GRASS GIS、Orfeo ToolboxなどのメジャーなGISはPythonをサポートしており、それらのソフトウェアが提供する機能をつなぎ合わせて実行することが容易になっています。</p>
+<p><strong>R</strong>はグラフ作成や統計解析ライブラリが非常に充実しています。Pythonで大規模なデータを処理した後、Rで統計解析を行うこともよくあります。</p>
+<p><strong>Bash</strong>はほとんどのUnix系のOSがサポートしている言語で、他と比べて基本的な機能しかありません。古くから使われている言語で互換性が高いため、例えば、pythonで書かれたプログラムをAWS上で自動的に実行させるといった、異なるプログラムやディバイス上での処理をつなげる処理によく使われます。</p>
+<p><strong>C#</strong>は他の4つと比べると、非常に早く実行することができる言語です。多くのPythonやRのライブラリがバックエンドでC#で書かれたプログラムを利用しています。</p>
+<p>以下では、Jupyter Notebook上でPythonの基本的な使い方を学びます。</p>
+<div class="section" id="Jupyter-Notebook上での出力について">
+<h2>Jupyter Notebook上での出力について<a class="headerlink" href="#Jupyter-Notebook上での出力について" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="line-block">
+<div class="line">Pythonで実行結果を表示させるには、通常<code class="docutils literal notranslate"><span class="pre">print()</span></code>関数を使います。</div>
+<div class="line">例えば、<code class="docutils literal notranslate"><span class="pre">5+3</span></code>の実行結果を表示させるには、Jupyter Notebook上で以下のように書きます。</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="mi">30</span> <span class="o">+</span> <span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+42
+</pre></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">30</span> <span class="pre">+</span> <span class="pre">12</span></code>の実行結果が<code class="docutils literal notranslate"><span class="pre">42</span></code>と表示されました。PythonをJupyter Notebook上で実行する場合に限り、<code class="docutils literal notranslate"><span class="pre">print()</span></code>が省略されても一番最後の実行結果は表示されます。</p>
+<p>30 + 12</p>
+<p>ただし、省略できるのは同じチャンクの最後の行のみです。複数行表示したい場合は、適宜<code class="docutils literal notranslate"><span class="pre">print()</span></code>関数を利用する必要があります。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="mi">30</span> <span class="o">+</span> <span class="mi">12</span>
+<span class="mi">20</span> <span class="o">-</span> <span class="mi">10</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+10
+</pre></div></div>
+</div>
+<p>すべての値を出力させたい場合、<code class="docutils literal notranslate"><span class="pre">print()</span></code>関数を複数入れて、以下のように書きます。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="mi">30</span> <span class="o">+</span> <span class="mi">12</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">20</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+42
+10
+</pre></div></div>
+</div>
+<p>以下では、<code class="docutils literal notranslate"><span class="pre">print()</span></code>関数が不要な場合、省略されている場合があります。</p>
+</div>
+<div class="section" id="代入">
+<h2>代入<a class="headerlink" href="#代入" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>以下のコードを見てください。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+110
+</pre></div></div>
+</div>
+<p>上記のコードは下記のことを行っています。</p>
+<p>１行目: 変数<code class="docutils literal notranslate"><span class="pre">x</span></code>に10を入力 ２行目: 変数<code class="docutils literal notranslate"><span class="pre">y</span></code>に100を入力 ３行目: <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">y</span></code>を計算して結果を変数<code class="docutils literal notranslate"><span class="pre">z</span></code>に入力 ４行目: 関数<code class="docutils literal notranslate"><span class="pre">print()</span></code>に<code class="docutils literal notranslate"><span class="pre">z</span></code>を入力</p>
+</div>
+<div class="section" id="型">
+<h2>型<a class="headerlink" href="#型" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="基本型">
+<h3>基本型<a class="headerlink" href="#基本型" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>型とは、データがどのような形式かを表すもので、Pythonにあらかじめ定義されている基本型は以下のものがあります。 - 数値型 - 整数型(‘int’) : -1, 0, 1, 2, …. - 小数型(‘float’) : -120.0, 3.1415, 1.5e12, 3.00e8 - 複素数型(‘complex’): 1.0j, 1+1j, 3e8+0j - バイナリ型 - ブール型(‘bool’) : True, False - 文字列 - 文字列型(‘str’) : ‘aaa’, ‘あいうえお’, “0123”</p>
+<p>また、必要に応じてユーザーによって<strong>型</strong>を新しく作ることもできます。 プログラムが複雑になってくると、新しい<strong>型</strong>を導入することはとても便利です。</p>
+<p>自分の扱っているデータの方を確認するには、<code class="docutils literal notranslate"><span class="pre">type()</span></code>関数を利用します。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">type</span><span class="p">(</span><span class="s1">&#39;abcd&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+str
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">type</span><span class="p">(</span><span class="mi">30</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+int
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="コレクション型">
+<h3>コレクション型<a class="headerlink" href="#コレクション型" title="このヘッドラインへのパーマリンク">¶</a></h3>
+</div>
+</div>
+<div class="section" id="コレクションへのアクセス">
+<h2>コレクションへのアクセス<a class="headerlink" href="#コレクションへのアクセス" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</div>
+<div class="section" id="参照">
+<h2>参照<a class="headerlink" href="#参照" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</div>
+<div class="section" id="二項演算子">
+<h2>二項演算子<a class="headerlink" href="#二項演算子" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="四則演算">
+<h3>四則演算<a class="headerlink" href="#四則演算" title="このヘッドラインへのパーマリンク">¶</a></h3>
+</div>
+<div class="section" id="ブール演算子(論理演算子)">
+<h3>ブール演算子(論理演算子)<a class="headerlink" href="#ブール演算子(論理演算子)" title="このヘッドラインへのパーマリンク">¶</a></h3>
+</div>
+</div>
+<div class="section" id="スライス">
+<h2>スライス<a class="headerlink" href="#スライス" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</div>
+<div class="section" id="文字列整形">
+<h2>文字列整形<a class="headerlink" href="#文字列整形" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</div>
+<div class="section" id="条件式(if,-elif,-else)">
+<h2>条件式(if, elif, else)<a class="headerlink" href="#条件式(if,-elif,-else)" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</div>
+<div class="section" id="ループ(for,-while)">
+<h2>ループ(for, while)<a class="headerlink" href="#ループ(for,-while)" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</div>
+<div class="section" id="enumulate">
+<h2>enumulate<a class="headerlink" href="#enumulate" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</div>
+<div class="section" id="関数">
+<h2>関数<a class="headerlink" href="#関数" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</div>
+<div class="section" id="モジュールとパッケージ">
+<h2>モジュールとパッケージ<a class="headerlink" href="#モジュールとパッケージ" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</div>
+<div class="section" id="標準ライブラリ">
+<h2>標準ライブラリ<a class="headerlink" href="#標準ライブラリ" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</div>
+<div class="section" id="名前空間とスコープ">
+<h2>名前空間とスコープ<a class="headerlink" href="#名前空間とスコープ" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</div>
+<div class="section" id="プロパティとメソッド">
+<h2>プロパティとメソッド<a class="headerlink" href="#プロパティとメソッド" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</div>
+<div class="section" id="Jupyter-Notebook外でのPythonの利用">
+<h2>Jupyter Notebook外でのPythonの利用<a class="headerlink" href="#Jupyter-Notebook外でのPythonの利用" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Pythonで書いたプログラムをJupyter Notebookを起動せずに実行したり、過去に作成したプログラムを、別のPythonプログラムから呼び出したりするには、Pythonのコードをテキストファイルに書き、<code class="docutils literal notranslate"><span class="pre">.py</span></code>の拡張子で保存します。</p>
+<p>例えば、以下を<code class="docutils literal notranslate"><span class="pre">hello.py</span></code>として保存した場合、</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;hello world!&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>ターミナルから以下のコマンドを実行すると、ターミナルに実行結果が表示されます。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python hello.py
+</pre></div>
+</div>
+<p>表示:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hello world!
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, Taka
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

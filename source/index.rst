@@ -6,17 +6,14 @@
 pythonでリモセン
 ================
 
-主にPythonを使ったGISやリモートセンシングのデータ処理について書きます。
-
-source
-   https://github.com/amano-takahisa/rs_with_python
-
-
 
 
 .. toctree::
    :maxdepth: 1
    :caption: Contents:
 
+   indices/index
+
+..
    handson/index
    lib/index
