@@ -97,9 +97,11 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="intro_python.html">Pythonの基礎</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_hyperspectral.html">ハイパースペクトラルセンサーデータの可視化</a></li>
 <li class="toctree-l3"><a class="reference internal" href="leaf_area_index.html">OpenCVを利用した葉面積の推定</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../indices/index.html#id3">3年専攻演習</a></li>
 </ul>
 </li>
 </ul>
@@ -426,7 +428,7 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="section" id="Jupoyter-Notebookと環境構築">
 <h1>Jupoyter Notebookと環境構築<a class="headerlink" href="#Jupoyter-Notebookと環境構築" title="このヘッドラインへのパーマリンク">¶</a></h1>
-<p>ここでは、Jupyter Notebookの導入方法と基本的な使い方を解説します。</p>
+<p>Python開発環境として、Jupyter Notebookの導入方法と、その基本的な使い方を解説します。</p>
 <div class="section" id="Jupoyter-Notebookとはなにか">
 <h2>Jupoyter Notebookとはなにか<a class="headerlink" href="#Jupoyter-Notebookとはなにか" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <p>Jupyter Notebookは、Pythonのコードとその実行結果、またそのコードに関するドキュメントを一緒に記述できるいい感じのファイル形式のことを指します。このテキストもJupyter Notebookで作成されています。Jupyter Notebookでは、プログラムのコードとドキュメントを単一のファイルで保存できるため、新しいアイデアを試したり、他人と共有しすることが簡単になります。</p>
@@ -454,15 +456,18 @@ div.rendered_html tbody tr:hover {
 </div>
 <p>コードが記載されるひとかたまりは、<strong>チャンク</strong>や<strong>セル</strong>とよばれ、コードの実行はこのチャンクごとに行われます。チャンクを実行すると、その出力がチャンクの下に表示されます。<code class="docutils literal notranslate"><span class="pre">#</span></code>から始まる行や、<code class="docutils literal notranslate"><span class="pre">#</span></code>より右側の文字列は<strong>コメント</strong>で、プログラムの実行に影響しません。一時的にコードを無効化したり、コードに関するメモを記載したりするのに使います。</p>
 <p>Jupyter Notebookファイルはテキストファイルで<code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>という拡張子で保存されます。</p>
-<p>この<code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>ファイルは、Jupyter Labという名前のソフトを通じ、webブラウザ上に表示、編集することができます。Jupyter Labは、以前はJupyter Notebookという名前で開発されていたソフトの後続。高機能版になります。単に<strong>Jupyter Notebook</strong>と言うと、<code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>ファイルのことであったり、表示させるソフトのことであったりすることがあるので、少し紛らわしいです。</p>
-<p>ここでは基本的なJupyter Lab(Notebook)の使い方と、Pythonの基礎を解説します。</p>
+<p>この<code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>ファイルは、Jupyter Labという名前のソフトを通じ、webブラウザ上に表示、編集することができます。Jupyter Labは、以前はJupyter Notebookという名前で開発されていたソフトの後続・高機能版になります。文脈によって「Jupyter Notebook」は<code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>ファイルのことであったり、表示させるソフトのことであったりすることがあるので、少し紛らわしいです。</p>
+<p>ここでは基本的なJupyter Lab(Notebook)の導入方法と、その使い方を説明します。</p>
 </div>
 <div class="section" id="環境設定">
 <h2>環境設定<a class="headerlink" href="#環境設定" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Jupyter Notebookを利用するには、googleが無料で提供するサービスを利用するか、自分のパソコンにPythonとJupyter Notebookの環境を準備して利用するかの2つの方法があります。</p>
+<p>前者の場合、設定が簡単ですが、利用には様々な制約があります。後者の場合、導入までのステップが多いですが、本格的にPythonを利用することができるようになります。</p>
+<p>以下、2つの方法を紹介します。</p>
 <div class="section" id="Google-Colaboratoryの紹介">
 <h3>Google Colaboratoryの紹介<a class="headerlink" href="#Google-Colaboratoryの紹介" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>Jupyter Lab (Notebook)を利用するには、ローカル環境にJupyter Labをインストールする方法と、Googleが提供するクラウドサービスを利用する方法があります。</p>
-<p><a class="reference external" href="https://colab.research.google.com/">Google Colaboratory</a>を利用すると、下記のPython環境の構築やJupyter Labのインストールなどを行うことなく、googleが提供するサーバー上で動くJupyter環境がブラウザから利用することができます。 Google Colaboratoryを利用するメリットとしては、</p>
+<p><a class="reference external" href="https://colab.research.google.com/">Google Colaboratory</a>はGoogleが無料で提供しているオンラインのJupyter Notebook環境です。これを利用すると、下記のPython環境の構築やJupyter Labのインストールなどを行うことなく、googleが提供するサーバー上で動くJupyter環境がブラウザから利用することができます。</p>
+<p>Google Colaboratoryを利用するメリットとしては、</p>
 <ul class="simple">
 <li><p>作成したNotebookの共有が楽(リンクを送信するなど)</p></li>
 <li><p>環境構築が楽</p></li>
@@ -476,17 +481,21 @@ div.rendered_html tbody tr:hover {
 <li><p>Google Driveの容量を使う</p></li>
 <li><p>Git等他のツールとの統合がしにくい</p></li>
 </ul>
+<p>が挙げられます。</p>
 <p>「定期的にセッションが消える」については、<a class="reference external" href="https://qiita.com/tomo_makes/items/b3c60b10f7b25a0a5935#2-%E3%82%B7%E3%83%A3%E3%83%83%E3%83%88%E3%83%80%E3%82%A6%E3%83%B3%E3%81%BE%E3%81%A7%E3%81%AE%E6%AE%8B%E6%99%82%E9%96%93%E3%81%AF90%E5%88%86%E3%83%AB%E3%83%BC%E3%83%AB%E3%81%A812%E6%99%82%E9%96%93%E3%83%AB%E3%83%BC%E3%83%AB">シャットダウンまでの残時間は90分ルールと12時間ルール</a>がわかりやすく説明されています。簡単に言うと、90分何もしないとやり直し、12時間経つと何をしていてもやり直しです。</p>
 <p>リモートセンシング解析で何百GBものファイルを扱う場合、この90分ルールと12時間ルールと、Googleドライブ容量の制限により、実用的ではありません。 ただ、演習やハンズオンセミナーなどPythonの入門用に一時的に利用するには良い選択肢だと思います。</p>
-<p>以下に、ローカル環境でのPythonおよびJupyter labの環境構築手順を示しますが、うまく行かない場合Google Colaboratoryを利用して演習をしてください。Google Colaboratoryを利用する場合は、以下をすべてすっ飛ばして大丈夫です。</p>
+<p>以下に、ローカル環境でのPythonおよびJupyter labの環境構築手順を示しますが、うまく行かない場合、演習ではGoogle Colaboratoryを利用してください。Google Colaboratoryを利用する場合は、以下をすべてすっ飛ばして大丈夫です。</p>
 </div>
 <div class="section" id="WSL2上のLinuxでPythonを使う(Windows-10)">
 <h3>WSL2上のLinuxでPythonを使う(Windows 10)<a class="headerlink" href="#WSL2上のLinuxでPythonを使う(Windows-10)" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>GIS、リモートセンシングで利用するPythonやGDAL等のライブラリは、開発者の多くがLinux(Unix)を使っています。そのため、Windows上でうまく動作しないことがよくあります。Windows10から導入されたWSL2(Windows Subsystem for Linux)という仮想化技術があります。WSL2の導入によって、Linuxの仮想マシンがWindows上で動作し、この仮想マシン上のLinuxでPythonを動かすことができるようになります。</p>
-<p>以下は基本的に<a class="reference external" href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">Microsoftの紹介する手順</a>に従い、導入方法を紹介します。作業時間は1時間ほどです。</p>
+<p>Windows上でPythonを利用する場合、以下の方法があります。 - Windows上にPython環境を構築する - Windows上でLinuxを動かし、その上にPython環境を構築する</p>
+<p>GIS、リモートセンシングで利用するPythonやGDAL等のライブラリは、開発者の多くがLinux(Unix)を使っています。そのため、Windows上でうまく動作しないことがよくあります。Windows10には、WSL2(Windows Subsystem for Linux)という仮想化技術があります。WSL2の導入によって、Linuxの仮想マシンがWindows上で動作し、この仮想マシン上のLinuxでPythonを動かすことができるようになります。</p>
+<p>ここでは、上記2つのうち後者の方法を説明します。</p>
+<p>大まかな流れは、 1. WindowsにWSL2をインストールする 2. WSL2にUbuntu 20.04をインストールする 3. UbuntuにAnacondaをインストールする 4. AnacondaでPython環境を作成する 5. Jupyter Labをインストールする 6. WindowsとUbuntuのファイル共有の設定をする となります。</p>
+<p>WLS2の導入方法は<a class="reference external" href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">Microsoftが紹介する手順</a>に従っています。作業時間は1時間ほどです。</p>
 <div class="section" id="Windows-10のバージョンの確認">
 <h4>Windows 10のバージョンの確認<a class="headerlink" href="#Windows-10のバージョンの確認" title="このヘッドラインへのパーマリンク">¶</a></h4>
-<p>WSL2は、windowsバージョンが1903、ビルドが18362以降で使うことができます。(ARM64の場合はそれぞれ2004および19041) これより低いビルドバージョンの場合は、<a class="reference external" href="https://www.microsoft.com/software-download/windows10">Windows Update Assistant</a>を使ってアップデートしてください。 ビルドバージョンは以下から確認できます。</p>
+<p>WSL2は、windowsバージョンが1903、ビルドが18362以降で使うことができます。(ARM64の場合はそれぞれ2004および19041) これより低いビルドバージョンの場合は、<a class="reference external" href="https://www.microsoft.com/software-download/windows10">Windows Update Assistant</a>を使ってアップデートしてください。 ビルドバージョンはWindowsの設定画面からから以下のように確認できます。</p>
 <p><img alt="ビルドバージョンの確認" src="../_images/ss_001_Settings.png" /></p>
 </div>
 <div class="section" id="WSLの設定">
@@ -542,15 +551,15 @@ div.rendered_html tbody tr:hover {
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>takahisa@DESKTOP-QRCQMC:~$
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">takahisa</span></code>の部分に、Ubuntuの初期設定で指定したユーザー名、&#64;から:の間に書かれているのは、自動で設定された端末名です。<code class="docutils literal notranslate"><span class="pre">:</span></code>から<code class="docutils literal notranslate"><span class="pre">$</span></code>の間には、今開いているフォルダ名が書かれています。<code class="docutils literal notranslate"><span class="pre">~</span></code>は、<code class="docutils literal notranslate"><span class="pre">/home/takahisa/</span></code>を省略した表示です。</p>
-<p>ターミナル上では、<code class="docutils literal notranslate"><span class="pre">$</span></code>の後ろにコマンドを入力し、エンターキーを押すことで、そのコマンドを実行していきます。</p>
+<p><code class="docutils literal notranslate"><span class="pre">takahisa</span></code>の部分に、Ubuntuの初期設定で指定したユーザー名、&#64;から:の間に書かれているのは、自動で設定された端末名です。<code class="docutils literal notranslate"><span class="pre">:</span></code>から<code class="docutils literal notranslate"><span class="pre">$</span></code>の間には、今開いているフォルダ名が書かれています。<code class="docutils literal notranslate"><span class="pre">~</span></code>は<strong>ホームフォルダ</strong>と呼ばれ、<code class="docutils literal notranslate"><span class="pre">/home/takahisa/</span></code>を示しています。Windowsでいうところの<code class="docutils literal notranslate"><span class="pre">C:\Users\takahisa\</span></code>のフォルダです。Linuxではフォルダの区切りを<code class="docutils literal notranslate"><span class="pre">/</span></code>で表示します。</p>
+<p>ターミナル上でコマンドを実行するには、<code class="docutils literal notranslate"><span class="pre">$</span></code>の後ろにコマンドを入力し、エンターキーを押します。</p>
 <p>ctrl + v や右クリックメニューはターミナル上で使えません。Windows上でクリップボードにコピーしたコマンドをターミナルに張り付けるには、右クリック、ターミナル上の文字列をコピーするには、文字列をマウスで選択(ハイライトされます)して右クリックをしてください。</p>
 <p>まずは以下のコマンドを入力して、Ubuntuの既存のアプリケーションをアップデートしましょう。</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt update
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">sudo</span></code>から始まるコマンドは、コマンドを管理者権限で実行することを意味しています。パスワードが聞かれたら、設定したパスワードを入力してエンターキーを押してください。(パスワードや入力は表示されません。)</p>
-<p>上記コマンドは、Ubuntuのアプリケーションリストを更新します。次のコマンドでアップデートがあるアプリケーションを実際に更新します。ターミナルに張り付けて実行してください。</p>
+<p>上記コマンドは、Ubuntuのアプリケーションリストを更新します。次のコマンドでアップデートがあるアプリケーションを実際に更新します。ターミナルに貼り付けて実行してください。</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt upgrade
 </pre></div>
 </div>
@@ -590,12 +599,45 @@ jupyter labextension install @jupyter-widgets/jupyterlab-manager@2.0
 </div>
 <div class="section" id="WSLとWindowsとのファイル共有">
 <h4>WSLとWindowsとのファイル共有<a class="headerlink" href="#WSLとWindowsとのファイル共有" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>Ubuntuのホームフォルダ(<code class="docutils literal notranslate"><span class="pre">/home/takahisa</span></code>もしくは<code class="docutils literal notranslate"><span class="pre">~</span></code>)には、Windowsのファイルマネージャーのアドレスバーに<code class="docutils literal notranslate"><span class="pre">\\wsl$\Ubuntu-20.04\home\takahisa</span></code>と入力するとアクセスすることができます。また逆に、UbuntuからはWindowsのホームフォルダには<code class="docutils literal notranslate"><span class="pre">/mnt/c/Users/</span></code>からアクセスすることができます。</p>
+<p>以下のコマンドをUbuntuのターミナルで実行し、UbuntuのホームディレクトリにWindowsのDocumentへのショートカットを作成しましょう。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln -s /mnt/c/Users/takahisa/Documents Win_Documents
+</pre></div>
+</div>
+<p>以上でJupyter Labのインストールが終了です。</p>
 </div>
 </div>
 </div>
 <div class="section" id="Jupyter-Labの使い方">
 <h2>Jupyter Labの使い方<a class="headerlink" href="#Jupyter-Labの使い方" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>インタラクティブ 以下のチャンクを実行して、</p>
+<div class="section" id="Jupyter-Labを開く">
+<h3>Jupyter Labを開く<a class="headerlink" href="#Jupyter-Labを開く" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Google Colaboratoryを使う場合は、Google ColaboratoryのページからNotebookを新規作成してください。すでに作成したNotebookはGoogle Driveからアクセスすることができます。</p>
+<p>WSL2を利用している場合は、スタートメニューからUbuntu 20.04を起動してください。Ubuntuのターミナルが開きます。</p>
+<p>ターミナルに、以下のコマンドを入力して、Anacondaの環境に入ります。アカウント名の前に<code class="docutils literal notranslate"><span class="pre">(py38)</span></code>と表示されればOKです。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda activate py38
+</pre></div>
+</div>
+<p>次に、以下のコマンドを入力して、Jupyter Labを起動します。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter lab
+</pre></div>
+</div>
+<p><img alt="Jupyter Labの起動コマンド" src="../_images/ss_013_start_jupyter_lab.png" /></p>
+<p>ターミナルに表示されるメッセージ内に、</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>http://127.0.0.1:8888/?token<span class="o">=</span>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+</pre></div>
+</div>
+<p>の形式のURLが表示されますので、マウスで選択し、右クリックでコピーします。</p>
+<p>コピーしたURLをWindowsのgoogle chromeやFirefoxで開くとJupyter Labが起動します。</p>
+<p><img alt="Jupyter Labの起動" src="../_images/ss_014_jupyter_lab.png" /></p>
+<p>左のフォルダアイコンをクリックすると、Ubuntuのホームフォルダにあるファイル一覧が表示されます。セットアップの際にWin_Documentsという名前でWindowsのDocumentsフォルダへのリンクを作成しているため、ここをダブルクリックすることで、WindowsのDocuments内のファイルにアクセスすることができます。</p>
+</div>
+<div class="section" id="Jupyter-Notebookファイル(.ipynb)を開く">
+<h3>Jupyter Notebookファイル(.ipynb)を開く<a class="headerlink" href="#Jupyter-Notebookファイル(.ipynb)を開く" title="このヘッドラインへのパーマリンク">¶</a></h3>
+</div>
+<div class="section" id="Jupyter-Notebookファイル(.ipynb)を新規作成する">
+<h3>Jupyter Notebookファイル(.ipynb)を新規作成する<a class="headerlink" href="#Jupyter-Notebookファイル(.ipynb)を新規作成する" title="このヘッドラインへのパーマリンク">¶</a></h3>
+</div>
 <div class="section" id="チャンクの実行">
 <h3>チャンクの実行<a class="headerlink" href="#チャンクの実行" title="このヘッドラインへのパーマリンク">¶</a></h3>
 </div>
@@ -607,6 +649,9 @@ jupyter labextension install @jupyter-widgets/jupyterlab-manager@2.0
 </div>
 <div class="section" id="ファイルの保存">
 <h3>ファイルの保存<a class="headerlink" href="#ファイルの保存" title="このヘッドラインへのパーマリンク">¶</a></h3>
+</div>
+<div class="section" id="Jupyter-Labを閉じる">
+<h3>Jupyter Labを閉じる<a class="headerlink" href="#Jupyter-Labを閉じる" title="このヘッドラインへのパーマリンク">¶</a></h3>
 </div>
 </div>
 </div>

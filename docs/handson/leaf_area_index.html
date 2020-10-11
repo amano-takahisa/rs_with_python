@@ -40,7 +40,7 @@
     
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="検索" href="../search.html" />
-    <link rel="next" title="各種ライブラリのメモ" href="../lib/index.html" />
+    <link rel="next" title="DEM(数値標高モデル)からの水系図作成" href="catchment_from_dem.html" />
     <link rel="prev" title="ハイパースペクトラルセンサーデータの可視化" href="plot_hyperspectral.html" /> 
 </head>
 
@@ -88,24 +88,25 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">ハンズオン</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="setup_ipynb.html">Jupoyter Notebookについて</a></li>
-<li class="toctree-l2"><a class="reference internal" href="setup_ipynb.html#環境設定">環境設定</a></li>
-<li class="toctree-l2"><a class="reference internal" href="setup_ipynb.html#Jupyter-Labの使い方">Jupyter Labの使い方</a></li>
-<li class="toctree-l2"><a class="reference internal" href="setup_ipynb.html#Pythonの基礎">Pythonの基礎</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plot_hyperspectral.html">ハイパースペクトラルセンサーデータの可視化</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">OpenCVを利用した葉面積の推定</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#OpenCVでの画像の表示">OpenCVでの画像の表示</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#画像データとはなにか">画像データとはなにか</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#チャンネルの分解">チャンネルの分解</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#HSVへの変換">HSVへの変換</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#閾値による分類">閾値による分類</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ラベルの利用">ラベルの利用</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../indices/index.html">授業等</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../indices/index.html#id2">2年基礎実験</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="setup_ipynb.html">Jupoyter Notebookと環境構築</a></li>
+<li class="toctree-l3"><a class="reference internal" href="intro_python.html">Pythonの基礎</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_hyperspectral.html">ハイパースペクトラルセンサーデータの可視化</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">OpenCVを利用した葉面積の推定</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#OpenCVでの画像の表示">OpenCVでの画像の表示</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#画像データとはなにか">画像データとはなにか</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#チャンネルの分解">チャンネルの分解</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#HSVへの変換">HSVへの変換</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#閾値による分類">閾値による分類</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ラベルの利用">ラベルの利用</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../lib/index.html">各種ライブラリのメモ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../indices/index.html#id3">3年専攻演習</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -152,7 +153,7 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="index.html">ハンズオン</a> &raquo;</li>
+          <li><a href="../indices/index.html">授業等</a> &raquo;</li>
         
       <li>OpenCVを利用した葉面積の推定</li>
     
@@ -504,7 +505,7 @@ Requirement already satisfied: numpy&gt;=1.17.3 in /home/takahisa/anaconda3/envs
 </div>
 </div>
 <p>上のチャンクを実行すると、別ウィンドウで次の画像が表示されます。</p>
-<p><img alt="field" src="handson/data/field_2.jpg" /></p>
+<p><img alt="field" src="../_images/field_2.jpg" /></p>
 <p>表示されたウィンドウを閉じてもチャンクの番号が<code class="docutils literal notranslate"><span class="pre">[*]</span></code>と表示されたままの場合は、Jupyter NotebookメニューのKernel -&gt; Restart Kernelで、カーネルを再起動してください。</p>
 <p>画像の表示はこの方法でもいいですが、<strong>matplotlib</strong>というライブラリを利用して、Jupyter Notebook内にインラインで表示させる下記の方法がよく用いられます。</p>
 <p>まずはmatplotlibをインポートします。(必要であればmatplotlibを<code class="docutils literal notranslate"><span class="pre">!pip</span> <span class="pre">install</span> <span class="pre">matplotlib</span></code> からインストールしてください。)</p>
@@ -1109,7 +1110,7 @@ Mask ratio is 0.2845270369284877
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../lib/index.html" class="btn btn-neutral float-right" title="各種ライブラリのメモ" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="catchment_from_dem.html" class="btn btn-neutral float-right" title="DEM(数値標高モデル)からの水系図作成" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="plot_hyperspectral.html" class="btn btn-neutral float-left" title="ハイパースペクトラルセンサーデータの可視化" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
