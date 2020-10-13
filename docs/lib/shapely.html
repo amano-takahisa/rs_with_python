@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Numpy &mdash; rs-with-python  ドキュメント</title>
+  <title>Shapely &mdash; rs-with-python  ドキュメント</title>
   
 
   
@@ -133,13 +133,13 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Numpy</li>
+      <li>Shapely</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/lib/numpy.ipynb.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/lib/shapely.ipynb.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -407,39 +407,231 @@ div.rendered_html tbody tr:hover {
     text-align: unset;
 }
 </style>
-<div class="section" id="Numpy">
-<h1>Numpy<a class="headerlink" href="#Numpy" title="このヘッドラインへのパーマリンク">¶</a></h1>
-<p><strong>NumPy</strong>はグリッドに配置されたデータを効率良く扱うためのライブラリです。数学でいうn次元の行列のような形をしたデータを扱う際に非常に便利です。 <a class="reference external" href="https://numpy.org/doc/stable/user/quickstart.html">公式ドキュメントはこちら</a></p>
-<p>NumPyで作成されるn次元の行列は、<strong>ndarray</strong>と呼ばれます。 以下に2×3のndarrayの例を示します。</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
- <span class="p">[</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]]</span>
-</pre></div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">[]</span></code>で定義された同じ長さの複数のリストが更に<code class="docutils literal notranslate"><span class="pre">[]</span></code>で囲われたような形をしています。</p>
-<p>まずはnumpyを用いて行列(numpy.array)を作成してみます。</p>
-<div class="nbinput docutils container">
+<div class="section" id="Shapely">
+<h1>Shapely<a class="headerlink" href="#Shapely" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<div class="section" id="Point">
+<h2>Point<a class="headerlink" href="#Point" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
-              <span class="p">[</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
-<span class="n">a</span>
+<span></span><span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span><span class="p">,</span> <span class="n">MultiPoint</span>
+</pre></div>
+</div>
+</div>
+<p>ランダムなポイントデータを作成</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="n">x_range</span> <span class="o">=</span> <span class="p">(</span><span class="mi">139</span><span class="p">,</span> <span class="mi">140</span><span class="p">)</span>
+<span class="n">y_range</span> <span class="o">=</span> <span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="mi">36</span><span class="p">)</span>
+<span class="n">n_point</span> <span class="o">=</span>  <span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">points</span> <span class="o">=</span> <span class="p">[</span><span class="n">Point</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">*</span><span class="n">x_range</span><span class="p">),</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">*</span><span class="n">y_range</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_point</span><span class="p">)]</span>
+<span class="n">multi_point</span> <span class="o">=</span>  <span class="n">MultiPoint</span><span class="p">([(</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">*</span><span class="n">x_range</span><span class="p">),</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">*</span><span class="n">y_range</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_point</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">multi_point</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/lib_shapely_5_0.svg" src="../_images/lib_shapely_5_0.svg" /></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">multi_point</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/lib_shapely_6_0.svg" src="../_images/lib_shapely_6_0.svg" /></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">polygons</span> <span class="o">=</span> <span class="p">[</span><span class="n">point</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)</span> <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">points</span><span class="p">]</span>
+<span class="n">polygons</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/lib_shapely_7_0.svg" src="../_images/lib_shapely_7_0.svg" /></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">dir</span><span class="p">(</span><span class="n">polygons</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-array([[1., 0., 0.],
-       [0., 1., 2.]])
+[&#39;__and__&#39;,
+ &#39;__array_interface__&#39;,
+ &#39;__bool__&#39;,
+ &#39;__class__&#39;,
+ &#39;__del__&#39;,
+ &#39;__delattr__&#39;,
+ &#39;__dict__&#39;,
+ &#39;__dir__&#39;,
+ &#39;__doc__&#39;,
+ &#39;__eq__&#39;,
+ &#39;__format__&#39;,
+ &#39;__ge__&#39;,
+ &#39;__geo_interface__&#39;,
+ &#39;__geom__&#39;,
+ &#39;__getattribute__&#39;,
+ &#39;__gt__&#39;,
+ &#39;__hash__&#39;,
+ &#39;__init__&#39;,
+ &#39;__init_subclass__&#39;,
+ &#39;__le__&#39;,
+ &#39;__lt__&#39;,
+ &#39;__module__&#39;,
+ &#39;__ne__&#39;,
+ &#39;__new__&#39;,
+ &#39;__nonzero__&#39;,
+ &#39;__or__&#39;,
+ &#39;__p__&#39;,
+ &#39;__reduce__&#39;,
+ &#39;__reduce_ex__&#39;,
+ &#39;__repr__&#39;,
+ &#39;__setattr__&#39;,
+ &#39;__setstate__&#39;,
+ &#39;__sizeof__&#39;,
+ &#39;__str__&#39;,
+ &#39;__sub__&#39;,
+ &#39;__subclasshook__&#39;,
+ &#39;__weakref__&#39;,
+ &#39;__xor__&#39;,
+ &#39;_crs&#39;,
+ &#39;_ctypes_data&#39;,
+ &#39;_exterior&#39;,
+ &#39;_geom&#39;,
+ &#39;_get_coords&#39;,
+ &#39;_interiors&#39;,
+ &#39;_is_empty&#39;,
+ &#39;_lgeos&#39;,
+ &#39;_ndim&#39;,
+ &#39;_other_owned&#39;,
+ &#39;_repr_svg_&#39;,
+ &#39;_set_coords&#39;,
+ &#39;almost_equals&#39;,
+ &#39;area&#39;,
+ &#39;array_interface_base&#39;,
+ &#39;boundary&#39;,
+ &#39;bounds&#39;,
+ &#39;buffer&#39;,
+ &#39;centroid&#39;,
+ &#39;contains&#39;,
+ &#39;convex_hull&#39;,
+ &#39;coords&#39;,
+ &#39;covers&#39;,
+ &#39;crosses&#39;,
+ &#39;ctypes&#39;,
+ &#39;difference&#39;,
+ &#39;disjoint&#39;,
+ &#39;distance&#39;,
+ &#39;empty&#39;,
+ &#39;envelope&#39;,
+ &#39;equals&#39;,
+ &#39;equals_exact&#39;,
+ &#39;exterior&#39;,
+ &#39;from_bounds&#39;,
+ &#39;geom_type&#39;,
+ &#39;geometryType&#39;,
+ &#39;has_z&#39;,
+ &#39;hausdorff_distance&#39;,
+ &#39;impl&#39;,
+ &#39;interiors&#39;,
+ &#39;interpolate&#39;,
+ &#39;intersection&#39;,
+ &#39;intersects&#39;,
+ &#39;is_closed&#39;,
+ &#39;is_empty&#39;,
+ &#39;is_ring&#39;,
+ &#39;is_simple&#39;,
+ &#39;is_valid&#39;,
+ &#39;length&#39;,
+ &#39;minimum_rotated_rectangle&#39;,
+ &#39;overlaps&#39;,
+ &#39;project&#39;,
+ &#39;relate&#39;,
+ &#39;relate_pattern&#39;,
+ &#39;representative_point&#39;,
+ &#39;simplify&#39;,
+ &#39;svg&#39;,
+ &#39;symmetric_difference&#39;,
+ &#39;to_wkb&#39;,
+ &#39;to_wkt&#39;,
+ &#39;touches&#39;,
+ &#39;type&#39;,
+ &#39;union&#39;,
+ &#39;within&#39;,
+ &#39;wkb&#39;,
+ &#39;wkb_hex&#39;,
+ &#39;wkt&#39;,
+ &#39;xy&#39;]
 </pre></div></div>
 </div>
-<p>ndarrayには、</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="n">polygons</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="vm">__bases__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">polygons</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">AttributeError</span>                            Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-16-25bb30be89da&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>print<span class="ansi-blue-fg">(</span>polygons<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">.</span>__bases__<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span> print<span class="ansi-blue-fg">(</span>type<span class="ansi-blue-fg">(</span>polygons<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">AttributeError</span>: &#39;Polygon&#39; object has no attribute &#39;__bases__&#39;
+</pre></div></div>
+</div>
+</div>
 </div>
 
 

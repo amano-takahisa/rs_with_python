@@ -1,0 +1,1055 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Geopandas &mdash; rs-with-python  ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> rs-with-python
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../indices/index.html">実験・演習</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">rs-with-python</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Geopandas</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/lib/geopandas.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container,
+div.nbinput.container div.prompt,
+div.nbinput.container div.input_area,
+div.nbinput.container div[class*=highlight],
+div.nbinput.container div[class*=highlight] pre,
+div.nboutput.container,
+div.nboutput.container div.prompt,
+div.nboutput.container div.output_area,
+div.nboutput.container div[class*=highlight],
+div.nboutput.container div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    background: #f5f5f5;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="Geopandas">
+<h1>Geopandas<a class="headerlink" href="#Geopandas" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">shapely.geometry</span>
+
+<span class="kn">from</span> <span class="nn">mantle_utils.alg.vector</span> <span class="kn">import</span> <span class="n">Vector</span>
+</pre></div>
+</div>
+</div>
+<p>Geodataframeの作成</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span>
+<span class="kn">from</span> <span class="nn">pyproj</span> <span class="kn">import</span> <span class="n">CRS</span>
+
+
+<span class="n">x_range</span> <span class="o">=</span> <span class="p">(</span><span class="mi">139</span><span class="p">,</span> <span class="mi">140</span><span class="p">)</span>
+<span class="n">y_range</span> <span class="o">=</span> <span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="mi">36</span><span class="p">)</span>
+<span class="n">n_point_1</span> <span class="o">=</span>  <span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">n_point_2</span> <span class="o">=</span>  <span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">rand_class_1</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="n">n_point_1</span><span class="p">)</span>
+<span class="n">rand_class_2</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="n">n_point_2</span><span class="p">)</span>
+
+<span class="n">x_coords_1</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">*</span><span class="n">x_range</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_point_1</span><span class="p">)]</span>
+<span class="n">y_coords_1</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">*</span><span class="n">y_range</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_point_1</span><span class="p">)]</span>
+<span class="n">x_coords_2</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">*</span><span class="n">x_range</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_point_2</span><span class="p">)]</span>
+<span class="n">y_coords_2</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">*</span><span class="n">y_range</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_point_2</span><span class="p">)]</span>
+
+<span class="n">crs</span> <span class="o">=</span> <span class="n">CRS</span><span class="o">.</span><span class="n">from_user_input</span><span class="p">(</span><span class="mi">4326</span><span class="p">)</span>
+
+<span class="n">points_1_gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">geometry</span><span class="o">=</span><span class="n">gpd</span><span class="o">.</span><span class="n">points_from_xy</span><span class="p">(</span><span class="n">x_coords_1</span><span class="p">,</span> <span class="n">y_coords_1</span><span class="p">),</span> <span class="n">crs</span> <span class="o">=</span> <span class="n">crs</span><span class="p">)</span>
+<span class="n">points_1_gdf</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rand_class_1</span>
+<span class="n">polygon_1_gdf</span> <span class="o">=</span> <span class="n">points_1_gdf</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">polygon_1_gdf</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">points_1_gdf</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">polygon_1_gdf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;class&#39;</span><span class="p">)</span>
+
+<span class="n">points_2_gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">geometry</span><span class="o">=</span><span class="n">gpd</span><span class="o">.</span><span class="n">points_from_xy</span><span class="p">(</span><span class="n">x_coords_2</span><span class="p">,</span> <span class="n">y_coords_2</span><span class="p">),</span> <span class="n">crs</span> <span class="o">=</span> <span class="n">crs</span><span class="p">)</span>
+<span class="n">points_2_gdf</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rand_class_2</span>
+<span class="n">polygon_2_gdf</span> <span class="o">=</span> <span class="n">points_2_gdf</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">polygon_2_gdf</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">points_2_gdf</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">polygon_2_gdf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;class&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/cats/datastore3/anaconda3_envs/takahisa/lib/python3.7/site-packages/ipykernel_launcher.py:23: UserWarning: Geometry is in a geographic CRS. Results from &#39;buffer&#39; are likely incorrect. Use &#39;GeoSeries.to_crs()&#39; to re-project geometries to a projected CRS before this operation.
+
+/cats/datastore3/anaconda3_envs/takahisa/lib/python3.7/site-packages/ipykernel_launcher.py:29: UserWarning: Geometry is in a geographic CRS. Results from &#39;buffer&#39; are likely incorrect. Use &#39;GeoSeries.to_crs()&#39; to re-project geometries to a projected CRS before this operation.
+
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fd774761b10&gt;
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/lib_geopandas_3_2.png" src="../_images/lib_geopandas_3_2.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/lib_geopandas_3_3.png" src="../_images/lib_geopandas_3_3.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">po_1_v</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">(</span><span class="n">polygon_1_gdf</span><span class="p">)</span>
+<span class="n">po_2_v</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">(</span><span class="n">polygon_2_gdf</span><span class="p">)</span>
+<span class="n">tmp_v</span> <span class="o">=</span> <span class="n">po_1_v</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">po_2_v</span><span class="p">)</span>
+<span class="n">tmp_v</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;class&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fd77473f610&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/lib_geopandas_4_1.png" src="../_images/lib_geopandas_4_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">po_1_v</span><span class="o">.</span><span class="n">gdf</span><span class="o">.</span><span class="n">total_bounds</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+array([138.91495006,  34.90307304, 140.098773  ,  36.09183615])
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">int_v</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>POLYGON ((139.50014 35.65670, 139.49966 35.646...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>POLYGON ((139.52186 35.66757, 139.52892 35.664...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>POLYGON ((139.70703 35.97933, 139.70655 35.969...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>POLYGON ((139.20902 35.32835, 139.20854 35.318...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>POLYGON EMPTY</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>POLYGON EMPTY</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>POLYGON EMPTY</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>POLYGON ((139.61131 35.09420, 139.61083 35.084...</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>POLYGON EMPTY</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>POLYGON EMPTY</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 1 columns</p>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">polygon_1_v</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">(</span><span class="n">polygon_1_gdf</span><span class="p">)</span>
+<span class="n">polygon_1_v</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">][[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fb74a98c1d0&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/lib_geopandas_7_1.png" src="../_images/lib_geopandas_7_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">tmp_gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">geometry</span><span class="o">=</span><span class="n">polygon_1_gdf</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">polygon_2_gdf</span><span class="p">))</span>
+<span class="n">tmp_gdf</span><span class="p">[</span><span class="o">~</span><span class="n">tmp_gdf</span><span class="o">.</span><span class="n">is_empty</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fb75122fc90&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/lib_geopandas_8_1.png" src="../_images/lib_geopandas_8_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">points_gdf</span><span class="o">.</span><span class="n">representative_point</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0     POINT (139.80215 35.83012)
+1     POINT (139.56260 35.00986)
+2     POINT (139.45344 35.24756)
+3     POINT (139.95679 35.66969)
+4     POINT (139.57810 35.83197)
+                 ...
+95    POINT (139.85639 35.63182)
+96    POINT (139.28897 35.80853)
+97    POINT (139.65650 35.13089)
+98    POINT (139.05659 35.45623)
+99    POINT (139.39110 35.36762)
+Length: 100, dtype: geometry
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">type</span><span class="p">(</span><span class="n">polygon_gdf</span><span class="o">.</span><span class="n">area</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/cats/datastore3/anaconda3_envs/takahisa/lib/python3.7/site-packages/ipykernel_launcher.py:1: UserWarning: Geometry is in a geographic CRS. Results from &#39;area&#39; are likely incorrect. Use &#39;GeoSeries.to_crs()&#39; to re-project geometries to a projected CRS before this operation.
+
+  &#34;&#34;&#34;Entry point for launching an IPython kernel.
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+pandas.core.series.Series
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">points_gdf</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s1">&#39;data/r_points.shp&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">polygon_gdf</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s1">&#39;data/r_points_buff.shp&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">world</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">gpd</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="s1">&#39;naturalearth_lowres&#39;</span><span class="p">))</span>
+<span class="n">world</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f7ee52a1810&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/lib_geopandas_13_1.png" src="../_images/lib_geopandas_13_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">points_gdf</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>geometry</th>
+      <th>class</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>POINT (139.80215 35.83012)</td>
+      <td>a</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>POINT (139.56260 35.00986)</td>
+      <td>c</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>POINT (139.45344 35.24756)</td>
+      <td>a</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>POINT (139.95679 35.66969)</td>
+      <td>b</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>POINT (139.57810 35.83197)</td>
+      <td>a</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>POINT (139.85639 35.63182)</td>
+      <td>e</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>POINT (139.28897 35.80853)</td>
+      <td>e</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>POINT (139.65650 35.13089)</td>
+      <td>b</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>POINT (139.05659 35.45623)</td>
+      <td>a</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>POINT (139.39110 35.36762)</td>
+      <td>d</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 2 columns</p>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">type</span><span class="p">(</span><span class="n">points_gdf</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+tuple
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">len</span><span class="p">(</span><span class="n">points_gdf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+100
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">points_gdf</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>geometry</th>
+      <th>class</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>POINT (139.80215 35.83012)</td>
+      <td>a</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>POINT (139.56260 35.00986)</td>
+      <td>c</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="section" id="to_json">
+<h2>to_json<a class="headerlink" href="#to_json" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>It will not convert crs</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">points_gdf</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">na</span><span class="o">=</span><span class="s1">&#39;null&#39;</span><span class="p">,</span> <span class="n">show_bbox</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;{&#34;type&#34;: &#34;FeatureCollection&#34;, &#34;features&#34;: [{&#34;id&#34;: &#34;0&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;a&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [139.8021535768139, 35.830116126832735]}}, {&#34;id&#34;: &#34;1&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;c&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [139.5625982304562, 35.00985903496143]}}, {&#34;id&#34;: &#34;2&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;a&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [139.45343932203696, 35.247557751949664]}}]}&#39;
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s1">&#39;data/r_points_32654.shp&#39;</span><span class="p">)</span>
+<span class="n">gdf</span><span class="o">.</span><span class="n">to_json</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;{&#34;type&#34;: &#34;FeatureCollection&#34;, &#34;features&#34;: [{&#34;id&#34;: &#34;0&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;a&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [391807.377101384, 3965768.2162633785]}}, {&#34;id&#34;: &#34;1&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;c&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [368845.7032082516, 3875080.3686444876]}}, {&#34;id&#34;: &#34;2&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;a&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [359294.3825147571, 3901592.930920788]}}, {&#34;id&#34;: &#34;3&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;b&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [405585.59010235075, 3947814.4281419255]}}, {&#34;id&#34;: &#34;4&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;a&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [371572.0805592809, 3966245.0322919525]}}, {&#34;id&#34;: &#34;5&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;e&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [360215.8186737846, 3935019.1132948725]}}, {&#34;id&#34;: &#34;6&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;a&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [328912.68195076275, 3962653.293980441]}}, {&#34;id&#34;: &#34;7&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;a&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [394736.2302528735, 3970904.3929815013]}}, {&#34;id&#34;: &#34;8&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;b&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [331096.6864845783, 3960270.6491313595]}}, {&#34;id&#34;: &#34;9&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;a&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [372814.16375830607, 3958843.809020047]}}, {&#34;id&#34;: &#34;10&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;a&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [349026.22587834223, 3919385.215750637]}}, {&#34;id&#34;: &#34;11&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;d&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [358273.76029339613, 3907403.3623373285]}}, {&#34;id&#34;: &#34;12&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;e&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [402296.2596241512, 3960561.8677406707]}}, {&#34;id&#34;: &#34;13&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;d&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [344546.1824511837, 3893360.3495421996]}}, {&#34;id&#34;: &#34;14&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;d&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [372913.54034179327, 3882595.8916983274]}}, {&#34;id&#34;: &#34;15&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;c&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [327339.095580171, 3903389.5460463786]}}, {&#34;id&#34;: &#34;16&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;e&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [337000.8937043563, 3904836.1870081997]}}, {&#34;id&#34;: &#34;17&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;a&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [365560.2368636691, 3881159.043450968]}}, {&#34;id&#34;: &#34;18&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;d&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [345875.2982130418, 3880704.712438339]}}, {&#34;id&#34;: &#34;19&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;a&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [403316.8748316665, 3874633.849218356]}}, {&#34;id&#34;: &#34;20&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;c&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [318881.40238909674, 3921550.489880526]}}, {&#34;id&#34;: &#34;21&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;d&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [380174.05080462166, 3886895.247801154]}}, {&#34;id&#34;: &#34;22&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;d&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [389380.3396053852, 3980097.1688549924]}}, {&#34;id&#34;: &#34;23&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;c&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [403682.67655321537, 3929470.272681043]}}, {&#34;id&#34;: &#34;24&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;b&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [405341.07692949986, 3892881.2405700474]}}, {&#34;id&#34;: &#34;25&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;e&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [369001.5647785146, 3941036.899659442]}}, {&#34;id&#34;: &#34;26&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;b&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [322396.6281038346, 3885420.3518220605]}}, {&#34;id&#34;: &#34;27&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;e&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [408637.74558411085, 3944484.642418481]}}, {&#34;id&#34;: &#34;28&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;e&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [339805.79605409154, 3896936.2721996526]}}, {&#34;id&#34;: &#34;29&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;e&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [319911.9495461866, 3965891.974883819]}}, {&#34;id&#34;: &#34;30&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;c&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [368604.5779201345, 3971147.2811316103]}}, {&#34;id&#34;: &#34;31&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;e&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [340847.33355728036, 3935655.10888596]}}, {&#34;id&#34;: &#34;32&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;b&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [370052.6740167535, 3944490.499002067]}}, {&#34;id&#34;: &#34;33&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;d&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [361863.21507391887, 3910314.941746749]}}, {&#34;id&#34;: &#34;34&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;c&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [318794.5424429284, 3935203.1360616228]}}, {&#34;id&#34;: &#34;35&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;a&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [373696.90219887637, 3909739.4393000607]}}, {&#34;id&#34;: &#34;36&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;d&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [396527.45976592496, 3977585.086065845]}}, {&#34;id&#34;: &#34;37&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;b&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [334561.86678493395, 3890141.8276328137]}}, {&#34;id&#34;: &#34;38&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;a&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [396338.38358962454, 3889103.3489288823]}}, {&#34;id&#34;: &#34;39&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;c&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [345077.62973466376, 3884058.163697022]}}, {&#34;id&#34;: &#34;40&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;c&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [407630.88179119996, 3890347.4167300374]}}, {&#34;id&#34;: &#34;41&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;a&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [374197.66277041833, 3976367.5588299576]}}, {&#34;id&#34;: &#34;42&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;c&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [398325.41440395394, 3968470.0400660005]}}, {&#34;id&#34;: &#34;43&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;a&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [320049.09049013205, 3942735.7038381873]}}, {&#34;id&#34;: &#34;44&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;c&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [378310.5140536496, 3962856.0538531127]}}, {&#34;id&#34;: &#34;45&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;b&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [336677.8906616744, 3955289.9047249984]}}, {&#34;id&#34;: &#34;46&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;c&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [372215.5019683881, 3970026.4932407835]}}, {&#34;id&#34;: &#34;47&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;d&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [337604.29322909005, 3970509.4523568046]}}, {&#34;id&#34;: &#34;48&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;d&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [347922.67752948636, 3888403.9797483636]}}, {&#34;id&#34;: &#34;49&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;a&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [387752.15917823, 3925833.5775040914]}}, {&#34;id&#34;: &#34;50&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;c&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [341270.22681029246, 3912565.6656125113]}}, {&#34;id&#34;: &#34;51&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;b&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [320292.89733150916, 3915690.0049228184]}}, {&#34;id&#34;: &#34;52&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;d&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [353241.4816487309, 3930058.7864530114]}}, {&#34;id&#34;: &#34;53&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;a&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [391486.69206919044, 3880604.6937653353]}}, {&#34;id&#34;: &#34;54&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;e&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [357427.257782073, 3965194.6219485295]}}, {&#34;id&#34;: &#34;55&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;d&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [384701.0870222018, 3952026.328348264]}}, {&#34;id&#34;: &#34;56&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;b&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [396148.21427573793, 3982653.7651694827]}}, {&#34;id&#34;: &#34;57&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;b&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [344613.7373638609, 3977841.9163947646]}}, {&#34;id&#34;: &#34;58&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;e&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [402556.679766148, 3896051.649306159]}}, {&#34;id&#34;: &#34;59&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;b&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [332230.28095451556, 3965958.9196629976]}}, {&#34;id&#34;: &#34;60&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;c&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [341817.53666544205, 3927985.0048554316]}}, {&#34;id&#34;: &#34;61&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;d&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [339051.5844645441, 3893402.5078535806]}}, {&#34;id&#34;: &#34;62&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;d&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [367572.5129805993, 3897582.298558758]}}, {&#34;id&#34;: &#34;63&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;b&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [399073.80638003297, 3960194.2600349416]}}, {&#34;id&#34;: &#34;64&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;e&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [366004.76412740716, 3974370.5291829654]}}, {&#34;id&#34;: &#34;65&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;e&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [405511.8613853592, 3955788.412254232]}}, {&#34;id&#34;: &#34;66&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;d&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [354637.91583959915, 3942690.227233035]}}, {&#34;id&#34;: &#34;67&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;a&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [338069.264842503, 3879773.1892424123]}}, {&#34;id&#34;: &#34;68&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;c&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [390670.9373259191, 3937252.206389549]}}, {&#34;id&#34;: &#34;69&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;c&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [380130.43359681044, 3934000.7620803993]}}, {&#34;id&#34;: &#34;70&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;a&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [321276.8532037605, 3944087.464799181]}}, {&#34;id&#34;: &#34;71&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;c&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [332728.9790377356, 3885695.13543713]}}, {&#34;id&#34;: &#34;72&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;a&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [326798.6669941969, 3927893.1264412515]}}, {&#34;id&#34;: &#34;73&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;d&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [366139.7888355836, 3903927.2318656505]}}, {&#34;id&#34;: &#34;74&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;c&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [391778.7972521506, 3878685.98319286]}}, {&#34;id&#34;: &#34;75&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;e&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [343308.934338325, 3876247.3255707705]}}, {&#34;id&#34;: &#34;76&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;b&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [330850.42777706357, 3905453.2830193145]}}, {&#34;id&#34;: &#34;77&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;d&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [371923.7511654892, 3914095.496799379]}}, {&#34;id&#34;: &#34;78&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;e&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [343242.4985463142, 3903961.483956606]}}, {&#34;id&#34;: &#34;79&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;b&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [325652.6393280709, 3962319.570053574]}}, {&#34;id&#34;: &#34;80&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;a&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [362601.8606998244, 3899889.5253636036]}}, {&#34;id&#34;: &#34;81&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;d&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [402543.51959215384, 3944932.80613198]}}, {&#34;id&#34;: &#34;82&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;c&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [383780.73104602564, 3928679.519293095]}}, {&#34;id&#34;: &#34;83&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;a&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [381171.13257805875, 3890290.136278853]}}, {&#34;id&#34;: &#34;84&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;a&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [327627.8039136628, 3920444.201974133]}}, {&#34;id&#34;: &#34;85&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;b&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [392663.1415436085, 3920518.1404981697]}}, {&#34;id&#34;: &#34;86&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;e&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [351417.3653003271, 3929043.879719506]}}, {&#34;id&#34;: &#34;87&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;e&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [389922.8793140733, 3969316.8834376056]}}, {&#34;id&#34;: &#34;88&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;c&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [335683.91899700253, 3974478.7497070776]}}, {&#34;id&#34;: &#34;89&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;c&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [382290.9921522791, 3978024.212534808]}}, {&#34;id&#34;: &#34;90&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;c&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [340411.4269835217, 3942249.084118384]}}, {&#34;id&#34;: &#34;91&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;c&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [386857.78192789556, 3930577.4601617907]}}, {&#34;id&#34;: &#34;92&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;c&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [324229.82122363173, 3910435.449613555]}}, {&#34;id&#34;: &#34;93&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;b&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [372089.71512360213, 3888215.734983792]}}, {&#34;id&#34;: &#34;94&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;b&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [337599.08172836597, 3974487.1574285063]}}, {&#34;id&#34;: &#34;95&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;e&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [396450.1087666497, 3943715.5696311747]}}, {&#34;id&#34;: &#34;96&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;e&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [345409.66215748386, 3964062.284286596]}}, {&#34;id&#34;: &#34;97&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;b&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [377594.8654832881, 3888384.103524417]}}, {&#34;id&#34;: &#34;98&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;a&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [323639.48616832047, 3925374.020842437]}}, {&#34;id&#34;: &#34;99&#34;, &#34;type&#34;: &#34;Feature&#34;, &#34;properties&#34;: {&#34;class&#34;: &#34;d&#34;}, &#34;geometry&#34;: {&#34;type&#34;: &#34;Point&#34;, &#34;coordinates&#34;: [353838.8266688845, 3915000.3671581685]}}]}&#39;
+</pre></div></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, Taka
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

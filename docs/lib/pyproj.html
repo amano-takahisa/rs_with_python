@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Numpy &mdash; rs-with-python  ドキュメント</title>
+  <title>CRS &mdash; rs-with-python  ドキュメント</title>
   
 
   
@@ -133,13 +133,13 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Numpy</li>
+      <li>CRS</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/lib/numpy.ipynb.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/lib/pyproj.ipynb.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -407,39 +407,67 @@ div.rendered_html tbody tr:hover {
     text-align: unset;
 }
 </style>
-<div class="section" id="Numpy">
-<h1>Numpy<a class="headerlink" href="#Numpy" title="このヘッドラインへのパーマリンク">¶</a></h1>
-<p><strong>NumPy</strong>はグリッドに配置されたデータを効率良く扱うためのライブラリです。数学でいうn次元の行列のような形をしたデータを扱う際に非常に便利です。 <a class="reference external" href="https://numpy.org/doc/stable/user/quickstart.html">公式ドキュメントはこちら</a></p>
-<p>NumPyで作成されるn次元の行列は、<strong>ndarray</strong>と呼ばれます。 以下に2×3のndarrayの例を示します。</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
- <span class="p">[</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]]</span>
-</pre></div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">[]</span></code>で定義された同じ長さの複数のリストが更に<code class="docutils literal notranslate"><span class="pre">[]</span></code>で囲われたような形をしています。</p>
-<p>まずはnumpyを用いて行列(numpy.array)を作成してみます。</p>
-<div class="nbinput docutils container">
+<div class="section" id="CRS">
+<h1>CRS<a class="headerlink" href="#CRS" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
-              <span class="p">[</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
-<span class="n">a</span>
+<span></span><span class="kn">from</span> <span class="nn">pyproj.crs</span> <span class="kn">import</span> <span class="n">CRS</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="convert">
+<h2>convert<a class="headerlink" href="#convert" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">crs</span> <span class="o">=</span> <span class="n">CRS</span><span class="o">.</span><span class="n">from_epsg</span><span class="p">(</span><span class="mi">4326</span><span class="p">)</span>
+<span class="n">crs</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-array([[1., 0., 0.],
-       [0., 1., 2.]])
+&lt;Geographic 2D CRS: EPSG:4326&gt;
+Name: WGS 84
+Axis Info [ellipsoidal]:
+- Lat[north]: Geodetic latitude (degree)
+- Lon[east]: Geodetic longitude (degree)
+Area of Use:
+- name: World
+- bounds: (-180.0, -90.0, 180.0, 90.0)
+Datum: World Geodetic System 1984
+- Ellipsoid: WGS 84
+- Prime Meridian: Greenwich
 </pre></div></div>
 </div>
-<p>ndarrayには、</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">crs</span><span class="o">.</span><span class="n">to_wkt</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;GEOGCRS[&#34;WGS 84&#34;,DATUM[&#34;World Geodetic System 1984&#34;,ELLIPSOID[&#34;WGS 84&#34;,6378137,298.257223563,LENGTHUNIT[&#34;metre&#34;,1]]],PRIMEM[&#34;Greenwich&#34;,0,ANGLEUNIT[&#34;degree&#34;,0.0174532925199433]],CS[ellipsoidal,2],AXIS[&#34;geodetic latitude (Lat)&#34;,north,ORDER[1],ANGLEUNIT[&#34;degree&#34;,0.0174532925199433]],AXIS[&#34;geodetic longitude (Lon)&#34;,east,ORDER[2],ANGLEUNIT[&#34;degree&#34;,0.0174532925199433]],USAGE[SCOPE[&#34;unknown&#34;],AREA[&#34;World&#34;],BBOX[-90,-180,90,180]],ID[&#34;EPSG&#34;,4326]]&#39;
+</pre></div></div>
+</div>
+</div>
 </div>
 
 
