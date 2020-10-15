@@ -454,7 +454,7 @@ div.rendered_html tbody tr:hover {
 [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
 </pre></div></div>
 </div>
-<p>コードが記載されるひとかたまりは、<strong>チャンク</strong>や<strong>セル</strong>とよばれ、コードの実行はこのチャンクごとに行われます。チャンクを実行すると、その出力がチャンクの下に表示されます。<code class="docutils literal notranslate"><span class="pre">#</span></code>から始まる行や、<code class="docutils literal notranslate"><span class="pre">#</span></code>より右側の文字列は<strong>コメント</strong>で、プログラムの実行に影響しません。一時的にコードを無効化したり、コードに関するメモを記載したりするのに使います。</p>
+<p>コードが記載されるひとかたまりは、<strong>チャンク</strong>や<strong>セル</strong>とよばれ、コードの実行はこのセルごとに行われます。セルを実行すると、その出力がセルの下に表示されます。<code class="docutils literal notranslate"><span class="pre">#</span></code>から始まる行や、<code class="docutils literal notranslate"><span class="pre">#</span></code>より右側の文字列は<strong>コメント</strong>で、プログラムの実行に影響しません。一時的にコードを無効化したり、コードに関するメモを記載したりするのに使います。</p>
 <p>Jupyter Notebookファイルはテキストファイルで<code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>という拡張子で保存されます。</p>
 <p>この<code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>ファイルは、Jupyter Labという名前のソフトを通じ、webブラウザ上に表示、編集することができます。Jupyter Labは、以前はJupyter Notebookという名前で開発されていたソフトの後続・高機能版になります。文脈によって「Jupyter Notebook」は<code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>ファイルのことであったり、表示させるソフトのことであったりすることがあるので、少し紛らわしいです。</p>
 <p>ここでは基本的なJupyter Lab(Notebook)の導入方法と、その使い方を説明します。</p>
@@ -630,29 +630,37 @@ jupyter labextension install @jupyter-widgets/jupyterlab-manager@2.0
 <p>の形式のURLが表示されますので、マウスで選択し、右クリックでコピーします。</p>
 <p>コピーしたURLをWindowsのgoogle chromeやFirefoxで開くとJupyter Labが起動します。</p>
 <p><img alt="Jupyter Labの起動" src="../_images/ss_014_jupyter_lab.png" /></p>
-<p>左のフォルダアイコンをクリックすると、Ubuntuのホームフォルダにあるファイル一覧が表示されます。セットアップの際にWin_Documentsという名前でWindowsのDocumentsフォルダへのリンクを作成しているため、ここをダブルクリックすることで、WindowsのDocuments内のファイルにアクセスすることができます。</p>
 </div>
 <div class="section" id="Jupyter-Notebookファイル(.ipynb)を開く">
 <h3>Jupyter Notebookファイル(.ipynb)を開く<a class="headerlink" href="#Jupyter-Notebookファイル(.ipynb)を開く" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Jupyter labの左側のフォルダアイコンをクリックすると、Jupyter Labのファイルマネージャが開きます。セットアップの際にWin_Documentsという名前でWindowsのDocumentsフォルダへのリンクを作成しているため、ここをダブルクリックすることで、WindowsのDocuments内のファイルにアクセスすることができます。</p>
+<p>この中にフォルダやファイルを保存するには、 - Jupyter Labのファイルマネージャで右クリック - Jupyter Labのファイルマネージャにファイルをドラッグ&amp;ドロップ - Windowsのファイルマネージャを利用する のいずれかでできます。</p>
+<p>Win_Document内に、<code class="docutils literal notranslate"><span class="pre">my_project</span></code>という名前のフォルダを作成してください。次の章でその中にJupyter Notebookを作成しましょう。</p>
 </div>
 <div class="section" id="Jupyter-Notebookファイル(.ipynb)を新規作成する">
 <h3>Jupyter Notebookファイル(.ipynb)を新規作成する<a class="headerlink" href="#Jupyter-Notebookファイル(.ipynb)を新規作成する" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Jupyter Labのファイルマネージャで、<code class="docutils literal notranslate"><span class="pre">Win_Documents/my_project</span></code>内に移動して下さい。</p>
+<p>右側に表示されているLauncharにある「Notebook Python 3」のアイコンをクリックすると、<code class="docutils literal notranslate"><span class="pre">Untitled.ipynb</span></code>という名前のNotebookが新規作成されます。</p>
+<p>Notebookのファイル名は、ファイルマネージャの右クリックメニュー、もしくは開いているNotebookタブ名を右クリックすることで変更できます。</p>
+<p>Windowsのファイルマネージャからファイルを追加した場合、Jupyter Labのファイルマネージャの更新マークを押すと追加されたファイルがファイルマネージャ内に表示されます。追加された<code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>ファイルはダブルクリックで開くことができます。</p>
 </div>
-<div class="section" id="チャンクの実行">
-<h3>チャンクの実行<a class="headerlink" href="#チャンクの実行" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="section" id="セルの実行">
+<h3>セルの実行<a class="headerlink" href="#セルの実行" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>セルはNotebookのツールバーにある＋アイコンから追加することができます。 各セルはコードのセルとドキュメント用のセルの2種類があります。コード用のセルにPythonのプログラムを記述し、ドキュメント用のセルにはMarkdown形式でテキストが入力できます。 セルを選択した状態で、<code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">Enter</span></code>キーを押すか、Notebookのツールバーにある実行ボタンを押してください。</p>
 </div>
-<div class="section" id="チャンクの編集">
-<h3>チャンクの編集<a class="headerlink" href="#チャンクの編集" title="このヘッドラインへのパーマリンク">¶</a></h3>
-</div>
-<div class="section" id="カーネルの再起動">
-<h3>カーネルの再起動<a class="headerlink" href="#カーネルの再起動" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="section" id="セルの編集">
+<h3>セルの編集<a class="headerlink" href="#セルの編集" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>セルをダブルクリックするとセルが編集できるようになります。</p>
 </div>
 <div class="section" id="ファイルの保存">
 <h3>ファイルの保存<a class="headerlink" href="#ファイルの保存" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>編集中のファイルはNotebookのツールバーにある保存アイコンから保存できます。</p>
 </div>
 <div class="section" id="Jupyter-Labを閉じる">
 <h3>Jupyter Labを閉じる<a class="headerlink" href="#Jupyter-Labを閉じる" title="このヘッドラインへのパーマリンク">¶</a></h3>
-</div>
+<p>ブラウザを閉じ、Jupyter labを起動したUbuntuのターミナルで2回<code class="docutils literal notranslate"><span class="pre">ctrl+c</span></code>を押し、Jupyter labを停止します。</p>
+<video controls src="images/mv_jupyter_lab.mp4"><p>animation</p>
+</video></div>
 </div>
 </div>
 
