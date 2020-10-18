@@ -590,7 +590,8 @@ conda activate py38
 </div>
 <p>上記を実行すると、<code class="docutils literal notranslate"><span class="pre">(base)</span> <span class="pre">takahisa&#64;DESKTOP-QRCQMC:~$</span></code>の表示が<code class="docutils literal notranslate"><span class="pre">(py38)</span> <span class="pre">takahisa&#64;DESKTOP-QRCQMC:~$</span></code>に変更されます。 Anacondaで作成したPythonの環境内に入ると、その環境名がユーザー名の前に表示されます。</p>
 <p>以下のコマンドで、作成したPython環境に、必要なPythonライブラリをインストールします。</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install -c conda-forge geopandas rasterio matplotlib jupyterlab opencv ipympl nodejs
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install -c conda-forge geopandas rasterio matplotlib jupyterlab opencv ipympl nodejs grass-session
+
 jupyter labextension install @jupyter-widgets/jupyterlab-manager@2.0
 </pre></div>
 </div>
