@@ -91,7 +91,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../indices/index.html#id2">2年基礎実験</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../indices/index.html#id3">3年専攻演習</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">DEM(数値標高モデル)からの水系図作成</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#DEMデータの取得">DEMデータの取得</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#QGISを用いた方法">QGISを用いた方法</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PythonからGRASSモジュールを利用する">PythonからGRASSモジュールを利用する</a></li>
 </ul>
 </li>
 </ul>
@@ -167,237 +168,6 @@
             
   
 <style>
-/* CSS for nbsphinx extension */
-
-/* remove conflicting styling from Sphinx themes */
-div.nbinput.container,
-div.nbinput.container div.prompt,
-div.nbinput.container div.input_area,
-div.nbinput.container div[class*=highlight],
-div.nbinput.container div[class*=highlight] pre,
-div.nboutput.container,
-div.nboutput.container div.prompt,
-div.nboutput.container div.output_area,
-div.nboutput.container div[class*=highlight],
-div.nboutput.container div[class*=highlight] pre {
-    background: none;
-    border: none;
-    padding: 0 0;
-    margin: 0;
-    box-shadow: none;
-}
-
-/* avoid gaps between output lines */
-div.nboutput.container div[class*=highlight] pre {
-    line-height: normal;
-}
-
-/* input/output containers */
-div.nbinput.container,
-div.nboutput.container {
-    display: -webkit-flex;
-    display: flex;
-    align-items: flex-start;
-    margin: 0;
-    width: 100%;
-}
-@media (max-width: 540px) {
-    div.nbinput.container,
-    div.nboutput.container {
-        flex-direction: column;
-    }
-}
-
-/* input container */
-div.nbinput.container {
-    padding-top: 5px;
-}
-
-/* last container */
-div.nblast.container {
-    padding-bottom: 5px;
-}
-
-/* input prompt */
-div.nbinput.container div.prompt pre {
-    color: #307FC1;
-}
-
-/* output prompt */
-div.nboutput.container div.prompt pre {
-    color: #BF5B3D;
-}
-
-/* all prompts */
-div.nbinput.container div.prompt,
-div.nboutput.container div.prompt {
-    width: 4.5ex;
-    padding-top: 5px;
-    position: relative;
-    user-select: none;
-}
-
-div.nbinput.container div.prompt > div,
-div.nboutput.container div.prompt > div {
-    position: absolute;
-    right: 0;
-    margin-right: 0.3ex;
-}
-
-@media (max-width: 540px) {
-    div.nbinput.container div.prompt,
-    div.nboutput.container div.prompt {
-        width: unset;
-        text-align: left;
-        padding: 0.4em;
-    }
-    div.nboutput.container div.prompt.empty {
-        padding: 0;
-    }
-
-    div.nbinput.container div.prompt > div,
-    div.nboutput.container div.prompt > div {
-        position: unset;
-    }
-}
-
-/* disable scrollbars on prompts */
-div.nbinput.container div.prompt pre,
-div.nboutput.container div.prompt pre {
-    overflow: hidden;
-}
-
-/* input/output area */
-div.nbinput.container div.input_area,
-div.nboutput.container div.output_area {
-    -webkit-flex: 1;
-    flex: 1;
-    overflow: auto;
-}
-@media (max-width: 540px) {
-    div.nbinput.container div.input_area,
-    div.nboutput.container div.output_area {
-        width: 100%;
-    }
-}
-
-/* input area */
-div.nbinput.container div.input_area {
-    border: 1px solid #e0e0e0;
-    border-radius: 2px;
-    background: #f5f5f5;
-}
-
-/* override MathJax center alignment in output cells */
-div.nboutput.container div[class*=MathJax] {
-    text-align: left !important;
-}
-
-/* override sphinx.ext.imgmath center alignment in output cells */
-div.nboutput.container div.math p {
-    text-align: left;
-}
-
-/* standard error */
-div.nboutput.container div.output_area.stderr {
-    background: #fdd;
-}
-
-/* ANSI colors */
-.ansi-black-fg { color: #3E424D; }
-.ansi-black-bg { background-color: #3E424D; }
-.ansi-black-intense-fg { color: #282C36; }
-.ansi-black-intense-bg { background-color: #282C36; }
-.ansi-red-fg { color: #E75C58; }
-.ansi-red-bg { background-color: #E75C58; }
-.ansi-red-intense-fg { color: #B22B31; }
-.ansi-red-intense-bg { background-color: #B22B31; }
-.ansi-green-fg { color: #00A250; }
-.ansi-green-bg { background-color: #00A250; }
-.ansi-green-intense-fg { color: #007427; }
-.ansi-green-intense-bg { background-color: #007427; }
-.ansi-yellow-fg { color: #DDB62B; }
-.ansi-yellow-bg { background-color: #DDB62B; }
-.ansi-yellow-intense-fg { color: #B27D12; }
-.ansi-yellow-intense-bg { background-color: #B27D12; }
-.ansi-blue-fg { color: #208FFB; }
-.ansi-blue-bg { background-color: #208FFB; }
-.ansi-blue-intense-fg { color: #0065CA; }
-.ansi-blue-intense-bg { background-color: #0065CA; }
-.ansi-magenta-fg { color: #D160C4; }
-.ansi-magenta-bg { background-color: #D160C4; }
-.ansi-magenta-intense-fg { color: #A03196; }
-.ansi-magenta-intense-bg { background-color: #A03196; }
-.ansi-cyan-fg { color: #60C6C8; }
-.ansi-cyan-bg { background-color: #60C6C8; }
-.ansi-cyan-intense-fg { color: #258F8F; }
-.ansi-cyan-intense-bg { background-color: #258F8F; }
-.ansi-white-fg { color: #C5C1B4; }
-.ansi-white-bg { background-color: #C5C1B4; }
-.ansi-white-intense-fg { color: #A1A6B2; }
-.ansi-white-intense-bg { background-color: #A1A6B2; }
-
-.ansi-default-inverse-fg { color: #FFFFFF; }
-.ansi-default-inverse-bg { background-color: #000000; }
-
-.ansi-bold { font-weight: bold; }
-.ansi-underline { text-decoration: underline; }
-
-
-div.nbinput.container div.input_area div[class*=highlight] > pre,
-div.nboutput.container div.output_area div[class*=highlight] > pre,
-div.nboutput.container div.output_area div[class*=highlight].math,
-div.nboutput.container div.output_area.rendered_html,
-div.nboutput.container div.output_area > div.output_javascript,
-div.nboutput.container div.output_area:not(.rendered_html) > img{
-    padding: 5px;
-}
-
-/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
-div.nbinput.container div.input_area > div[class^='highlight'],
-div.nboutput.container div.output_area > div[class^='highlight']{
-    overflow-y: hidden;
-}
-
-/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
-.prompt a.copybtn {
-    display: none;
-}
-
-/* Some additional styling taken form the Jupyter notebook CSS */
-div.rendered_html table {
-  border: none;
-  border-collapse: collapse;
-  border-spacing: 0;
-  color: black;
-  font-size: 12px;
-  table-layout: fixed;
-}
-div.rendered_html thead {
-  border-bottom: 1px solid black;
-  vertical-align: bottom;
-}
-div.rendered_html tr,
-div.rendered_html th,
-div.rendered_html td {
-  text-align: right;
-  vertical-align: middle;
-  padding: 0.5em 0.5em;
-  line-height: normal;
-  white-space: normal;
-  max-width: none;
-  border: none;
-}
-div.rendered_html th {
-  font-weight: bold;
-}
-div.rendered_html tbody tr:nth-child(odd) {
-  background: #f5f5f5;
-}
-div.rendered_html tbody tr:hover {
-  background: rgba(66, 165, 245, 0.2);
-}
-
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
@@ -422,18 +192,94 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="section" id="DEM(数値標高モデル)からの水系図作成">
 <h1>DEM(数値標高モデル)からの水系図作成<a class="headerlink" href="#DEM(数値標高モデル)からの水系図作成" title="このヘッドラインへのパーマリンク">¶</a></h1>
-<p><a class="reference external" href="https://github.com/mdbartos/pysheds">https://github.com/mdbartos/pysheds</a></p>
-<div class="section" id="DEMデータの取得">
-<h2>DEMデータの取得<a class="headerlink" href="#DEMデータの取得" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
+<p>ここでは、数値標高モデルのデータから水系図の作成を行います。</p>
+<p>以下の2つの方法を説明します。 - QGISを経由してGRASS GISのモジュールを利用する - PythonからGRASS GISのモジュールを利用する</p>
+<p>どちらも、GRASSの<a class="reference external" href="https://grass.osgeo.org/grass78/manuals/r.watershed.html">r.watershed</a>というモジュールを利用して水系図を作成します。GRASS
+GISは独自のデータベース構造を持つため、はじめは仕組みを理解することが難しいかもしれませんが、ラスタデータやベクタデータを扱う多くのライブラリがあり、リモートセンシングやGISの解析に非常に有用なツールです。QGISを経由してGRASSのモジュールを利用することで、比較的簡易にそれらのツールを利用することができるようになります。また、Pythonを使う方法を利用すると、バッチ処理やほかのPython処理とスムーズに結合することができるようになります。</p>
+<p>まずはQGISを使った方法を説明します。</p>
+<p>事前に、<a class="reference external" href="https://trac.osgeo.org/osgeo4w/">OSGeo4W</a>からネットワークインストーラーをダウンロードして、QGIS Desktop with GRASSが使えるようにしておいてください。インストールの設定は、エクスプレスインストールを選択し、すべてデフォルトの設定で大丈夫です。</p>
+<p>データは笛吹川上流域のSRTM DEMデータを利用します。SRTMデータはWGS84の地理座標系で提供されています。事前にUTM座標系に変換したものを準備したので、<a class="reference external" href="data/watershed/dem_fuefuki.tif">ここから</a>ダウンロードしてdataフォルダに保存してください。</p>
+<div class="section" id="QGISを用いた方法">
+<h2>QGISを用いた方法<a class="headerlink" href="#QGISを用いた方法" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>スタートメニューから、QGISを検索し、<strong>QGIS Desktop with GRASS</strong>を起動してください。<strong>with GRASS表記がないものでは以下は動きません。</strong></p>
+<p><img alt="QGISの起動" src="../_images/ss_catchment_01_start_qgis.png" /></p>
+<p>ダウンロードした<code class="docutils literal notranslate"><span class="pre">dem_fuefuki.tif</span></code>をQGISにドラッグ＆ドロップしてデータを読み込みます。読み込まれたデータはLayersパネルに一覧が表示されます。Layersパネルが表示されていない場合、View → PanelsメニューからLayersをオンにしてください。また、同じメニューから、Processing Tool Boxのパネルも表示してください。</p>
+<video controls src="../_static/mv_watershed_load_dem.mp4"><p>animation</p>
+</video><div class="section" id="GRASS-GISモジュールの実行">
+<h3>GRASS GISモジュールの実行<a class="headerlink" href="#GRASS-GISモジュールの実行" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Processing Toolboxから、GRASS GISやSAGA GISなどのほかのフリーのGISソフトが提供するツール群を利用することができます。Processing Toolboxの検索ボックスに“water”と入れて表示される“r.watershed”モジュールを起動してください。</p>
+<p><img alt="watershedモジュールの起動" src="../_images/ss_watershed_rwatershed.png" /></p>
+<p>モジュールに以下の設定を行い、Runを押して実行してください。記載のない項目はすべてデフォルトの値です。</p>
+<ul class="simple">
+<li><p>Elevation : dem_fuefuki [EPSG:32654]</p></li>
+<li><p>Minimum size of exterior watershed basin [optional] : 1000</p></li>
+</ul>
+<p>上記のオプションで最小面積が<span class="math notranslate nohighlight">\(1000m^2\)</span>となるような集水域図が作成されます。 ログメッセージが表示後、モジュールの実行が完了します。モジュールウィンドウは閉じてください。</p>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>
-</pre></div>
+<div class="section" id="結果">
+<h3>結果<a class="headerlink" href="#結果" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Layersパネルに計算されたラスターデータが追加されます。</p>
+<p>作成されたラスタについて、以下で説明します。図はDEMから作成した陰影図を重ね合わせています。</p>
+<div class="section" id="Unique-label-for-each-watershed-basin">
+<h4>Unique label for each watershed basin<a class="headerlink" href="#Unique-label-for-each-watershed-basin" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<div class="line-block">
+<div class="line">集水域を表します。各集水域に固有のIDが振られています。</div>
+<div class="line"><img alt="集水域" src="../_images/watershed_basin_half.png" /></div>
 </div>
 </div>
+<div class="section" id="Half-basins">
+<h4>Half-basins<a class="headerlink" href="#Half-basins" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<div class="line-block">
+<div class="line">河川の左右別の集水域を表します。下流から見て右の支流に偶数、左の支流にその1少ない奇数のIDが振られています。</div>
+<div class="line"><img alt="集水域" src="../_images/watershed_basin_half.png" /></div>
+</div>
+</div>
+<div class="section" id="Number-of-cells-that-drain-through-each-cell">
+<h4>Number of cells that drain through each cell<a class="headerlink" href="#Number-of-cells-that-drain-through-each-cell" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>各ピクセルより上流にあるピクセルの数を表します。ピクセルサイズと掛け合わせることで、各ピクセルにおける集水域の面積となります。入力DEMの範囲外から流入する地域については値が負になっています。</p>
+<p><img alt="ピクセル数" src="../_images/watershed_n_cell.png" /></p>
+</div>
+<div class="section" id="Stream-segments">
+<h4>Stream segments<a class="headerlink" href="#Stream-segments" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>河川の位置を表します。各河川は集水域のIDに対応するID値を持ちます。GRASSの<code class="docutils literal notranslate"><span class="pre">r.to.vect</span></code>モジュールの入力として与えることで、ベクターデータ(shapefile)として出力できます。</p>
+<p><img alt="stream" src="../_images/watershed_stream_seg.png" /></p>
+</div>
+<div class="section" id="Drainage-direction">
+<h4>Drainage direction<a class="headerlink" href="#Drainage-direction" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>各ピクセルでの斜面の方位を示しています。方位は以下の図に示す値で定義されています。(<a class="reference external" href="https://idea.isnew.info/how-to-import-arcgis-flow-direction-into-grass-gis.html">参考</a>)</p>
+<p><img alt="流下方位" src="../_images/watershed_drainage_direction_map.png" /> <img alt="方位定義" src="../_images/watershed_drainage_direction.png" /></p>
+</div>
+<div class="section" id="Stream-power-index-a-*-tan(b)">
+<h4>Stream power index a * tan(b)<a class="headerlink" href="#Stream-power-index-a-*-tan(b)" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>各地点における水が流下する力を示します。各ピクセルにおける単位等高線あたりの集水面積を<span class="math notranslate nohighlight">\(\alpha\)</span>、各地点での傾斜角度を<span class="math notranslate nohighlight">\(\beta\)</span>としたとき、<span class="math notranslate nohighlight">\(\alpha \times tan(\beta)\)</span>と定義されるStream Power Index(SPI)と呼ばれる指標です。(Moore et al. 1991)</p>
+<p><img alt="SPI" src="../_images/watershed_stream_pi.png" /></p>
+</div>
+<div class="section" id="Topographic-index-ln(a-/-tan(b))">
+<h4>Topographic index ln(a / tan(b))<a class="headerlink" href="#Topographic-index-ln(a-/-tan(b))" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>各地点における水が流下する力を示します。SPIの自然対数で定義されます。(Quinn et al. 1991)</p>
+<p><img alt="TCI" src="../_images/watershed_topo_indx.png" /></p>
+</div>
+<div class="section" id="Slope-length-and-steepness-(LS)-factor-for-USLE">
+<h4>Slope length and steepness (LS) factor for USLE<a class="headerlink" href="#Slope-length-and-steepness-(LS)-factor-for-USLE" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>Revised Universal Soil Loss Equation (RUSLE)におけるLSの値(傾斜長および傾斜度)を示します。</p>
+<p><img alt="LS" src="../_images/watershed_slope_s.png" /></p>
+</div>
+<div class="section" id="Slope-steepness-(S)-factor-for-USLE">
+<h4>Slope steepness (S) factor for USLE<a class="headerlink" href="#Slope-steepness-(S)-factor-for-USLE" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>Revised Universal Soil Loss Equation (RUSLE)におけるSの値(傾斜度)を示します。</p>
+<p><img alt="LS" src="../_images/watershed_slope_s.png" /></p>
+</div>
+<div class="section" id="結果の保存">
+<h4>結果の保存<a class="headerlink" href="#結果の保存" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>Layerウィンドウ内でレイヤの右側に<img alt="メモリアイコン" src="../_images/watershed_memory.png" />表示があるレイヤはQGISの一時ファイルに保存されています。GRASSモジュールを実行する際に計算結果の保存先を指定しなかった場合、デフォルトで一時ファイルに保存されます。これらはQGISを終了した際に削除されてしまうので、QGISを閉じる前にGeoTiffファイルとして保存してください。保存方法は、保存したいレイヤを右クリック、Export -&gt; Save as…
+で表示されるダイヤログにおいて、フォーマットと保存先フォルダを指定します。その他の設定項目はデフォルト値で大丈夫です。ラスタがファイルに保存され、QGISのレイヤにも追加されます。</p>
+<p>以上でQGISを通じたGRASSモジュールによる集水域図を作成することができました。</p>
+</div>
+</div>
+</div>
+<div class="section" id="PythonからGRASSモジュールを利用する">
+<h2>PythonからGRASSモジュールを利用する<a class="headerlink" href="#PythonからGRASSモジュールを利用する" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>GRASS GISは、独自のGRASSデータベースを作成し、一度ラスタやベクタデータをデータベースに登録したうえで、各種の計算を行います。計算された結果はデータベース上にあるため、GeotiffやShapefile等の一般的なファイルとして QGISからGRASSモジュールを利用する場合、以下のプロセスが自動で実行されます。 - GRAS</p>
 </div>
 </div>
 
