@@ -13,7 +13,6 @@ pythonでリモセン
    :caption: Contents:
 
    indices/index
-   handson/comment_form
 
 ..
    handson/index

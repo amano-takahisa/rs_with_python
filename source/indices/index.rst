@@ -17,13 +17,20 @@
    :caption: 11/10 (火):
    
    ../handson/leaf_area_index
-   
+
 
 3年専攻演習
 -----------
 
 .. toctree::
    :maxdepth: 1
-   :caption: Contents:
    
    ../handson/catchment_from_dem
+
+質問・コメント送信
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+   
+   ../handson/comment_form
