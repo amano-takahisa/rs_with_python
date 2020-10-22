@@ -655,6 +655,39 @@ key x not exist
 </pre></div></div>
 </div>
 </div>
+<div class="section" id="値の更新">
+<h2>値の更新<a class="headerlink" href="#値の更新" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">update()</span></code>メソッドを利用すると、他のdictionaryを与えてdictionaryを更新できます。その際、存在しないキーが与えられると要素が追加される。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">my_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="s1">&#39;aaa&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">222</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="s1">&#39;xxx&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="mi">999</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">:</span><span class="kc">None</span><span class="p">}}</span>
+<span class="n">my_dict</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="mi">999</span><span class="p">})</span>
+<span class="n">my_dict</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;a&#39;: 0, &#39;b&#39;: 222, &#39;c&#39;: {&#39;x&#39;: &#39;xxx&#39;, &#39;y&#39;: 999, &#39;z&#39;: None}, &#39;x&#39;: 999}
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="section" id="値の削除">
 <h2>値の削除<a class="headerlink" href="#値の削除" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <div class="nbinput docutils container">
@@ -707,6 +740,15 @@ not exist!
 <div class="highlight"><pre>
 {&#39;b&#39;: &#39;bbb&#39;, &#39;c&#39;: &#39;ccc&#39;}
 </pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>

@@ -490,6 +490,51 @@ True
 </pre></div></div>
 </div>
 </div>
+<div class="section" id="None値">
+<h2>None値<a class="headerlink" href="#None値" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">None</span></code>をBool関数に与えると<code class="docutils literal notranslate"><span class="pre">False</span></code>を返します。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">bool</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+False
+</pre></div></div>
+</div>
+<p>未定義の変数は<code class="docutils literal notranslate"><span class="pre">NameError</span></code>となります。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">bool</span><span class="p">(</span><span class="n">not_defined_valiable</span><span class="p">)</span>  <span class="c1"># -&gt; Name error</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-3-7d69e32564b6&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>bool<span class="ansi-blue-fg">(</span>not_defined_valiable<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">NameError</span>: name &#39;not_defined_valiable&#39; is not defined
+</pre></div></div>
+</div>
+</div>
 <div class="section" id="tilde">
 <h2>tilde<a class="headerlink" href="#tilde" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <p>negate <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> items</p>
