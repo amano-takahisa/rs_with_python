@@ -437,7 +437,7 @@ div.rendered_html tbody tr:hover {
 <p>ハイパースペクトラルセンサーデータを用いて、Pythonでの基本的なデータ処理について学びます。</p>
 <p>センサーデータのCSVから、以下のようなグラフと各測定でのNDVIの値を算出します。</p>
 <p><img alt="out" src="https://github.com/amano-takahisa/rs_with_python/raw/master/source/handson/out/spectral.png" /></p>
-<p>利用するデータは、<a class="reference external" href="data/spectrum2019.csv">こちら</a>。ダウンロードの上、<code class="docutils literal notranslate"><span class="pre">data</span></code>フォルダに保存してください。</p>
+<p>利用するデータは、<a class="reference external" href="https://amano-takahisa.github.io/rs_with_python/handson/data/spectrum2019.csv">こちら</a>。ダウンロードの上、ファイルマネージャにて<code class="docutils literal notranslate"><span class="pre">data</span></code>フォルダを作成し、その中に保存してください。</p>
 <div class="section" id="CSVファイルの読み込み">
 <h2>CSVファイルの読み込み<a class="headerlink" href="#CSVファイルの読み込み" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <div class="line-block">
@@ -1589,6 +1589,7 @@ dtype: float64
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># matplotlibのインポート</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pathlib</span>
 
 <span class="c1"># 波長域の定義</span>
 <span class="n">wave_length</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Blue&#39;</span><span class="p">:</span>  <span class="p">{</span><span class="s1">&#39;range&#39;</span><span class="p">:(</span><span class="mi">450</span><span class="p">,</span> <span class="mi">510</span><span class="p">),</span> <span class="s1">&#39;color&#39;</span><span class="p">:</span><span class="s1">&#39;Blue&#39;</span><span class="p">},</span>
@@ -1621,9 +1622,12 @@ dtype: float64
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 
+<span class="c1"># &#39;out&#39;フォルダの作成</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;out&#39;</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
 <span class="c1"># &#39;out&#39;フォルダに画像として保存</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;out/spectral.png&#39;</span><span class="p">)</span>
-
 
 <span class="c1"># 画面へ表示</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
