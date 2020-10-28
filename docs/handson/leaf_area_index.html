@@ -99,7 +99,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#チャンネルの分解">チャンネルの分解</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#HSVへの変換">HSVへの変換</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#閾値による分類">閾値による分類</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#ラベルの利用">ラベルの利用</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#結果の保存">結果の保存</a></li>
 </ul>
 </li>
 </ul>
@@ -432,6 +432,11 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="section" id="OpenCVを利用した葉面積の推定">
 <h1>OpenCVを利用した葉面積の推定<a class="headerlink" href="#OpenCVを利用した葉面積の推定" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference external" href="https://amano-takahisa.github.io/rs_with_python/handson/leaf_area_index.ipynb">このページのJupyter Notebookファイル</a></p></li>
+<li><p><a class="reference external" href="https://colab.research.google.com/github/amano-takahisa/rs_with_python/blob/master/docs/handson/leaf_area_index.ipynb">google colaboratoryで開く</a></p></li>
+<li><p><a class="reference external" href="https://github.com/amano-takahisa/rs_with_python/raw/master/source/handson/data/field.jpg">画像データ</a></p></li>
+</ul>
 <p>Pythonで画像を扱う際に、OpenCVというライブラリがよく利用されます。 今回はこのOpenCVを用いて、作物成長段階の指標となる葉面積を推定します。</p>
 <p>まずはOpenCVモジュールを読み込みます。 以下のチャンクを実行すると、今動いているPythonの環境にOpenCVの機能が追加されます。</p>
 <div class="nbinput nblast docutils container">
@@ -444,8 +449,8 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <p>作業しているパソコンにOpenCVがインストールされていない場合は、エラーが出ますので、以下のコマンドでインストールして、再度実行してください。</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -453,18 +458,9 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-Requirement already satisfied: opencv-python in /home/takahisa/anaconda3/envs/py38/lib/python3.8/site-packages (4.4.0.44)
-Requirement already satisfied: numpy&gt;=1.17.3 in /home/takahisa/anaconda3/envs/py38/lib/python3.8/site-packages (from opencv-python) (1.19.1)
-</pre></div></div>
-</div>
 <p>うまくインストールされれば、以下のコマンドでバージョンが表示されます。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -473,7 +469,7 @@ Requirement already satisfied: numpy&gt;=1.17.3 in /home/takahisa/anaconda3/envs
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -485,33 +481,40 @@ Requirement already satisfied: numpy&gt;=1.17.3 in /home/takahisa/anaconda3/envs
 <h2>OpenCVでの画像の表示<a class="headerlink" href="#OpenCVでの画像の表示" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <p>まずは画像ファイルをJupyter Notebookに読み込んで表示してみましょう。</p>
 <p>画像は、<code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>ファイルと同じフォルダに<code class="docutils literal notranslate"><span class="pre">data</span></code>という名前のフォルダを作成し、その中に保存してください。以下では、<a class="reference external" href="https://www.pxfuel.com/en/free-photo-qhhuu">www.pxfuel.com</a>から取得した画像を利用しています。</p>
-<p>下記のチャンクを実行すると、<strong>image</strong>という名前の別ウィンドウが立ち上がり、画像が表示されます。(Jupyter labをWSL2上やGoogle Colaboratoryで動かしている場合、下のコードは機能しないかもしれません。) 表示されたウィンドウは、キーボードのいづれかのキーを押して閉じてください。</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># ファイルへのパスをimage_path変数に代入する。</span>
-<span class="c1"># image_path = &#39;data/field.jpg&#39;</span>
-<span class="n">image_path</span> <span class="o">=</span> <span class="s1">&#39;data/field_2.jpg&#39;</span>
+<span class="n">image_path</span> <span class="o">=</span> <span class="s1">&#39;data/field.jpg&#39;</span>
 
 <span class="c1"># 画層をOpenCVのimage形式で読み込む</span>
 <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
-
-<span class="c1"># OpenCV のimshow関数で、画像を表示する</span>
+</pre></div>
+</div>
+</div>
+<p>次のチャンクを実行すると、<strong>image</strong>という名前の別ウィンドウが立ち上がり、画像が表示されます。(Jupyter labをWSL2上やGoogle Colaboratoryで動かしている場合、下のコードは機能しないかもしれません。参考:<a class="reference external" href="https://github.com/microsoft/WSL/issues/4106">Can’t use X-Server in WSL 2</a>)</p>
+<p>表示されたウィンドウは、キーボードのいづれかのキーを押して閉じてください。</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># OpenCV のimshow関数で、画像を表示する</span>
 <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s1">&#39;image&#39;</span><span class="p">,</span><span class="n">img</span><span class="p">)</span>
 <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">cv2</span><span class="o">.</span><span class="n">destroyAllWindows</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-<p>上のチャンクを実行すると、別ウィンドウで次の画像が表示されます。</p>
-<p><img alt="field" src="../_images/field_2.jpg" /></p>
-<p>表示されたウィンドウを閉じてもチャンクの番号が<code class="docutils literal notranslate"><span class="pre">[*]</span></code>と表示されたままの場合は、Jupyter NotebookメニューのKernel -&gt; Restart Kernelで、カーネルを再起動してください。</p>
+<p>うまく実行されれば別ウィンドウで次の画像が表示されます。</p>
+<p><img alt="field" src="handson/data/field_2.jpg" /></p>
+<p>表示されたウィンドウを閉じてもセルの番号が<code class="docutils literal notranslate"><span class="pre">[*]</span></code>と表示されたままの場合は、Jupyter NotebookメニューのKernel -&gt; Restart Kernelで、カーネルを再起動してください。</p>
 <p>画像の表示はこの方法でもいいですが、<strong>matplotlib</strong>というライブラリを利用して、Jupyter Notebook内にインラインで表示させる下記の方法がよく用いられます。</p>
 <p>まずはmatplotlibをインポートします。(必要であればmatplotlibを<code class="docutils literal notranslate"><span class="pre">!pip</span> <span class="pre">install</span> <span class="pre">matplotlib</span></code> からインストールしてください。)</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -523,7 +526,7 @@ Requirement already satisfied: numpy&gt;=1.17.3 in /home/takahisa/anaconda3/envs
 <p>import文はプログラムの一番最初にまとめて記述することが慣例ですが、ここでは必要になる箇所で適宜宣言することにします。</p>
 <p>では、<code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>の<code class="docutils literal notranslate"><span class="pre">matshow</span></code>関数を使って画像を表示しましょう。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -532,19 +535,19 @@ Requirement already satisfied: numpy&gt;=1.17.3 in /home/takahisa/anaconda3/envs
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.image.AxesImage at 0x7fb636e8c370&gt;
+&lt;matplotlib.image.AxesImage at 0x7f5d661d3490&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/handson_leaf_area_index_13_1.png" src="../_images/handson_leaf_area_index_13_1.png" />
+<img alt="../_images/handson_leaf_area_index_15_1.png" src="../_images/handson_leaf_area_index_15_1.png" />
 </div>
 </div>
 <p>色が変ですね。</p>
@@ -553,7 +556,7 @@ Requirement already satisfied: numpy&gt;=1.17.3 in /home/takahisa/anaconda3/envs
 <div class="line">OpenCVはBGRの順、matplotlibはRGBの順でカラーを取り扱います。 正しく読み込むには以下のように読み込みます。</div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -568,19 +571,19 @@ Requirement already satisfied: numpy&gt;=1.17.3 in /home/takahisa/anaconda3/envs
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.image.AxesImage at 0x7fb63457c700&gt;
+&lt;matplotlib.image.AxesImage at 0x7f5d5c0cf370&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/handson_leaf_area_index_15_1.png" src="../_images/handson_leaf_area_index_15_1.png" />
+<img alt="../_images/handson_leaf_area_index_17_1.png" src="../_images/handson_leaf_area_index_17_1.png" />
 </div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">.jpg</span></code>ファイルとして保存された写真をPythonで表示することができました。</p>
@@ -591,11 +594,15 @@ Requirement already satisfied: numpy&gt;=1.17.3 in /home/takahisa/anaconda3/envs
 <div class="line">写真や衛星画像のようなデータはラスタデータと呼ばれ、一定の間隔で格子状に区切られた各グリッドに値をもったデータ形式です。それぞれのグリッドのことをピクセルと呼ぶので、ピクセルデータと呼ぶこともあります。上で画像をプロットした際に、X軸とY軸に数値が振られていますが、この数値が画像のピクセルを表しています。通常左上を起点とした座標で表されます。</div>
 <div class="line">ラスタデータと対になるデータはベクタデータです。分野によっては、ベクタデータは、ベクトル、ポリゴンなどとも呼ばれます。</div>
 </div>
-<p>詳しくはESRIのサイトに解説があるので、参考にしてください。<a class="reference external" href="https://www.esrij.com/gis-guide/gis-datamodel/vector-data/">ベクターデータとは:www.esrij.com</a>、 <a class="reference external" href="https://www.esrij.com/gis-guide/gis-datamodel/raster-data/">ラスターデータとは:wwww.esrij.com</a></p>
+<p>詳しくはESRIのサイトに解説があるので、参考にしてください。</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.esrij.com/gis-guide/gis-datamodel/vector-data/">ベクターデータとは: www.esrij.com</a></p></li>
+<li><p><a class="reference external" href="https://www.esrij.com/gis-guide/gis-datamodel/raster-data/">ラスターデータとは: wwww.esrij.com</a></p></li>
+</ul>
 <p>今回読み込んだ画像はラスタデータです。ここではPythonの中でどのように保存されているかを見ていきます。</p>
-<p>まずは、<code class="docutils literal notranslate"><span class="pre">print()</span></code>関数を用いて、作成した<code class="docutils literal notranslate"><span class="pre">img_bgr</span></code>をそのまま表示させてみます。</p>
+<p>まずは<code class="docutils literal notranslate"><span class="pre">cv2.imread()</span></code>で読み込んだ<code class="docutils literal notranslate"><span class="pre">img_bgr</span></code>を<code class="docutils literal notranslate"><span class="pre">print()</span></code>関数を用いて表示させてみます。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -659,12 +666,33 @@ Requirement already satisfied: numpy&gt;=1.17.3 in /home/takahisa/anaconda3/envs
   [ 82  93 113]]]
 </pre></div></div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">print()</span></code>関数によって、画像の中のデータが表示されました。画像データは、整数の値が入ったリストが入れ子になった構造をしていることがわかります。</p>
+<p><code class="docutils literal notranslate"><span class="pre">type()</span></code>関数で、データ型を確認します。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">type</span><span class="p">(</span><span class="n">img_bgr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+numpy.ndarray
+</pre></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">img_bgr</span></code>の実態は、<code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>クラスのデータであることが分かりました。 <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>クラスは、<code class="docutils literal notranslate"><span class="pre">shape</span></code>プロパティを持つので、これを確認してみます。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">img_rgb</span><span class="o">.</span><span class="n">shape</span>
+<span></span><span class="n">img_bgr</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -677,11 +705,178 @@ Requirement already satisfied: numpy&gt;=1.17.3 in /home/takahisa/anaconda3/envs
 (853, 1280, 3)
 </pre></div></div>
 </div>
+<p>実は、OpenCVで読みこんんだデータは、各ピクセルにおける輝度が<code class="docutils literal notranslate"><span class="pre">[青、緑、赤]</span></code>の順で保存され、その各ピクセルの値は、画像の左上から右上、さらに上から下の順で3重の入れ子構造で保存されています。そのため、<code class="docutils literal notranslate"><span class="pre">shape</span></code>を確認することで、読み込んだ画像は高さ853ピクセル、幅1280ピクセルのサイズで、3チャンネルの画像であったことがわかりました。</p>
+<p>今回の画像の例では、<code class="docutils literal notranslate"><span class="pre">print()</span></code>関数で一行目に表示された<code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">71</span> <span class="pre">205</span> <span class="pre">152]</span></code>の値は、左上のピクセルの青色の値が<code class="docutils literal notranslate"><span class="pre">71</span></code>、緑色が<code class="docutils literal notranslate"><span class="pre">205</span></code>、赤色が<code class="docutils literal notranslate"><span class="pre">152</span></code>の値を持っています。値が大きいほど、ディスプレイ上でその色が明るく光るので、このピクセルは緑&gt;赤&gt;青の順の強さで光って、黄緑色であることが推測できます。</p>
+<p><code class="docutils literal notranslate"><span class="pre">cv2.cvtColor()</span></code>関数で変換された<code class="docutils literal notranslate"><span class="pre">img_rgb</span></code>のデータと比べてみましょう。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="n">img_rgb</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[[[152 205  71]
+  [149 202  68]
+  [148 199  68]
+  ...
+  [ 92  66  43]
+  [121  95  68]
+  [161 136 105]]
+
+ [[154 206  70]
+  [152 204  68]
+  [148 200  64]
+  ...
+  [111  85  58]
+  [134 109  78]
+  [167 143 107]]
+
+ [[155 206  67]
+  [152 203  64]
+  [147 198  59]
+  ...
+  [135 113  76]
+  [149 126  85]
+  [169 146 102]]
+
+ ...
+
+ [[252 217 187]
+  [254 219 191]
+  [246 206 181]
+  ...
+  [143 120 104]
+  [128 103  98]
+  [117  91  90]]
+
+ [[224 197 168]
+  [240 210 184]
+  [246 214 189]
+  ...
+  [157 136 115]
+  [137 115 104]
+  [119  96  90]]
+
+ [[195 175 150]
+  [209 187 163]
+  [216 190 167]
+  ...
+  [158 142 117]
+  [135 116 101]
+  [113  93  82]]]
+</pre></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">cv2.cvtColor()</span></code>によって、赤色の値と青色の値が入れ替えられたことが確認できます。</p>
+<p>また、<code class="docutils literal notranslate"><span class="pre">numpy.array</span></code>は以下のようにすることで、データの一部を取り出すことができます。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">array</span><span class="p">[</span><span class="mi">1</span><span class="n">軸目の範囲</span><span class="p">,</span> <span class="mi">2</span><span class="n">軸目の範囲</span><span class="p">,</span> <span class="mi">3</span><span class="n">軸目の範囲</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>今回の画像データは縦、横、色チャンネルの3次元データです。左上の縦100x横200ピクセルに対応する<code class="docutils literal notranslate"><span class="pre">img_rgb</span></code>は次のように取り出すことができます。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">img_rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">200</span><span class="p">,</span> <span class="p">:]</span>  <span class="c1"># 3軸目の範囲&quot;:&quot; は&quot;すべての範囲&quot;を意味する</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+array([[[152, 205,  71],
+        [149, 202,  68],
+        [148, 199,  68],
+        ...,
+        [125, 144,  89],
+        [127, 150,  96],
+        [128, 154, 106]],
+
+       [[154, 206,  70],
+        [152, 204,  68],
+        [148, 200,  64],
+        ...,
+        [142, 160, 108],
+        [143, 163, 112],
+        [139, 162, 116]],
+
+       [[155, 206,  67],
+        [152, 203,  64],
+        [147, 198,  59],
+        ...,
+        [152, 168, 123],
+        [146, 163, 119],
+        [135, 156, 113]],
+
+       ...,
+
+       [[147, 187, 101],
+        [137, 176,  97],
+        [137, 176, 109],
+        ...,
+        [145, 194,  42],
+        [154, 204,  47],
+        [168, 219,  54]],
+
+       [[147, 188,  96],
+        [142, 182,  96],
+        [143, 181, 108],
+        ...,
+        [150, 199,  45],
+        [155, 205,  46],
+        [163, 216,  50]],
+
+       [[149, 190,  98],
+        [145, 185,  99],
+        [143, 180, 110],
+        ...,
+        [150, 199,  48],
+        [150, 201,  46],
+        [156, 208,  48]]], dtype=uint8)
+</pre></div></div>
+</div>
+<p>この部分だけをプロットしてみましょう。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">200</span><span class="p">,</span> <span class="p">:])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.image.AxesImage at 0x7f5d5c0465e0&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/handson_leaf_area_index_30_1.png" src="../_images/handson_leaf_area_index_30_1.png" />
+</div>
+</div>
+<p>画像の左上あたりが切り取られていることが確認できました。</p>
 </div>
 <div class="section" id="チャンネルの分解">
 <h2>チャンネルの分解<a class="headerlink" href="#チャンネルの分解" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -691,7 +886,7 @@ Requirement already satisfied: numpy&gt;=1.17.3 in /home/takahisa/anaconda3/envs
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -700,7 +895,7 @@ Requirement already satisfied: numpy&gt;=1.17.3 in /home/takahisa/anaconda3/envs
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -714,11 +909,11 @@ Requirement already satisfied: numpy&gt;=1.17.3 in /home/takahisa/anaconda3/envs
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/handson_leaf_area_index_22_0.png" src="../_images/handson_leaf_area_index_22_0.png" />
+<img alt="../_images/handson_leaf_area_index_34_0.png" src="../_images/handson_leaf_area_index_34_0.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -743,14 +938,14 @@ Requirement already satisfied: numpy&gt;=1.17.3 in /home/takahisa/anaconda3/envs
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/handson_leaf_area_index_23_0.png" src="../_images/handson_leaf_area_index_23_0.png" />
+<img alt="../_images/handson_leaf_area_index_35_0.png" src="../_images/handson_leaf_area_index_35_0.png" />
 </div>
 </div>
 </div>
 <div class="section" id="HSVへの変換">
 <h2>HSVへの変換<a class="headerlink" href="#HSVへの変換" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -760,7 +955,7 @@ Requirement already satisfied: numpy&gt;=1.17.3 in /home/takahisa/anaconda3/envs
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -769,7 +964,7 @@ Requirement already satisfied: numpy&gt;=1.17.3 in /home/takahisa/anaconda3/envs
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -794,11 +989,11 @@ Requirement already satisfied: numpy&gt;=1.17.3 in /home/takahisa/anaconda3/envs
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/handson_leaf_area_index_26_0.png" src="../_images/handson_leaf_area_index_26_0.png" />
+<img alt="../_images/handson_leaf_area_index_38_0.png" src="../_images/handson_leaf_area_index_38_0.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -810,7 +1005,7 @@ Requirement already satisfied: numpy&gt;=1.17.3 in /home/takahisa/anaconda3/envs
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -819,7 +1014,7 @@ array([ 95, 128,  73], dtype=uint8)
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -831,7 +1026,7 @@ array([ 95, 128,  73], dtype=uint8)
 <div class="section" id="閾値による分類">
 <h2>閾値による分類<a class="headerlink" href="#閾値による分類" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -840,7 +1035,7 @@ array([ 95, 128,  73], dtype=uint8)
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -858,11 +1053,11 @@ array([ 95, 128,  73], dtype=uint8)
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/handson_leaf_area_index_31_0.png" src="../_images/handson_leaf_area_index_31_0.png" />
+<img alt="../_images/handson_leaf_area_index_43_0.png" src="../_images/handson_leaf_area_index_43_0.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -879,11 +1074,11 @@ array([ 95, 128,  73], dtype=uint8)
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/handson_leaf_area_index_32_0.png" src="../_images/handson_leaf_area_index_32_0.png" />
+<img alt="../_images/handson_leaf_area_index_44_0.png" src="../_images/handson_leaf_area_index_44_0.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -900,7 +1095,7 @@ Mask ratio is 0.2845270369284877
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -945,11 +1140,11 @@ Mask ratio is 0.2845270369284877
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/handson_leaf_area_index_34_0.png" src="../_images/handson_leaf_area_index_34_0.png" />
+<img alt="../_images/handson_leaf_area_index_46_0.png" src="../_images/handson_leaf_area_index_46_0.png" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -959,15 +1154,15 @@ Mask ratio is 0.2845270369284877
 </div>
 </div>
 </div>
-<div class="section" id="ラベルの利用">
-<h2>ラベルの利用<a class="headerlink" href="#ラベルの利用" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="結果の保存">
+<h2>結果の保存<a class="headerlink" href="#結果の保存" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <div class="line-block">
 <div class="line">画像を以下のツールを利用してラベル付けをします。</div>
 <div class="line"><a class="reference external" href="https://github.com/yuyu2172/image-labelling-tool">https://github.com/yuyu2172/image-labelling-tool</a></div>
 <div class="line">ラベルは<code class="docutils literal notranslate"><span class="pre">json</span></code>形式のファイルに保存されます。以下で、jsonファイルをバイナリラスタに変換していきます。</div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -976,7 +1171,7 @@ Mask ratio is 0.2845270369284877
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -994,7 +1189,7 @@ Mask ratio is 0.2845270369284877
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-24-e208dddd0d7e&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">&lt;ipython-input-27-e208dddd0d7e&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
 <span class="ansi-green-intense-fg ansi-bold">      2</span> <span class="ansi-green-fg">from</span> matplotlib <span class="ansi-green-fg">import</span> pyplot <span class="ansi-green-fg">as</span> plt
 <span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-green-fg">from</span> IPython<span class="ansi-blue-fg">.</span>display <span class="ansi-green-fg">import</span> display<span class="ansi-blue-fg">,</span> Javascript
 <span class="ansi-green-fg">----&gt; 4</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> image_labelling_tool <span class="ansi-green-fg">import</span> labelling_tool<span class="ansi-blue-fg">,</span> labelling_tool_jupyter
