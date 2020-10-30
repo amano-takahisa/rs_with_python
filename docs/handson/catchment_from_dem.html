@@ -425,7 +425,11 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="section" id="DEM(数値標高モデル)からの水系図作成">
 <h1>DEM(数値標高モデル)からの水系図作成<a class="headerlink" href="#DEM(数値標高モデル)からの水系図作成" title="このヘッドラインへのパーマリンク">¶</a></h1>
-<p>ここでは、数値標高モデルのデータから水系図の作成を行います。</p>
+<ul>
+<li><a href="https://amano-takahisa.github.io/rs_with_python/handson/catchment_from_dem.ipynb">このページのJupyter Notebookファイル</a></li>
+<li><a href="https://colab.research.google.com/github/amano-takahisa/rs_with_python/blob/master/docs/handson/catchment_from_dem.ipynb" target="_blank">google colaboratoryで開く</a></li>
+<li><a href="https://github.com/amano-takahisa/rs_with_python/raw/master/source/handson/data/watershed/dem_fuefuki.tif">利用するデータ</a></li>
+</ul><p>ここでは、数値標高モデルのデータから水系図の作成を行います。</p>
 <p>以下の2つの方法を説明します。 - QGISを経由してGRASS GISのモジュールを利用する - PythonからGRASS GISのモジュールを利用する</p>
 <p>どちらも、GRASSの<a class="reference external" href="https://grass.osgeo.org/grass78/manuals/r.watershed.html">r.watershed</a>というモジュールを利用して水系図を作成します。GRASS
 GISは独自のデータベース構造を持つため、はじめは仕組みを理解することが難しいかもしれませんが、ラスタデータやベクタデータを扱う多くのライブラリがあり、リモートセンシングやGISの解析に非常に有用なツールです。QGISを経由してGRASSのモジュールを利用することで、比較的簡易にそれらのツールを利用することができるようになります。また、Pythonを使う方法を利用すると、バッチ処理やほかのPython処理とスムーズに結合することができるようになります。</p>
