@@ -433,7 +433,7 @@ div.rendered_html tbody tr:hover {
 <ul>
 <li><a href="https://amano-takahisa.github.io/rs_with_python/handson/plot_hyperspectral.ipynb">このページのJupyter Notebookファイル</a></li>
 <li><a href="https://colab.research.google.com/github/amano-takahisa/rs_with_python/blob/master/docs/handson/plot_hyperspectral.ipynb" target="_blank">google colaboratoryで開く</a></li>
-<li><a href="https://amano-takahisa.github.io/rs_with_python/handson/data/spectrum2019.csv">利用するデータ</a></li>
+<li><a href="https://amano-takahisa.github.io/rs_with_python/handson/data/spec.csv">利用するデータ</a></li>
 </ul><p>ハイパースペクトラルセンサーデータを用いて、Pythonでの基本的なデータ処理について学びます。</p>
 <p>センサーデータのCSVから、以下のようなグラフと各測定でのNDVIの値を算出します。</p>
 <p><img alt="out" src="https://github.com/amano-takahisa/rs_with_python/raw/master/source/handson/out/spectral.png" /></p>
@@ -441,7 +441,7 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="CSVファイルの読み込み">
 <h2>CSVファイルの読み込み<a class="headerlink" href="#CSVファイルの読み込み" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <div class="line-block">
-<div class="line">CSVやエクセルなどに保存された表敬式のデータを扱うには、<strong>Pandas</strong>というライブラリを利用します。</div>
+<div class="line">CSVやエクセルなどに保存された表形式のデータを扱うには、<strong>Pandas</strong>というライブラリを利用します。</div>
 <div class="line"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/index.html">Pandasの公式ドキュメントはこちら</a></div>
 </div>
 <p>Pandasでは表形式のデータを<strong>DataFrame</strong>と呼ばれる形で保持し、必要な処理を行っていきます。</p>
@@ -454,7 +454,7 @@ div.rendered_html tbody tr:hover {
 <span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>  <span class="c1"># pandasをpdという別名で呼び出す</span>
 
 <span class="c1"># csvファイルを読み込み、dfという変数に代入する</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/spectrum2019.csv&#39;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/spec.csv&#39;</span><span class="p">)</span>
 <span class="n">df</span>  <span class="c1"># dfの中身を表示</span>
 </pre></div>
 </div>
@@ -583,7 +583,7 @@ div.rendered_html tbody tr:hover {
 <p>5048 rows × 5 columns</p>
 </div></div>
 </div>
-<p>各業の意味はコメントに記載のとおりです。 Pandasライブラリには、今回利用したCSVファイルを読み込むための<code class="docutils literal notranslate"><span class="pre">read_csv()</span></code>メソッド(関数)の他にも、エクセルファイルを読み込むための<code class="docutils literal notranslate"><span class="pre">read_excel()</span></code>、クリップボードからデータを読み込む<code class="docutils literal notranslate"><span class="pre">read_clipboard()</span></code>などのメソッドが用意されています。詳しくは<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/io.html">Pandas API reference</a>で確認してください。</p>
+<p>各行の意味はコメントに記載のとおりです。 Pandasライブラリには、今回利用したCSVファイルを読み込むための<code class="docutils literal notranslate"><span class="pre">read_csv()</span></code>メソッド(関数)の他にも、エクセルファイルを読み込むための<code class="docutils literal notranslate"><span class="pre">read_excel()</span></code>、クリップボードからデータを読み込む<code class="docutils literal notranslate"><span class="pre">read_clipboard()</span></code>などのメソッドが用意されています。詳しくは<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/io.html">Pandas API reference</a>で確認してください。</p>
 <p>データは、dfに<code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>というクラスで代入されています。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
@@ -612,8 +612,8 @@ pandas.core.frame.DataFrame
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">irrad</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/spectrum2019.csv&#39;</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="mi">2500</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">47</span><span class="p">)</span>
-<span class="n">irrad</span>
+<span></span><span class="n">spec</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/spec.csv&#39;</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="mi">2500</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">47</span><span class="p">)</span>
+<span class="n">spec</span>
 </pre></div>
 </div>
 </div>
@@ -749,19 +749,41 @@ pandas.core.frame.DataFrame
 <div class="section" id="カラム名の変更">
 <h3>カラム名の変更<a class="headerlink" href="#カラム名の変更" title="このヘッドラインへのパーマリンク">¶</a></h3>
 <p>まずはカラムの名前が長すぎて扱いづらいので変更します。</p>
+<p>データフレームはのカラム名は、作成したデータフレームの名前の後に<code class="docutils literal notranslate"><span class="pre">.columns</span></code>を付けることで取得することができます。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">col_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;WaveLength&#39;</span><span class="p">,</span><span class="s1">&#39;obs1&#39;</span><span class="p">,</span><span class="s1">&#39;obs2&#39;</span><span class="p">,</span><span class="s1">&#39;obs3&#39;</span><span class="p">,</span><span class="s1">&#39;obs4&#39;</span><span class="p">]</span>
-<span class="n">irrad</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">col_names</span>
-<span class="n">irrad</span>
+<span></span><span class="n">spec</span><span class="o">.</span><span class="n">columns</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Index([&#39;Wavelength[nm]&#39;, &#39;Spectral Irradiance[W/m^2/nm]&#39;,
+       &#39;Spectral Irradiance[W/m^2/nm].1&#39;, &#39;Spectral Irradiance[W/m^2/nm].2&#39;,
+       &#39;Spectral Irradiance[W/m^2/nm].3&#39;],
+      dtype=&#39;object&#39;)
+</pre></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">.columns</span></code>に新しいカラム名を代入するとカラム名を変更することができます。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">spec</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;WL&#39;</span><span class="p">,</span><span class="s1">&#39;obs1&#39;</span><span class="p">,</span><span class="s1">&#39;obs2&#39;</span><span class="p">,</span><span class="s1">&#39;obs3&#39;</span><span class="p">,</span><span class="s1">&#39;obs4&#39;</span><span class="p">]</span>
+<span class="n">spec</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -783,7 +805,7 @@ pandas.core.frame.DataFrame
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>WaveLength</th>
+      <th>WL</th>
       <th>obs1</th>
       <th>obs2</th>
       <th>obs3</th>
@@ -890,25 +912,25 @@ pandas.core.frame.DataFrame
 <p>次に、データ型の変更です。</p>
 <p>データフレームに格納されるデータは、同じ列の値がすべて同じ型のであることが必要です。今回は数値としてデータを扱いたいため、すべての列を浮動小数点のデータとして読み込みます。 まず、以下のコードで各列がどのような型で読み込まれているかを確認します。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">irrad</span><span class="o">.</span><span class="n">dtypes</span>
+<span></span><span class="n">spec</span><span class="o">.</span><span class="n">dtypes</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-WaveLength    float64
-obs1           object
-obs2           object
-obs3          float64
-obs4          float64
+WL      float64
+obs1     object
+obs2     object
+obs3    float64
+obs4    float64
 dtype: object
 </pre></div></div>
 </div>
@@ -916,13 +938,13 @@ dtype: object
 <p>obs1、obs2の列は、CSVファイルには数値の代わりに<code class="docutils literal notranslate"><span class="pre">nodata</span></code>の文字列が保存されている箇所があり、すべての値を数値に変換することができませんでした。 そのため、データフレームの各列は<strong>object</strong>の型で保持されています。</p>
 <p>以下で、この数値に変換できなかった値を強制的にNaNへ変換し、すべての列を浮動小数点の型とすることができます。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">irrad</span> <span class="o">=</span> <span class="n">irrad</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;coerce&#39;</span><span class="p">,))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">irrad</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
-<span class="n">irrad</span>
+<span></span><span class="n">spec</span> <span class="o">=</span> <span class="n">spec</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">spec</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
+<span class="n">spec</span>
 </pre></div>
 </div>
 </div>
@@ -931,16 +953,16 @@ dtype: object
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-WaveLength    float64
-obs1          float64
-obs2          float64
-obs3          float64
-obs4          float64
+WL      float64
+obs1    float64
+obs2    float64
+obs3    float64
+obs4    float64
 dtype: object
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -962,7 +984,7 @@ dtype: object
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>WaveLength</th>
+      <th>WL</th>
       <th>obs1</th>
       <th>obs2</th>
       <th>obs3</th>
@@ -1069,16 +1091,16 @@ dtype: object
 <h3>基本統計量の確認<a class="headerlink" href="#基本統計量の確認" title="このヘッドラインへのパーマリンク">¶</a></h3>
 <p>データフレームに保存されているデータの概要は、<code class="docutils literal notranslate"><span class="pre">describe()</span></code>メソッドで確認することができます。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">irrad</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span></span><span class="n">spec</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -1100,7 +1122,7 @@ dtype: object
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>WaveLength</th>
+      <th>WL</th>
       <th>obs1</th>
       <th>obs2</th>
       <th>obs3</th>
@@ -1178,12 +1200,12 @@ dtype: object
 </div>
 <p>DataFrameクラスが持つ<code class="docutils literal notranslate"><span class="pre">count()</span></code>や<code class="docutils literal notranslate"><span class="pre">mean()</span></code>、<code class="docutils literal notranslate"><span class="pre">std()</span></code>などのメソッドを用いると、上記の基本統計量を個別に算出することができます。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nb">print</span><span class="p">(</span><span class="n">irrad</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">irrad</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="n">spec</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">spec</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -1192,362 +1214,28 @@ dtype: object
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-WaveLength    710.684948
-obs1            0.000609
-obs2            0.000877
-obs3            0.000186
-obs4            0.000648
+WL      710.684948
+obs1      0.000609
+obs2      0.000877
+obs3      0.000186
+obs4      0.000648
 dtype: float64
-WaveLength    237.214209
-obs1            0.000588
-obs2            0.000587
-obs3            0.000285
-obs4            0.000494
+WL      237.214209
+obs1      0.000588
+obs2      0.000587
+obs3      0.000285
+obs4      0.000494
 dtype: float64
 </pre></div></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">mean()</span></code>では、各カラムの平均値が、<code class="docutils literal notranslate"><span class="pre">std()</span></code>では各カラムの標準偏差の値が算出されていることが確認できます。</p>
-</div>
-<div class="section" id="欠損値の設定">
-<h3>欠損値の設定<a class="headerlink" href="#欠損値の設定" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">irrad</span></code>のWaveLengthが400から403の値のデータを確認してみます。</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">wl_min</span> <span class="o">=</span> <span class="mi">400</span>
-<span class="n">wl_max</span> <span class="o">=</span> <span class="mi">403</span>
-<span class="n">irrad</span><span class="p">[(</span><span class="n">wl_min</span> <span class="o">&lt;</span> <span class="n">irrad</span><span class="p">[</span><span class="s1">&#39;WaveLength&#39;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">irrad</span><span class="p">[</span><span class="s1">&#39;WaveLength&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">wl_max</span><span class="p">)]</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
-</pre></div>
-</div>
-<div class="output_area rendered_html docutils container">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>WaveLength</th>
-      <th>obs1</th>
-      <th>obs2</th>
-      <th>obs3</th>
-      <th>obs4</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>312</th>
-      <td>400.31</td>
-      <td>0.000690</td>
-      <td>0.001017</td>
-      <td>-0.000031</td>
-      <td>0.000625</td>
-    </tr>
-    <tr>
-      <th>313</th>
-      <td>400.65</td>
-      <td>0.000623</td>
-      <td>0.001020</td>
-      <td>-0.000022</td>
-      <td>0.000661</td>
-    </tr>
-    <tr>
-      <th>314</th>
-      <td>400.99</td>
-      <td>0.000633</td>
-      <td>0.001079</td>
-      <td>-0.000018</td>
-      <td>0.000709</td>
-    </tr>
-    <tr>
-      <th>315</th>
-      <td>401.33</td>
-      <td>0.000710</td>
-      <td>0.001178</td>
-      <td>0.000012</td>
-      <td>0.000696</td>
-    </tr>
-    <tr>
-      <th>316</th>
-      <td>401.67</td>
-      <td>0.000628</td>
-      <td>0.001059</td>
-      <td>0.000028</td>
-      <td>0.000712</td>
-    </tr>
-    <tr>
-      <th>317</th>
-      <td>402.01</td>
-      <td>0.000550</td>
-      <td>0.000920</td>
-      <td>0.000011</td>
-      <td>0.000704</td>
-    </tr>
-    <tr>
-      <th>318</th>
-      <td>402.35</td>
-      <td>0.000554</td>
-      <td>0.000950</td>
-      <td>-0.000013</td>
-      <td>0.000721</td>
-    </tr>
-    <tr>
-      <th>319</th>
-      <td>402.69</td>
-      <td>0.000584</td>
-      <td>0.000959</td>
-      <td>-0.000004</td>
-      <td>0.000720</td>
-    </tr>
-  </tbody>
-</table>
-</div></div>
-</div>
-<p>いくつかの分光放射照度の値が負になっていることが確認できますが、分光放射照度は負の値を取らないため、これらは測定ノイズであると考えられます。</p>
-<p>今回は負の値になった箇所を、欠損値であることを示す<code class="docutils literal notranslate"><span class="pre">NaN</span></code>で埋めていきます。</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># WaveLength以外のカラム名を設定</span>
-<span class="n">target_columns</span> <span class="o">=</span> <span class="n">irrad</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;WaveLength&#39;</span><span class="p">)</span>
-
-<span class="c1"># target_columnsの値が負のセルをマスク</span>
-<span class="n">irrad</span><span class="p">[</span><span class="n">target_columns</span><span class="p">]</span> <span class="o">=</span>  <span class="n">irrad</span><span class="p">[</span><span class="n">target_columns</span><span class="p">]</span><span class="o">.</span><span class="n">mask</span><span class="p">(</span><span class="n">irrad</span><span class="p">[</span><span class="n">target_columns</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
-
-<span class="c1"># 上記のセルと同じ箇所を表示</span>
-<span class="n">irrad</span><span class="p">[(</span><span class="n">wl_min</span> <span class="o">&lt;</span> <span class="n">irrad</span><span class="p">[</span><span class="s1">&#39;WaveLength&#39;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">irrad</span><span class="p">[</span><span class="s1">&#39;WaveLength&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">wl_max</span><span class="p">)]</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
-</pre></div>
-</div>
-<div class="output_area rendered_html docutils container">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>WaveLength</th>
-      <th>obs1</th>
-      <th>obs2</th>
-      <th>obs3</th>
-      <th>obs4</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>312</th>
-      <td>400.31</td>
-      <td>0.000690</td>
-      <td>0.001017</td>
-      <td>NaN</td>
-      <td>0.000625</td>
-    </tr>
-    <tr>
-      <th>313</th>
-      <td>400.65</td>
-      <td>0.000623</td>
-      <td>0.001020</td>
-      <td>NaN</td>
-      <td>0.000661</td>
-    </tr>
-    <tr>
-      <th>314</th>
-      <td>400.99</td>
-      <td>0.000633</td>
-      <td>0.001079</td>
-      <td>NaN</td>
-      <td>0.000709</td>
-    </tr>
-    <tr>
-      <th>315</th>
-      <td>401.33</td>
-      <td>0.000710</td>
-      <td>0.001178</td>
-      <td>0.000012</td>
-      <td>0.000696</td>
-    </tr>
-    <tr>
-      <th>316</th>
-      <td>401.67</td>
-      <td>0.000628</td>
-      <td>0.001059</td>
-      <td>0.000028</td>
-      <td>0.000712</td>
-    </tr>
-    <tr>
-      <th>317</th>
-      <td>402.01</td>
-      <td>0.000550</td>
-      <td>0.000920</td>
-      <td>0.000011</td>
-      <td>0.000704</td>
-    </tr>
-    <tr>
-      <th>318</th>
-      <td>402.35</td>
-      <td>0.000554</td>
-      <td>0.000950</td>
-      <td>NaN</td>
-      <td>0.000721</td>
-    </tr>
-    <tr>
-      <th>319</th>
-      <td>402.69</td>
-      <td>0.000584</td>
-      <td>0.000959</td>
-      <td>NaN</td>
-      <td>0.000720</td>
-    </tr>
-  </tbody>
-</table>
-</div></div>
-</div>
-<p>再度、データフレームの基本統計量を確認します。</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">irrad</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
-</pre></div>
-</div>
-<div class="output_area rendered_html docutils container">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>WaveLength</th>
-      <th>obs1</th>
-      <th>obs2</th>
-      <th>obs3</th>
-      <th>obs4</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>count</th>
-      <td>2500.000000</td>
-      <td>2496.000000</td>
-      <td>2480.000000</td>
-      <td>2087.000000</td>
-      <td>2371.000000</td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td>710.684948</td>
-      <td>0.000609</td>
-      <td>0.000884</td>
-      <td>0.000241</td>
-      <td>0.000692</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>237.214209</td>
-      <td>0.000588</td>
-      <td>0.000583</td>
-      <td>0.000274</td>
-      <td>0.000464</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>294.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>25%</th>
-      <td>505.997500</td>
-      <td>0.000286</td>
-      <td>0.000446</td>
-      <td>0.000026</td>
-      <td>0.000238</td>
-    </tr>
-    <tr>
-      <th>50%</th>
-      <td>713.985000</td>
-      <td>0.000522</td>
-      <td>0.000898</td>
-      <td>0.000100</td>
-      <td>0.000771</td>
-    </tr>
-    <tr>
-      <th>75%</th>
-      <td>917.030000</td>
-      <td>0.000761</td>
-      <td>0.001307</td>
-      <td>0.000420</td>
-      <td>0.001104</td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td>1114.170000</td>
-      <td>0.004639</td>
-      <td>0.003810</td>
-      <td>0.001553</td>
-      <td>0.001641</td>
-    </tr>
-  </tbody>
-</table>
-</div></div>
-</div>
-<p>最小値が0になり、その他の統計量も若干変化したことが確認できます。</p>
+<p><code class="docutils literal notranslate"><span class="pre">mean()</span></code>では、各カラムの平均値が、<code class="docutils literal notranslate"><span class="pre">std()</span></code>では各カラムの標準偏差の値が算出されていることが確認できます。そのほか以下のメソッドがあります。</p>
+<ul class="simple">
+<li><p>median()</p></li>
+<li><p>max()</p></li>
+<li><p>min()</p></li>
+<li><p>product()</p></li>
+</ul>
+<p>など。</p>
 </div>
 </div>
 <div class="section" id="グラフへのプロット">
@@ -1555,35 +1243,66 @@ dtype: float64
 <p>上で作成したデータフレームをグラフにプロットしましょう。DataFrameクラスにある<a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/0.23.4/generated/pandas.DataFrame.plot.html">plot()</a>メソッドでプロットしてみます。</p>
 <p>引数xにx軸としたいカラムの名前を指定します。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">irrad</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;WaveLength&#39;</span><span class="p">)</span>
+<span></span><span class="n">spec</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;WL&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;AxesSubplot:xlabel=&#39;WaveLength&#39;&gt;
+&lt;AxesSubplot:xlabel=&#39;WL&#39;&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/handson_plot_hyperspectral_33_1.png" src="../_images/handson_plot_hyperspectral_33_1.png" />
+<img alt="../_images/handson_plot_hyperspectral_28_1.png" src="../_images/handson_plot_hyperspectral_28_1.png" />
 </div>
 </div>
-<p>DataFrameのplot()メソッドで描画される図はmatplotlibと組み合わせて使うこともできます。</p>
+<p>DataFrameのplot()メソッドで描画される図はmatplotlibと組み合わせて使うこともできます。これにより、ほかの種類とのグラフの重ね合わせや、軸やグラフエリアの詳細なカスタマイズができるようになります。</p>
 <p>グラフに可視光と近赤外線の範囲を重ね合わせて表示してみましょう。</p>
 <p>今回は<a class="reference external" href="https://www.usgs.gov/faqs/what-are-band-designations-landsat-satellites">Landsat 8に積まれているセンサーと同じ波長</a>でRGBと近赤外線(NIR)の波長域を設定してみます。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 25%" />
+<col style="width: 42%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>バンド名</p></th>
+<th class="head"><p>名前</p></th>
+<th class="head"><p>波長帯(nm)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Band 4</p></td>
+<td><p>青</p></td>
+<td><p>450~510</p></td>
+</tr>
+<tr class="row-odd"><td><p>Band 4</p></td>
+<td><p>緑</p></td>
+<td><p>530~590</p></td>
+</tr>
+<tr class="row-even"><td><p>Band 4</p></td>
+<td><p>赤</p></td>
+<td><p>640~670</p></td>
+</tr>
+<tr class="row-odd"><td><p>Band 5</p></td>
+<td><p>近赤外</p></td>
+<td><p>850~880</p></td>
+</tr>
+</tbody>
+</table>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1613,12 +1332,16 @@ dtype: float64
                <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 
 <span class="c1"># グラフをプロット</span>
-<span class="n">irrad</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;WaveLength&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="n">plot_xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">plot_ylim</span><span class="p">)</span>
+<span class="c1"># spec.plot(x=&#39;WL&#39;, ax=ax, xlim=plot_xlim, ylim=plot_ylim)</span>
+<span class="n">spec</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;WL&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+
+<span class="c1"># プロットの範囲を変更</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">plot_xlim</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">plot_ylim</span><span class="p">)</span>
 
 <span class="c1"># グラフのタイトル等をプロット</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Wave Length (nm)&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Spectral Irradiance ($W m^{-2} nm^{-1}$)&#39;</span><span class="p">)</span>
-
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 
@@ -1638,7 +1361,7 @@ dtype: float64
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/handson_plot_hyperspectral_35_0.png" src="../_images/handson_plot_hyperspectral_35_0.png" />
+<img alt="../_images/handson_plot_hyperspectral_30_0.png" src="../_images/handson_plot_hyperspectral_30_0.png" />
 </div>
 </div>
 </div>
@@ -1648,25 +1371,34 @@ dtype: float64
 <div class="math notranslate nohighlight">
 \[NDVI = \frac{近赤外線(NIR)の反射率 - 赤色(Red)の反射率}{近赤外線(NIR)の反射率 + 赤色(Red)の反射率}\]</div>
 <p>マルチスペクトルメータの場合、近赤外の反射率に相当するものは、上記の図の灰色の範囲の平均値、同様に赤色の反射率は赤色の範囲の平均値となります。今回のようなノイズが多いデータの場合、平均値より中央値を用いる方が良いでしょう。</p>
-<p>ここからNDVIを算出するため、以下の手順を行います。 - 各バンドにおける中央値の計算 - NDVIの計算</p>
+<p>ここからNDVIを算出するため、以下の手順を行います。</p>
+<ul class="simple">
+<li><p>赤・近赤外周波数領域における中央値の計算</p></li>
+<li><p>NDVIの計算</p></li>
+</ul>
 <div class="section" id="バンドごとの中央値の計算">
 <h3>バンドごとの中央値の計算<a class="headerlink" href="#バンドごとの中央値の計算" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>作成したデータフレームから、特定のWave Lengthの範囲における各バンドの値の中央値は、以下の手順で求めることができる。 1. Wabe Lengthが、赤色の範囲である行のみをデータフレームから抜き出す。 2. 抜き出してできる新たなデータフレームの列ごとの平均値(中央値)を求める。 3. 上記1,2をNIRについても行う。</p>
+<p>作成したデータフレームから、特定の周波数の範囲における各バンドの値の中央値は、以下の手順で求めることができる。</p>
+<ol class="arabic simple">
+<li><p>WLが、赤色の範囲である行のみをデータフレームから抜き出す。</p></li>
+<li><p>抜き出してできる新たなデータフレームの列ごとの中央値を求める。</p></li>
+<li><p>上記1,2をNIRについても行う。</p></li>
+</ol>
 <div class="section" id="行の抽出">
 <h4>行の抽出<a class="headerlink" href="#行の抽出" title="このヘッドラインへのパーマリンク">¶</a></h4>
 <p>データフレームから行番号を指定して特定の行を抜き出すには、<code class="docutils literal notranslate"><span class="pre">df[0:5]</span></code>のような形で行の範囲を指定します。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">irrad_part</span> <span class="o">=</span> <span class="n">irrad</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span>
-<span class="n">irrad_part</span>
+<span></span><span class="n">spec_part</span> <span class="o">=</span> <span class="n">spec</span><span class="p">[</span><span class="mi">300</span><span class="p">:</span><span class="mi">304</span><span class="p">]</span>
+<span class="n">spec_part</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -1688,7 +1420,7 @@ dtype: float64
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>WaveLength</th>
+      <th>WL</th>
       <th>obs1</th>
       <th>obs2</th>
       <th>obs3</th>
@@ -1697,85 +1429,54 @@ dtype: float64
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
-      <td>294.00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <th>300</th>
+      <td>396.24</td>
+      <td>0.000823</td>
+      <td>0.000999</td>
+      <td>0.000047</td>
+      <td>0.000385</td>
     </tr>
     <tr>
-      <th>1</th>
-      <td>294.34</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <th>301</th>
+      <td>396.58</td>
+      <td>0.000787</td>
+      <td>0.000943</td>
+      <td>0.000008</td>
+      <td>0.000388</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>294.68</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <th>302</th>
+      <td>396.92</td>
+      <td>0.000715</td>
+      <td>0.000854</td>
+      <td>-0.000011</td>
+      <td>0.000372</td>
     </tr>
     <tr>
-      <th>3</th>
-      <td>295.02</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>295.37</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>295.71</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>296.05</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>296.39</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <th>303</th>
+      <td>397.26</td>
+      <td>0.000653</td>
+      <td>0.000783</td>
+      <td>-0.000014</td>
+      <td>0.000356</td>
     </tr>
   </tbody>
 </table>
 </div></div>
 </div>
-<p>また、<code class="docutils literal notranslate"><span class="pre">0:5</span></code>の代わりに、<code class="docutils literal notranslate"><span class="pre">[True,</span> <span class="pre">False,</span> <span class="pre">False,</span> <span class="pre">...]</span></code>のようなブール値の入ったリストを与えると、<code class="docutils literal notranslate"><span class="pre">True</span></code>の行を抽出することができます。(<code class="docutils literal notranslate"><span class="pre">[]</span></code>が入れ子になっていることに注意。)</p>
+<p>赤色の周波数域のデータを抽出するには、「WLの値が<code class="docutils literal notranslate"><span class="pre">[640,</span> <span class="pre">670]</span></code>の間にある行」を抽出する必要があります。エクセルでファイルを開いて対象の行を探してもいいですが、せっかくなので条件から自動で行を抽出しましょう。</p>
+<p>データフレームの抽出では<code class="docutils literal notranslate"><span class="pre">[0:4]</span></code>の代わりに、<code class="docutils literal notranslate"><span class="pre">[True,</span> <span class="pre">False,</span> <span class="pre">False,</span> <span class="pre">...]</span></code>のような<strong>ブール値</strong>の入ったリストを与えると、データフレームから<code class="docutils literal notranslate"><span class="pre">True</span></code>の行を抽出することができます。(<code class="docutils literal notranslate"><span class="pre">[]</span></code>が入れ子になっていることに注意。)</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">irrad_part</span><span class="p">[[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">]]</span>
+<span></span><span class="n">spec_part</span><span class="p">[[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]]</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -1797,7 +1498,7 @@ dtype: float64
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>WaveLength</th>
+      <th>WL</th>
       <th>obs1</th>
       <th>obs2</th>
       <th>obs3</th>
@@ -1806,49 +1507,94 @@ dtype: float64
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
-      <td>294.00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <th>300</th>
+      <td>396.24</td>
+      <td>0.000823</td>
+      <td>0.000999</td>
+      <td>0.000047</td>
+      <td>0.000385</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>294.68</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>295.71</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>296.39</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <th>302</th>
+      <td>396.92</td>
+      <td>0.000715</td>
+      <td>0.000854</td>
+      <td>-0.000011</td>
+      <td>0.000372</td>
     </tr>
   </tbody>
 </table>
 </div></div>
 </div>
-<p>更に、以下のようにカラムを抽出し条件式に当てはめると、N番目の行が条件を満たす場合<code class="docutils literal notranslate"><span class="pre">True</span></code>、満たさない場合<code class="docutils literal notranslate"><span class="pre">False</span></code>が入った<strong>Series</strong>を作成することができ、このSeriesも上記のリスト同様に行の抽出に使うことができます。</p>
+<p>また、以下のようにカラムを抽出し条件式に当てはめると、条件を満たす場合<code class="docutils literal notranslate"><span class="pre">True</span></code>、満たさない場合<code class="docutils literal notranslate"><span class="pre">False</span></code>が入った<strong>Series</strong>を作成することができ、このSeriesも行の抽出に使うことができます。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># データフレームからのカラムの抽出</span>
-<span class="n">irrad_part</span><span class="p">[</span><span class="s1">&#39;WaveLength&#39;</span><span class="p">]</span>
+<span class="n">spec</span><span class="p">[</span><span class="s1">&#39;WL&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0        294.00
+1        294.34
+2        294.68
+3        295.02
+4        295.37
+         ...
+2495    1112.93
+2496    1113.24
+2497    1113.55
+2498    1113.86
+2499    1114.17
+Name: WL, Length: 2500, dtype: float64
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Bool値の入ったSeriesの作成</span>
+<span class="n">spec</span><span class="p">[</span><span class="s1">&#39;WL&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">640</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0       False
+1       False
+2       False
+3       False
+4       False
+        ...
+2495     True
+2496     True
+2497     True
+2498     True
+2499     True
+Name: WL, Length: 2500, dtype: bool
+</pre></div></div>
+</div>
+<p>このBool値が入ったSeriesは、<code class="docutils literal notranslate"><span class="pre">&amp;</span></code>や<code class="docutils literal notranslate"><span class="pre">|</span></code>で結合することで、複数の条件を満たす新たなBool値のSeriesを作成することができます。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">lines_red</span> <span class="o">=</span> <span class="p">(</span><span class="n">spec</span><span class="p">[</span><span class="s1">&#39;WL&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">640</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">spec</span><span class="p">[</span><span class="s1">&#39;WL&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">670</span><span class="p">)</span>
+<span class="n">lines_red</span>
 </pre></div>
 </div>
 </div>
@@ -1858,87 +1604,34 @@ dtype: float64
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-0    294.00
-1    294.34
-2    294.68
-3    295.02
-4    295.37
-5    295.71
-6    296.05
-7    296.39
-Name: WaveLength, dtype: float64
-</pre></div></div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Bool値の入ったSeriesの作成</span>
-<span class="n">irrad_part</span><span class="p">[</span><span class="s1">&#39;WaveLength&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">296</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-0     True
-1     True
-2     True
-3     True
-4     True
-5     True
-6    False
-7    False
-Name: WaveLength, dtype: bool
-</pre></div></div>
-</div>
-<p>このBool値が入ったSeriesは、<code class="docutils literal notranslate"><span class="pre">&amp;</span></code>や<code class="docutils literal notranslate"><span class="pre">|</span></code>で結合することで、複数の条件を満たす新たなBool値のSeriesを作成することができます。</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="p">(</span><span class="mi">294</span> <span class="o">&lt;</span> <span class="n">irrad_part</span><span class="p">[</span><span class="s1">&#39;WaveLength&#39;</span><span class="p">]</span> <span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">irrad_part</span><span class="p">[</span><span class="s1">&#39;WaveLength&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">296</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-0    False
-1     True
-2     True
-3     True
-4     True
-5     True
-6    False
-7    False
-Name: WaveLength, dtype: bool
+0       False
+1       False
+2       False
+3       False
+4       False
+        ...
+2495    False
+2496    False
+2497    False
+2498    False
+2499    False
+Name: WL, Length: 2500, dtype: bool
 </pre></div></div>
 </div>
 <p>以上を組み合わせて、赤色の波長範囲の分光放射照度のみのデータフレームは以下のように作成できます。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Bool値のSeriesを作る</span>
-<span class="n">selector</span> <span class="o">=</span> <span class="p">(</span><span class="n">wave_length</span><span class="p">[</span><span class="s1">&#39;Red&#39;</span><span class="p">][</span><span class="s1">&#39;range&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">irrad</span><span class="p">[</span><span class="s1">&#39;WaveLength&#39;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">irrad</span><span class="p">[</span><span class="s1">&#39;WaveLength&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">wave_length</span><span class="p">[</span><span class="s1">&#39;Red&#39;</span><span class="p">][</span><span class="s1">&#39;range&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
-<span class="c1"># Seriesでデータフレームを抽出する</span>
-<span class="n">irrad_red</span> <span class="o">=</span> <span class="n">irrad</span><span class="p">[</span><span class="n">selector</span><span class="p">]</span>
-<span class="n">irrad_red</span>
+<span></span><span class="c1"># Seriesでデータフレームを抽出する</span>
+<span class="n">spec_red</span> <span class="o">=</span> <span class="n">spec</span><span class="p">[</span><span class="n">lines_red</span><span class="p">]</span>
+<span class="n">spec_red</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -1960,7 +1653,7 @@ Name: WaveLength, dtype: bool
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>WaveLength</th>
+      <th>WL</th>
       <th>obs1</th>
       <th>obs2</th>
       <th>obs3</th>
@@ -2063,18 +1756,18 @@ Name: WaveLength, dtype: bool
 </div>
 <p>NIRについても同様にデータフレームを作成できます。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">selector</span> <span class="o">=</span> <span class="p">(</span><span class="n">wave_length</span><span class="p">[</span><span class="s1">&#39;NIR&#39;</span><span class="p">][</span><span class="s1">&#39;range&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">irrad</span><span class="p">[</span><span class="s1">&#39;WaveLength&#39;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">irrad</span><span class="p">[</span><span class="s1">&#39;WaveLength&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">wave_length</span><span class="p">[</span><span class="s1">&#39;NIR&#39;</span><span class="p">][</span><span class="s1">&#39;range&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">irrad_nir</span> <span class="o">=</span> <span class="n">irrad</span><span class="p">[</span><span class="n">selector</span><span class="p">]</span>
-<span class="n">irrad_nir</span>
+<span></span><span class="n">lines_nir</span> <span class="o">=</span> <span class="p">(</span><span class="n">spec</span><span class="p">[</span><span class="s1">&#39;WL&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">850</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">spec</span><span class="p">[</span><span class="s1">&#39;WL&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">880</span><span class="p">)</span>
+<span class="n">spec_nir</span> <span class="o">=</span> <span class="n">spec</span><span class="p">[</span><span class="n">lines_nir</span><span class="p">]</span>
+<span class="n">spec_nir</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -2096,7 +1789,7 @@ Name: WaveLength, dtype: bool
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>WaveLength</th>
+      <th>WL</th>
       <th>obs1</th>
       <th>obs2</th>
       <th>obs3</th>
@@ -2202,71 +1895,71 @@ Name: WaveLength, dtype: bool
 <h4>中央値の計算<a class="headerlink" href="#中央値の計算" title="このヘッドラインへのパーマリンク">¶</a></h4>
 <p>基本統計量の確認の際に示した<code class="docutils literal notranslate"><span class="pre">mean()</span></code>と同様に、DataFrameが持つ<code class="docutils literal notranslate"><span class="pre">median()</span></code>メソッドにより各カラムの中央値が計算できます。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">red_median</span> <span class="o">=</span> <span class="n">irrad_red</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+<span></span><span class="n">red_median</span> <span class="o">=</span> <span class="n">spec_red</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
 <span class="n">red_median</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-WaveLength    655.030000
-obs1            0.000289
-obs2            0.001139
-obs3            0.000057
-obs4            0.001069
+WL      655.030000
+obs1      0.000289
+obs2      0.001139
+obs3      0.000057
+obs4      0.001069
 dtype: float64
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">nir_median</span> <span class="o">=</span> <span class="n">irrad_nir</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+<span></span><span class="n">nir_median</span> <span class="o">=</span> <span class="n">spec_nir</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
 <span class="n">nir_median</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-WaveLength    865.150000
-obs1            0.000686
-obs2            0.000739
-obs3            0.000652
-obs4            0.000738
+WL      865.150000
+obs1      0.000686
+obs2      0.000739
+obs3      0.000652
+obs4      0.000738
 dtype: float64
 </pre></div></div>
 </div>
 </div>
 </div>
-<div class="section" id="id11">
-<h3>NDVIの計算<a class="headerlink" href="#id11" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="section" id="id10">
+<h3>NDVIの計算<a class="headerlink" href="#id10" title="このヘッドラインへのパーマリンク">¶</a></h3>
 <p>作成したSeriesからNDVIの計算に不要な<code class="docutils literal notranslate"><span class="pre">WaveLength</span></code>の値を抜いておきます。</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">red_median</span> <span class="o">=</span> <span class="n">red_median</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;WaveLength&#39;</span><span class="p">)</span>
-<span class="n">nir_median</span> <span class="o">=</span> <span class="n">nir_median</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;WaveLength&#39;</span><span class="p">)</span>
+<span></span><span class="n">red_median</span> <span class="o">=</span> <span class="n">red_median</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;WL&#39;</span><span class="p">)</span>
+<span class="n">nir_median</span> <span class="o">=</span> <span class="n">nir_median</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;WL&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <p>Seriesは要素数が同じ場合、四則演算は各要素ごとに行われます。これを分配法則といいます。このため、各obsにおけるNDVIは定義式のようにSeriesを計算することにより求めることができます。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2276,14 +1969,14 @@ dtype: float64
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 obs1    0.407179
 obs2   -0.212833
-obs3    0.838951
+obs3    0.839210
 obs4   -0.182955
 dtype: float64
 </pre></div></div>
