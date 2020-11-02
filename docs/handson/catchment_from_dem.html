@@ -427,11 +427,14 @@ div.rendered_html tbody tr:hover {
 <h1>DEM(数値標高モデル)からの水系図作成<a class="headerlink" href="#DEM(数値標高モデル)からの水系図作成" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <ul>
 <li><a href="https://amano-takahisa.github.io/rs_with_python/handson/catchment_from_dem.ipynb">このページのJupyter Notebookファイル</a></li>
-<li><a href="https://colab.research.google.com/github/amano-takahisa/rs_with_python/blob/master/docs/handson/catchment_from_dem.ipynb" target="_blank">google colaboratoryで開く</a></li>
 <li><a href="https://github.com/amano-takahisa/rs_with_python/raw/master/source/handson/data/watershed/dem_fuefuki.tif">利用するデータ</a></li>
 </ul><p>ここでは、数値標高モデルのデータから水系図の作成を行います。</p>
-<p>以下の2つの方法を説明します。 - QGISを経由してGRASS GISのモジュールを利用する - PythonからGRASS GISのモジュールを利用する</p>
-<p>どちらも、GRASSの<a class="reference external" href="https://grass.osgeo.org/grass78/manuals/r.watershed.html">r.watershed</a>というモジュールを利用して水系図を作成します。GRASS
+<p>以下の2つの方法を説明します。</p>
+<ul class="simple">
+<li><p>QGISを経由してGRASS GISのモジュールを利用する</p></li>
+<li><p>PythonからGRASS GISのモジュールを利用する</p></li>
+</ul>
+<p>どちらも、<a class="reference external" href="https://grass.osgeo.org/">GRASS GIS</a>の<a class="reference external" href="https://grass.osgeo.org/grass78/manuals/r.watershed.html">r.watershed</a>というモジュールを利用して水系図を作成します。GRASS
 GISは独自のデータベース構造を持つため、はじめは仕組みを理解することが難しいかもしれませんが、ラスタデータやベクタデータを扱う多くのライブラリがあり、リモートセンシングやGISの解析に非常に有用なツールです。QGISを経由してGRASSのモジュールを利用することで、比較的簡易にそれらのツールを利用することができるようになります。また、Pythonを使う方法を利用すると、バッチ処理やほかのPython処理とスムーズに結合することができるようになります。</p>
 <p>まずはQGISを使った方法を説明します。</p>
 <p>事前に、<a class="reference external" href="https://trac.osgeo.org/osgeo4w/">OSGeo4W</a>からネットワークインストーラーをダウンロードして、QGIS Desktop with GRASSが使えるようにしておいてください。インストールの設定は、エクスプレスインストールを選択し、すべてデフォルトの設定で大丈夫です。</p>
@@ -516,35 +519,85 @@ GISは独自のデータベース構造を持つため、はじめは仕組み�
 </div>
 <div class="section" id="PythonからGRASSモジュールを利用する">
 <h2>PythonからGRASSモジュールを利用する<a class="headerlink" href="#PythonからGRASSモジュールを利用する" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>GRASS GISは、独自のGRASSデータベースを作成し、一度ラスタやベクタデータをデータベースに登録したうえで、各種の計算を行います。計算された結果はデータベース上にあるため、GeotiffやShapefile等の一般的なファイルとして QGISからGRASSモジュールを利用する場合、以下のプロセスが自動で実行されます。 - GRAS</p>
-<p>ref: <a class="reference external" href="https://grasswiki.osgeo.org/wiki/Working_with_GRASS_without_starting_it_explicitly">https://grasswiki.osgeo.org/wiki/Working_with_GRASS_without_starting_it_explicitly</a></p>
-<p>以下のコマンドでGRASS GISをインストールします。15分ほどかかります。</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt install grass
+<p>GRASS GISは独自のデータベースを使って計算を行います。Geotiffやシェープファイルなどの一般的なファイルは、初めにGRASSデータベースへ登録する必要があります。</p>
+<p>各種の計算は、GRASSデータベースに登録されたデータに対して行われ、計算結果もデータベースに登録されます。</p>
+<p>計算の成果物となるラスタデータやベクタデータはこのGRASSデータベース上にあるため、GeotiffやShapefile等の一般的なファイルとしてとりだす作業も必要になります。</p>
+<p>上記のQGISを用いたGRASSモジュールの利用では、これらの操作がバックグラウンドで自動で行われます。</p>
+<p>GRASS GISはもともとBashターミナルからの操作を想定して設計されたプログラムですが、GRASS GIS 7.8以降ではPythonからの利用が非常にしやすくなりました。</p>
+<p>以降では、GRASSが提供するPythonインターフェースを用いて、Jupyter Notebook上でGRASS GISを利用してみます。 <a class="reference external" href="https://grasswiki.osgeo.org/wiki/Working_with_GRASS_without_starting_it_explicitly">参考リンク</a></p>
+<p>Windows 10のパソコンから利用する場合、<a class="reference internal" href="setup_ipynb.html"><span class="doc">Jupyter Notebookと環境構築</span></a>を参考にPython環境をセットアップしてください。残念ながら、Google CodelaboratoryではGRASSのバージョンが古いため、以降のコマンドは動きません。</p>
+<p>Python環境が設定出来たら、ターミナルから以下のコマンドを実行し、GRASS GISをインストールします。15分ほどかかります。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ubuntuのパスワード入力が必要</span>
+sudo apt install grass
 </pre></div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<p>GRASSのバージョンは7.8以上であることを以下のコマンドで確認してください。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grass --version
+</pre></div>
+</div>
+<p>Jupyter Notebookからは以下のように確認することもできます。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">!</span>pip install grass-session
+<span></span><span class="o">!</span>grass --version
 </pre></div>
 </div>
 </div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+GRASS GIS 7.8.2
+
+Geographic Resources Analysis Support System (GRASS) is Copyright,
+1999-2019 by the GRASS Development Team, and licensed under terms of the
+GNU General Public License (GPL) version &gt;=2.
+
+This GRASS GIS 7.8.2 release is coordinated and produced by
+the GRASS Development Team with contributions from all over the world.
+
+This program is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.
+
+</pre></div></div>
+</div>
+<p>また、PythonからGRASS GISを使うために必要な<code class="docutils literal notranslate"><span class="pre">grass-session</span></code>というライブラリをインストールしてください。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install grass-session
+</pre></div>
+</div>
+<p>Jupyter Notebookファイルと同じフォルダに<code class="docutils literal notranslate"><span class="pre">data/watershed/</span></code>フォルダを作成し、解析対象のDEMファイルを保存してください。</p>
+<p>まずは必要なライブラリのインポートとパラメータを設定します。</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">grass_session</span> <span class="kn">import</span> <span class="n">Session</span>
 <span class="kn">from</span> <span class="nn">grass.script</span> <span class="kn">import</span> <span class="n">core</span> <span class="k">as</span> <span class="n">gcore</span>
+<span class="kn">import</span> <span class="nn">os</span>
 
-<span class="n">raster_path</span> <span class="o">=</span> <span class="s1">&#39;data/watershed/dem_fuefuki.tif&#39;</span>
-
-<span class="c1"># create a new location from raster file</span>
-<span class="k">with</span> <span class="n">Session</span><span class="p">(</span><span class="n">gisdb</span><span class="o">=</span><span class="s1">&#39;tmp_grass_db&#39;</span><span class="p">,</span>
-             <span class="n">location</span><span class="o">=</span><span class="s1">&#39;fuefuki&#39;</span><span class="p">,</span>
-             <span class="n">mapset</span><span class="o">=</span><span class="s1">&#39;PERMANENT&#39;</span><span class="p">,</span>
+<span class="n">data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="s1">&#39;watershed&#39;</span><span class="p">)</span>
+<span class="n">raster_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">&#39;dem_fuefuki.tif&#39;</span><span class="p">)</span>
+<span class="n">gisdb_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">&#39;grass_db&#39;</span><span class="p">)</span>
+<span class="n">location</span> <span class="o">=</span> <span class="s1">&#39;fuefuki&#39;</span>
+<span class="n">mapset</span> <span class="o">=</span> <span class="s1">&#39;PERMANENT&#39;</span>
+</pre></div>
+</div>
+</div>
+<p>GRASSデータベースを作成します。データベースの作成には、扱うGISデータの座標系や空間的な範囲を設定する必要がありますが、これらはdem_fuefuki.tifファイルをもとに作成します。また、データベースの作成と同時にデータベースにdem_fuefuki.tifを登録します。</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">with</span> <span class="n">Session</span><span class="p">(</span><span class="n">gisdb</span><span class="o">=</span><span class="n">gisdb_path</span><span class="p">,</span>
+             <span class="n">location</span><span class="o">=</span><span class="n">location</span><span class="p">,</span>
+             <span class="n">mapset</span><span class="o">=</span><span class="n">mapset</span><span class="p">,</span>
              <span class="n">create_opts</span><span class="o">=</span><span class="n">raster_path</span><span class="p">):</span>
     <span class="c1"># import geotiff to PERMANENT mapset and change extent</span>
     <span class="n">gcore</span><span class="o">.</span><span class="n">run_command</span><span class="p">(</span><span class="s1">&#39;r.in.gdal&#39;</span><span class="p">,</span>
@@ -553,6 +606,20 @@ GISは独自のデータベース構造を持つため、はじめは仕組み�
                       <span class="n">band</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                       <span class="n">output</span><span class="o">=</span><span class="s1">&#39;dem&#39;</span><span class="p">,</span>
                       <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>データベースに<code class="docutils literal notranslate"><span class="pre">dem</span></code>という名前で<code class="docutils literal notranslate"><span class="pre">dem_fuefuki.tif</span></code>ファイルが登録されました。</p>
+<p>次に、登録された<code class="docutils literal notranslate"><span class="pre">dem</span></code>というラスタデータに対して、GRASSの<code class="docutils literal notranslate"><span class="pre">r.watershed</span></code>モジュールを適用します。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># create a new location from raster file</span>
+<span class="k">with</span> <span class="n">Session</span><span class="p">(</span><span class="n">gisdb</span><span class="o">=</span><span class="n">gisdb_path</span><span class="p">,</span>
+             <span class="n">location</span><span class="o">=</span><span class="s1">&#39;fuefuki&#39;</span><span class="p">,</span>
+             <span class="n">mapset</span><span class="o">=</span><span class="s1">&#39;PERMANENT&#39;</span><span class="p">):</span>
     <span class="c1"># Run r.watershed command</span>
     <span class="n">gcore</span><span class="o">.</span><span class="n">run_command</span><span class="p">(</span><span class="s1">&#39;r.watershed&#39;</span><span class="p">,</span>
                       <span class="n">elevation</span><span class="o">=</span><span class="s1">&#39;dem&#39;</span><span class="p">,</span>
@@ -570,7 +637,6 @@ GISは独自のデータベース構造を持つため、はじめは仕組み�
     <span class="c1"># List up created rasters</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">gcore</span><span class="o">.</span><span class="n">read_command</span><span class="p">(</span><span class="s1">&#39;g.list&#39;</span><span class="p">,</span>
                              <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;rast&#39;</span><span class="p">))</span>
-
 </pre></div>
 </div>
 </div>
@@ -592,24 +658,29 @@ tci
 
 </pre></div></div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">r.watarshed</span></code>コマンドのオプションは、今回QGISで実行したものと同じ値としました。各オプションの詳細は<a class="reference external" href="https://grass.osgeo.org/grass78/manuals/r.watershed.html">GRASS GISの公式ドキュメント</a>を参照してください。</p>
+<p><code class="docutils literal notranslate"><span class="pre">r.watarshed</span></code>コマンドに続いて、<code class="docutils literal notranslate"><span class="pre">g.list</span></code>コマンドを実行し、作成したラスタデータの一覧を表示しています。</p>
+<p><code class="docutils literal notranslate"><span class="pre">grass.script</span></code>の<code class="docutils literal notranslate"><span class="pre">core.run_command()</span></code>と<code class="docutils literal notranslate"><span class="pre">core.read_command()</span></code>との違いは、単純にGRASSのモジュールを動かす場合は<code class="docutils literal notranslate"><span class="pre">run_command()</span></code>、GRASSモジュールの標準出力を文字列でとってきたいときは<code class="docutils literal notranslate"><span class="pre">read_command()</span></code>を利用します。詳細は<a class="reference external" href="https://grasswiki.osgeo.org/wiki/GRASS_Python_Scripting_Library#Uses_for_read.2C_feed_and_pipe.2C_start_and_exec_commands">GRASS GISの公式wiki</a>に開設があります。</p>
+<p>続いて、データベース内に生成されたラスタデータをGeotiffファイルとして抽出します。GRASSのデータベースからラスタデータをファイルとして取り出すには、<code class="docutils literal notranslate"><span class="pre">`r.out.gdal</span></code>モジュール &lt;<a class="reference external" href="https://grass.osgeo.org/grass78/manuals/r.out.gdal.html">https://grass.osgeo.org/grass78/manuals/r.out.gdal.html</a>&gt;`__を利用します。</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">with</span> <span class="n">Session</span><span class="p">(</span><span class="n">gisdb</span><span class="o">=</span><span class="s1">&#39;tmp_grass_db&#39;</span><span class="p">,</span>
+<span></span><span class="k">with</span> <span class="n">Session</span><span class="p">(</span><span class="n">gisdb</span><span class="o">=</span><span class="n">gisdb_path</span><span class="p">,</span>
              <span class="n">location</span><span class="o">=</span><span class="s1">&#39;fuefuki&#39;</span><span class="p">,</span>
              <span class="n">mapset</span><span class="o">=</span><span class="s1">&#39;PERMANENT&#39;</span><span class="p">):</span>
     <span class="n">gcore</span><span class="o">.</span><span class="n">run_command</span><span class="p">(</span><span class="s1">&#39;r.out.gdal&#39;</span><span class="p">,</span>
                       <span class="n">flags</span><span class="o">=</span><span class="s1">&#39;mt&#39;</span><span class="p">,</span>
                       <span class="nb">input</span><span class="o">=</span><span class="s1">&#39;accumulation&#39;</span><span class="p">,</span>
-                      <span class="n">output</span><span class="o">=</span><span class="s1">&#39;accumulation.tif&#39;</span><span class="p">,</span>
+                      <span class="n">output</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">&#39;accumulation.tif&#39;</span><span class="p">),</span>
                       <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;GTiff&#39;</span><span class="p">,</span>
                       <span class="n">createopt</span><span class="o">=</span><span class="s1">&#39;TFW=YES,COMPRESS=LZW&#39;</span><span class="p">,</span>
                       <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">accumuration</span></code>の所を、<code class="docutils literal notranslate"><span class="pre">basin</span></code>や<code class="docutils literal notranslate"><span class="pre">drainage</span></code>に変更することで、そのほかの生成されたラスタデータをファイルとして取り出すことができます。</p>
 </div>
 </div>
 
