@@ -427,6 +427,7 @@ div.rendered_html tbody tr:hover {
 <h1>DEM(数値標高モデル)からの水系図作成<a class="headerlink" href="#DEM(数値標高モデル)からの水系図作成" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <ul>
 <li><a href="https://amano-takahisa.github.io/rs_with_python/handson/catchment_from_dem.ipynb">このページのJupyter Notebookファイル</a></li>
+<li><a href="https://youtu.be/42k_H4Yl09s">解説動画</a></li>
 <li><a href="https://github.com/amano-takahisa/rs_with_python/raw/master/source/handson/data/watershed/dem_fuefuki.tif">利用するデータ</a></li>
 </ul><p>ここでは、数値標高モデルのデータから水系図の作成を行います。</p>
 <p>以下の2つの方法を説明します。</p>
@@ -661,7 +662,7 @@ tci
 <p><code class="docutils literal notranslate"><span class="pre">r.watarshed</span></code>コマンドのオプションは、今回QGISで実行したものと同じ値としました。各オプションの詳細は<a class="reference external" href="https://grass.osgeo.org/grass78/manuals/r.watershed.html">GRASS GISの公式ドキュメント</a>を参照してください。</p>
 <p><code class="docutils literal notranslate"><span class="pre">r.watarshed</span></code>コマンドに続いて、<code class="docutils literal notranslate"><span class="pre">g.list</span></code>コマンドを実行し、作成したラスタデータの一覧を表示しています。</p>
 <p><code class="docutils literal notranslate"><span class="pre">grass.script</span></code>の<code class="docutils literal notranslate"><span class="pre">core.run_command()</span></code>と<code class="docutils literal notranslate"><span class="pre">core.read_command()</span></code>との違いは、単純にGRASSのモジュールを動かす場合は<code class="docutils literal notranslate"><span class="pre">run_command()</span></code>、GRASSモジュールの標準出力を文字列でとってきたいときは<code class="docutils literal notranslate"><span class="pre">read_command()</span></code>を利用します。詳細は<a class="reference external" href="https://grasswiki.osgeo.org/wiki/GRASS_Python_Scripting_Library#Uses_for_read.2C_feed_and_pipe.2C_start_and_exec_commands">GRASS GISの公式wiki</a>に開設があります。</p>
-<p>続いて、データベース内に生成されたラスタデータをGeotiffファイルとして抽出します。GRASSのデータベースからラスタデータをファイルとして取り出すには、<code class="docutils literal notranslate"><span class="pre">`r.out.gdal</span></code>モジュール &lt;<a class="reference external" href="https://grass.osgeo.org/grass78/manuals/r.out.gdal.html">https://grass.osgeo.org/grass78/manuals/r.out.gdal.html</a>&gt;`__を利用します。</p>
+<p>続いて、データベース内に生成されたラスタデータをGeotiffファイルとして抽出します。GRASSのデータベースからラスタデータをファイルとして取り出すには、<a class="reference external" href="https://grass.osgeo.org/grass78/manuals/r.out.gdal.html">r.out.gdalモジュール</a>を利用します。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
