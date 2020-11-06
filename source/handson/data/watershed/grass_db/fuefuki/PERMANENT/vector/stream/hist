@@ -1,0 +1,3 @@
+COMMAND: r.to.vect --overwrite input="stream" output="stream" type="line" column="value"
+GISDBASE: data/watershed/grass_db
+LOCATION: fuefuki MAPSET: PERMANENT USER: takahisa DATE: Fri Nov  6 23:48:25 2020
