@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>OS &mdash; rs-with-python  ドキュメント</title>
+  <title>&lt;no title&gt; &mdash; rs-with-python  ドキュメント</title>
   
 
   
@@ -133,13 +133,13 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>OS</li>
+      <li>&lt;no title&gt;</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/lib/os.ipynb.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/lib/pathlib.ipynb.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -407,25 +407,23 @@ div.rendered_html tbody tr:hover {
     text-align: unset;
 }
 </style>
-<div class="section" id="OS">
-<h1>OS<a class="headerlink" href="#OS" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 </pre></div>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">file_path</span>  <span class="o">=</span> <span class="s1">&#39;data/polygon_dumy.shp&#39;</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">file_path</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">file_path</span><span class="p">))</span>
+<span></span><span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="s1">&#39;*.ipynb&#39;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
 </pre></div>
 </div>
 </div>
@@ -434,128 +432,104 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-False
-False
+../extract_raster_from_archives.ipynb
+../sandbox/mask_raster.ipynb
+../sandbox/raster_stack.ipynb
+../sandbox/.ipynb_checkpoints/raster_stack-checkpoint.ipynb
+../.ipynb_checkpoints/read_shapefile_and_geotiff-checkpoint.ipynb
+../.ipynb_checkpoints/read_jpgml-checkpoint.ipynb
+../.ipynb_checkpoints/example-checkpoint.ipynb
+../.ipynb_checkpoints/extract_raster_values-checkpoint.ipynb
+../handson/plot_hyperspectral.ipynb
+../handson/leaf_area_index.ipynb
+../handson/setup_ipynb.ipynb
+../handson/catchment_from_dem.ipynb
+../handson/intro_python.ipynb
+../handson/3d_raster_plot.ipynb
+../handson/bathymetric_stat.ipynb
+../handson/.ipynb_checkpoints/bathymetric_stat-checkpoint.ipynb
+../handson/.ipynb_checkpoints/3d_raster_plot-checkpoint.ipynb
+../handson/.ipynb_checkpoints/intro_python-checkpoint.ipynb
+../handson/.ipynb_checkpoints/catchment_from_dem-checkpoint.ipynb
+../handson/.ipynb_checkpoints/setup_ipynb-checkpoint.ipynb
+../handson/.ipynb_checkpoints/plot_hyperspectral-checkpoint.ipynb
+../handson/.ipynb_checkpoints/leaf_area_index-checkpoint.ipynb
+../lib/dict.ipynb
+../lib/rasterio.ipynb
+../lib/list.ipynb
+../lib/numpy.ipynb
+../lib/exception.ipynb
+../lib/pyproj.ipynb
+../lib/glob.ipynb
+../lib/pathlib.ipynb
+../lib/kwargs.ipynb
+../lib/class.ipynb
+../lib/typing.ipynb
+../lib/locals.ipynb
+../lib/bool.ipynb
+../lib/pandas.ipynb
+../lib/os.ipynb
+../lib/shapely.ipynb
+../lib/geopandas.ipynb
+../lib/.ipynb_checkpoints/pathlib-checkpoint.ipynb
+../lib/.ipynb_checkpoints/os-checkpoint.ipynb
+../lib/.ipynb_checkpoints/list-checkpoint.ipynb
+../lib/.ipynb_checkpoints/locals-checkpoint.ipynb
+../lib/.ipynb_checkpoints/kwargs-checkpoint.ipynb
+../lib/.ipynb_checkpoints/pandas-checkpoint.ipynb
+../lib/.ipynb_checkpoints/numpy-checkpoint.ipynb
+../lib/.ipynb_checkpoints/glob-checkpoint.ipynb
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">s3_file_path</span> <span class="o">=</span> <span class="s1">&#39;s3://example.com/to/file.tif&#39;</span>
-<span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">s3_file_path</span><span class="p">)</span>
+<span></span><span class="n">paths</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="s1">&#39;*.ipynb&#39;</span><span class="p">)]</span>
+<span class="n">paths</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
-</pre></div>
+<div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-False
-</pre></div></div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">mantle_utils.workflow.process</span> <span class="kn">import</span> <span class="n">prepare_output_and_tmp_dirs</span>
-<span class="n">tmp_dir</span> <span class="o">=</span> <span class="n">prepare_output_and_tmp_dirs</span><span class="p">(</span><span class="s1">&#39;out&#39;</span><span class="p">)</span>
-<span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">tmp_dir</span><span class="p">)</span>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-12-872237da77ea&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>paths <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span>str<span class="ansi-blue-fg">(</span>path<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> path <span class="ansi-green-fg">in</span> Path<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;../&#39;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span> paths
 
+<span class="ansi-red-fg">TypeError</span>: &#39;PosixPath&#39; object is not iterable
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">str</span><span class="p">(</span><span class="n">paths</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-False
+&#39;../extract_raster_from_archives.ipynb&#39;
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">mantle_utils.aws.s3</span> <span class="kn">import</span> <span class="n">copy_file_from_bucket</span>
-
+<span></span>
 </pre></div>
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">s3_file_path</span> <span class="o">=</span> <span class="s1">&#39;s3://mantlelabs-eu-workflows/stacking-generate_raster_stack/2020_Austria_example_stack_for_classification/stack_33UWP/16/tile_33UWP_vh_median.tif&#39;</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">dist_path</span> <span class="o">=</span> <span class="n">copy_file_from_bucket</span><span class="p">(</span><span class="n">s3_file_path</span><span class="p">,</span> <span class="n">tmp_dir</span><span class="p">)</span>
-<span class="n">dist_path</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-&#39;out/tmp/tile_33UWP_vh_median.tif&#39;
-</pre></div></div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">dist_path</span> <span class="o">=</span> <span class="n">copy_file_from_bucket</span><span class="p">(</span><span class="n">s3_file_path</span><span class="p">,</span> <span class="s1">&#39;out/tmp/test.tif&#39;</span><span class="p">)</span>
-<span class="n">dist_path</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-&#39;out/tmp/test.tif&#39;
-</pre></div></div>
-</div>
-<div class="section" id="basename">
-<h2>basename<a class="headerlink" href="#basename" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">file_path</span> <span class="o">=</span> <span class="s1">&#39;path/to/file.tif&#39;</span>
-<span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-&#39;file.tif&#39;
-</pre></div></div>
-</div>
 </div>
 </div>
 

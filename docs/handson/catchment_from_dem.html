@@ -538,7 +538,7 @@ sudo apt install grass
 </div>
 <p>Jupyter Notebookからは以下のように確認することもできます。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -574,7 +574,7 @@ General Public License for more details.
 <p>Jupyter Notebookファイルと同じフォルダに<code class="docutils literal notranslate"><span class="pre">data/watershed/</span></code>フォルダを作成し、解析対象のDEMファイルを保存してください。</p>
 <p>まずは必要なライブラリのインポートとパラメータを設定します。</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -586,13 +586,17 @@ General Public License for more details.
 <span class="n">raster_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">&#39;dem_fuefuki.tif&#39;</span><span class="p">)</span>
 <span class="n">gisdb_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">&#39;grass_db&#39;</span><span class="p">)</span>
 <span class="n">location</span> <span class="o">=</span> <span class="s1">&#39;fuefuki&#39;</span>
+
+<span class="c1"># 通常GRASS GISでは、PERMANENTマップセットに一次データを保存し、</span>
+<span class="c1"># ユーザー、テーマごとにマップセットを作成して作業を行いますが、</span>
+<span class="c1"># ここではすべて同じPERMANENTマップセット上で作業を行います。</span>
 <span class="n">mapset</span> <span class="o">=</span> <span class="s1">&#39;PERMANENT&#39;</span>
 </pre></div>
 </div>
 </div>
 <p>GRASSデータベースを作成します。データベースの作成には、扱うGISデータの座標系や空間的な範囲を設定する必要がありますが、これらはdem_fuefuki.tifファイルをもとに作成します。また、データベースの作成と同時にデータベースにdem_fuefuki.tifを登録します。</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -610,17 +614,40 @@ General Public License for more details.
 </pre></div>
 </div>
 </div>
-<p>データベースに<code class="docutils literal notranslate"><span class="pre">dem</span></code>という名前で<code class="docutils literal notranslate"><span class="pre">dem_fuefuki.tif</span></code>ファイルが登録されました。</p>
+<p>データベースに<code class="docutils literal notranslate"><span class="pre">dem</span></code>という名前で<code class="docutils literal notranslate"><span class="pre">dem_fuefuki.tif</span></code>ファイルが登録されました。GRASSのデータベースの中身は<a class="reference external" href="https://grass.osgeo.org/grass78/manuals/g.list.html">g.list</a>を用いた以下のコマンドで確認することができます。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">with</span> <span class="n">Session</span><span class="p">(</span><span class="n">gisdb</span><span class="o">=</span><span class="n">gisdb_path</span><span class="p">,</span>
+             <span class="n">location</span><span class="o">=</span><span class="n">location</span><span class="p">,</span>
+             <span class="n">mapset</span><span class="o">=</span><span class="n">mapset</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">gcore</span><span class="o">.</span><span class="n">read_command</span><span class="p">(</span><span class="s1">&#39;g.list&#39;</span><span class="p">,</span>
+                             <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;rast&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+dem
+
+</pre></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">type='rast'</span></code>とすることで、ラスタデータをリストアップすることができます。</p>
 <p>次に、登録された<code class="docutils literal notranslate"><span class="pre">dem</span></code>というラスタデータに対して、GRASSの<code class="docutils literal notranslate"><span class="pre">r.watershed</span></code>モジュールを適用します。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># create a new location from raster file</span>
 <span class="k">with</span> <span class="n">Session</span><span class="p">(</span><span class="n">gisdb</span><span class="o">=</span><span class="n">gisdb_path</span><span class="p">,</span>
-             <span class="n">location</span><span class="o">=</span><span class="s1">&#39;fuefuki&#39;</span><span class="p">,</span>
-             <span class="n">mapset</span><span class="o">=</span><span class="s1">&#39;PERMANENT&#39;</span><span class="p">):</span>
+             <span class="n">location</span><span class="o">=</span><span class="n">location</span><span class="p">,</span>
+             <span class="n">mapset</span><span class="o">=</span><span class="n">mapset</span><span class="p">):</span>
     <span class="c1"># Run r.watershed command</span>
     <span class="n">gcore</span><span class="o">.</span><span class="n">run_command</span><span class="p">(</span><span class="s1">&#39;r.watershed&#39;</span><span class="p">,</span>
                       <span class="n">elevation</span><span class="o">=</span><span class="s1">&#39;dem&#39;</span><span class="p">,</span>
@@ -662,9 +689,49 @@ tci
 <p><code class="docutils literal notranslate"><span class="pre">r.watarshed</span></code>コマンドのオプションは、今回QGISで実行したものと同じ値としました。各オプションの詳細は<a class="reference external" href="https://grass.osgeo.org/grass78/manuals/r.watershed.html">GRASS GISの公式ドキュメント</a>を参照してください。</p>
 <p><code class="docutils literal notranslate"><span class="pre">r.watarshed</span></code>コマンドに続いて、<code class="docutils literal notranslate"><span class="pre">g.list</span></code>コマンドを実行し、作成したラスタデータの一覧を表示しています。</p>
 <p><code class="docutils literal notranslate"><span class="pre">grass.script</span></code>の<code class="docutils literal notranslate"><span class="pre">core.run_command()</span></code>と<code class="docutils literal notranslate"><span class="pre">core.read_command()</span></code>との違いは、単純にGRASSのモジュールを動かす場合は<code class="docutils literal notranslate"><span class="pre">run_command()</span></code>、GRASSモジュールの標準出力を文字列でとってきたいときは<code class="docutils literal notranslate"><span class="pre">read_command()</span></code>を利用します。詳細は<a class="reference external" href="https://grasswiki.osgeo.org/wiki/GRASS_Python_Scripting_Library#Uses_for_read.2C_feed_and_pipe.2C_start_and_exec_commands">GRASS GISの公式wiki</a>に開設があります。</p>
+<p>DEMから作成された河川のデータはstreamという名前でラスタデータとして保存されています。これを<a class="reference external" href="https://grass.osgeo.org/grass78/manuals/r.to.vect.html">r.to.vect</a>モジュールを利用してベクトルデータに変換してみましょう。</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">with</span> <span class="n">Session</span><span class="p">(</span><span class="n">gisdb</span><span class="o">=</span><span class="n">gisdb_path</span><span class="p">,</span>
+             <span class="n">location</span><span class="o">=</span><span class="s1">&#39;fuefuki&#39;</span><span class="p">,</span>
+             <span class="n">mapset</span><span class="o">=</span><span class="s1">&#39;PERMANENT&#39;</span><span class="p">):</span>
+    <span class="n">gcore</span><span class="o">.</span><span class="n">run_command</span><span class="p">(</span><span class="s1">&#39;r.to.vect&#39;</span><span class="p">,</span>
+                      <span class="nb">input</span><span class="o">=</span><span class="s1">&#39;stream&#39;</span><span class="p">,</span>
+                      <span class="n">output</span><span class="o">=</span><span class="s1">&#39;stream&#39;</span><span class="p">,</span>
+                      <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span>
+                      <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>データベースの中身を確認します。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">with</span> <span class="n">Session</span><span class="p">(</span><span class="n">gisdb</span><span class="o">=</span><span class="n">gisdb_path</span><span class="p">,</span>
+             <span class="n">location</span><span class="o">=</span><span class="s1">&#39;fuefuki&#39;</span><span class="p">,</span>
+             <span class="n">mapset</span><span class="o">=</span><span class="s1">&#39;PERMANENT&#39;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">gcore</span><span class="o">.</span><span class="n">read_command</span><span class="p">(</span><span class="s1">&#39;g.list&#39;</span><span class="p">,</span>
+                             <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;vector&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+stream
+
+</pre></div></div>
+</div>
 <p>続いて、データベース内に生成されたラスタデータをGeotiffファイルとして抽出します。GRASSのデータベースからラスタデータをファイルとして取り出すには、<a class="reference external" href="https://grass.osgeo.org/grass78/manuals/r.out.gdal.html">r.out.gdalモジュール</a>を利用します。</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -682,6 +749,26 @@ tci
 </div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">accumuration</span></code>の所を、<code class="docutils literal notranslate"><span class="pre">basin</span></code>や<code class="docutils literal notranslate"><span class="pre">drainage</span></code>に変更することで、そのほかの生成されたラスタデータをファイルとして取り出すことができます。</p>
+<p>ベクタデータのファイルへの書き出しは<a class="reference external" href="https://grass.osgeo.org/grass78/manuals/v.out.ogr.html">v.out.ogr</a>を利用します。</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">with</span> <span class="n">Session</span><span class="p">(</span><span class="n">gisdb</span><span class="o">=</span><span class="n">gisdb_path</span><span class="p">,</span>
+             <span class="n">location</span><span class="o">=</span><span class="s1">&#39;fuefuki&#39;</span><span class="p">,</span>
+             <span class="n">mapset</span><span class="o">=</span><span class="s1">&#39;PERMANENT&#39;</span><span class="p">):</span>
+    <span class="n">gcore</span><span class="o">.</span><span class="n">run_command</span><span class="p">(</span><span class="s1">&#39;v.out.ogr&#39;</span><span class="p">,</span>
+                      <span class="n">flags</span><span class="o">=</span><span class="s1">&#39;e&#39;</span><span class="p">,</span>
+                      <span class="nb">input</span><span class="o">=</span><span class="s1">&#39;stream&#39;</span><span class="p">,</span>
+                      <span class="n">output</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">&#39;stream.shp&#39;</span><span class="p">),</span>
+                      <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;ESRI_Shapefile&#39;</span><span class="p">,</span>
+                      <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>上のコードで<code class="docutils literal notranslate"><span class="pre">stream.shp</span></code>というShapefileが保存されます。</p>
+<p>以上で、PythonからGRASS GISを使ってDEMデータの解析を行うことができました。</p>
 </div>
 </div>
 
